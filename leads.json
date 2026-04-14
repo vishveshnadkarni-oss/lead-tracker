@@ -1049,8 +1049,8 @@
     "segment": "Industrial",
     "address": "S-303, 3rd floor, Brigade plaza, Sc Road, Anand Rao Circle, Bangalore, 560009",
     "source": "Sanyal",
-    "sourceType": "BFL Employee",
-    "oem": "BFL",
+    "oem": "Non-Standard",
+    "sourceType": "Other",
     "machine": "",
     "amount": "500000",
     "subvention": "No",
@@ -1063,7 +1063,7 @@
     "reason": "Went in 2 tranches",
     "notes": "",
     "id": "mnyovzw2qiui8gc7mup",
-    "updatedAt": "2026-04-14T14:00:57.458Z"
+    "updatedAt": "2026-04-14T14:16:10.242Z"
   },
   {
     "company": "Indauto Filters",
