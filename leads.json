@@ -1104,7 +1104,7 @@
     "oem": "Non-Standard",
     "sourceType": "Existing Customer",
     "machine": "",
-    "amount": "500000",
+    "amount": "5000000",
     "subvention": "No",
     "priority": "Medium",
     "stage": "Sanctioned",
@@ -1115,7 +1115,7 @@
     "reason": "Went in 2 tranches",
     "notes": "",
     "id": "mnyovzw2qiui8gc7mup",
-    "updatedAt": "2026-04-14T14:16:47.285Z"
+    "updatedAt": "2026-04-14T14:43:36.763Z"
   },
   {
     "company": "Indauto Filters",
