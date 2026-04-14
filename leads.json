@@ -893,8 +893,8 @@
     "segment": "Medical",
     "address": "",
     "source": "Tarun",
-    "sourceType": "OEM Referral",
     "oem": "Wipro GE",
+    "sourceType": "OEM Referral",
     "machine": "",
     "amount": "34500000",
     "subvention": "Yes",
@@ -902,12 +902,12 @@
     "stage": "New",
     "status": "Active",
     "leadDate": "2026-03-02",
-    "followup": "",
+    "followup": "2026-04-16",
     "lastContact": "",
     "reason": "",
     "notes": "Subvention with 9% and 0.5% PF",
     "id": "mnyovzw252966vb5vds",
-    "updatedAt": "2026-04-14T14:00:57.458Z"
+    "updatedAt": "2026-04-14T14:52:20.284Z"
   },
   {
     "company": "Ascent Engineering",
