@@ -2037,8 +2037,8 @@
     "segment": "Industrial",
     "address": "12-16, 3rd floor, DVR town centre, Budigere Road, Mandur, Bengaluru, 560049",
     "source": "Sandeep",
-    "sourceType": "Self",
     "oem": "Venttup Ventures",
+    "sourceType": "Direct Walk-in",
     "machine": "NA",
     "amount": "0",
     "subvention": "No",
@@ -2051,7 +2051,7 @@
     "reason": "Startup",
     "notes": "",
     "id": "mnyhv7qou2tvbrosh4e",
-    "updatedAt": "2026-04-14T10:44:23.664Z"
+    "updatedAt": "2026-04-14T14:37:07.295Z"
   },
   {
     "company": "Inmosys Tech LLP",
