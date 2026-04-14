@@ -35,8 +35,8 @@
     "segment": "Medical",
     "address": "Building no. 38/2208,B Karaparambha, mini bypass road, kunduparampa, Edakkad, Kozhikode, Kerala, 673005",
     "source": "Mr. Madhusudhan",
-    "sourceType": "OEM Referral",
     "oem": "Aerolase Lasers",
+    "sourceType": "OEM Referral",
     "machine": "",
     "amount": "7100000",
     "subvention": "No",
@@ -47,9 +47,9 @@
     "followup": "",
     "lastContact": "",
     "reason": "Owner not ready to come as co-applicant",
-    "notes": "Call him in evening",
+    "notes": "",
     "id": "mnyovzw2tahst7frlu",
-    "updatedAt": "2026-04-14T14:00:57.458Z"
+    "updatedAt": "2026-04-14T14:13:46.026Z"
   },
   {
     "company": "Exclusive Magnesium",
