@@ -9,8 +9,8 @@
     "segment": "Medical",
     "address": "No. 15/5, ShanmugarajaRd, Next to Axis Bank branch, Sekkalai, Karaikudi, TN, 630001",
     "source": "J. Daniel Vinoth Kumar",
-    "sourceType": "OEM Referral",
     "oem": "B-MEC",
+    "sourceType": "Dealer Referral",
     "machine": "",
     "amount": "38500000",
     "subvention": "No",
@@ -23,7 +23,7 @@
     "reason": "Startup",
     "notes": "",
     "id": "mnypinab06r8hsdr2ygh",
-    "updatedAt": "2026-04-14T14:18:34.211Z"
+    "updatedAt": "2026-04-14T14:26:43.686Z"
   },
   {
     "company": "Shree Shiva Sai Cast pvt ltd",
