@@ -1205,8 +1205,8 @@
     "segment": "Medical",
     "address": "Akkamahadevi Road, AVK College Road, Prince Jayachamaraja Wodeyar, Davangere, Karnataka â 577002",
     "source": "Pramod",
-    "sourceType": "OEM Referral",
     "oem": "Veiva Scientific",
+    "sourceType": "Dealer Referral",
     "machine": "Makoto Ivus Machine",
     "amount": "10500000",
     "subvention": "Yes",
@@ -1219,7 +1219,7 @@
     "reason": "Went with HDFC bank",
     "notes": "",
     "id": "mnyovzw2sqamc7w1c0q",
-    "updatedAt": "2026-04-14T14:00:57.458Z"
+    "updatedAt": "2026-04-14T14:35:51.678Z"
   },
   {
     "company": "Vignesh Techpack Pvt Ltd",
