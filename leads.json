@@ -1699,8 +1699,8 @@
     "segment": "Industrial",
     "address": "Door no. 12/11, Jeganath industrial estate, Athipalayam road, Chinnavedampatti, Coimbatore",
     "source": "Sendhil",
-    "sourceType": "OEM Referral",
     "oem": "Cosmos",
+    "sourceType": "OEM Referral",
     "machine": "",
     "amount": "0",
     "subvention": "No",
@@ -1708,12 +1708,12 @@
     "stage": "New",
     "status": "Active",
     "leadDate": "2026-04-07",
-    "followup": "",
+    "followup": "2026-04-15",
     "lastContact": "",
     "reason": "",
     "notes": "",
     "id": "mnyovzw35v8ae654xdv",
-    "updatedAt": "2026-04-14T14:00:57.459Z"
+    "updatedAt": "2026-04-14T14:52:39.078Z"
   },
   {
     "company": "Rigibore India Pvt. Ltd",
