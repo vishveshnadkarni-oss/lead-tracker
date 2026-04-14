@@ -191,8 +191,8 @@
     "segment": "Medical",
     "address": "Amberpet Main Road, Bharat Nagar, Amberpet, Hyderabad, Telangana, 500013",
     "source": "Mr. Pani",
-    "sourceType": "OEM Referral",
     "oem": "B-MEC",
+    "sourceType": "Dealer Referral",
     "machine": "",
     "amount": "7000000",
     "subvention": "No",
@@ -205,7 +205,7 @@
     "reason": "Owner not interested",
     "notes": "Interested in Principal Morat Scheme. Urgently looking for loans",
     "id": "mnyovzw2lk8matffop",
-    "updatedAt": "2026-04-14T14:00:57.458Z"
+    "updatedAt": "2026-04-14T14:26:59.772Z"
   },
   {
     "company": "Meitra Hospital",
