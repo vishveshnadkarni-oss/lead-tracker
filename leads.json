@@ -503,8 +503,8 @@
     "segment": "Medical",
     "address": "Moka Rd. KHB colony, Tekur Compound, Gandhi Nagar, Ballari, Karnataka, 583103",
     "source": "Mr. Venkatraman Hegde",
-    "sourceType": "OEM Referral",
     "oem": "B-MEC",
+    "sourceType": "Dealer Referral",
     "machine": "Cathlab, CT scans and MRI machines",
     "amount": "70000000",
     "subvention": "No",
@@ -517,7 +517,7 @@
     "reason": "Itâs a Trust. Does not fit policy.",
     "notes": "",
     "id": "mnyovzw242ji05ooejd",
-    "updatedAt": "2026-04-14T14:00:57.458Z"
+    "updatedAt": "2026-04-14T14:26:51.855Z"
   },
   {
     "company": "Skyline",
