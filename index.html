@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>Lead Tracker – BFL OEM</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --surface2: #22263a;
+  --border: #2e3350;
+  --accent: #f5c842;
+  --accent2: #e8a020;
+  --text: #e8eaf0;
+  --muted: #7c82a0;
+  --green: #3ecf8e;
+  --red: #f66;
+  --blue: #5b8df5;
+  --orange: #f5934a;
+  --radius: 12px;
+  --font: 'DM Sans', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 14px; min-height: 100vh; }
+
+/* NAV */
+.nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.nav-brand { font-family: 'DM Serif Display', serif; font-size: 19px; color: var(--accent); letter-spacing: -0.3px; }
+.nav-brand span { color: var(--muted); font-size: 11px; display: block; font-family: var(--font); font-weight: 400; letter-spacing: 0; }
+.nav-actions { display: flex; gap: 8px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; border: none; cursor: pointer; font-family: var(--font); font-size: 13px; font-weight: 500; transition: all .15s; }
+.btn-primary { background: var(--accent); color: #111; }
+.btn-primary:hover { background: var(--accent2); }
+.btn-ghost { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.btn-sm { padding: 5px 10px; font-size: 12px; }
+.btn-icon { padding: 8px; border-radius: 8px; background: var(--surface2); border: 1px solid var(--border); color: var(--muted); cursor: pointer; transition: all .15s; font-size: 16px; }
+.btn-icon:hover { color: var(--accent); border-color: var(--accent); }
+
+/* TABS */
+.tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); background: var(--surface); padding: 0 16px; overflow-x: auto; }
+.tab { padding: 12px 16px; font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: all .15s; }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* MAIN */
+.main { padding: 16px; max-width: 900px; margin: 0 auto; }
+
+/* STATS */
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
+@media (min-width: 600px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+.stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
+.stat-val { font-size: 24px; font-weight: 600; color: var(--accent); }
+.stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: .5px; }
+
+/* FILTERS */
+.filters { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.filter-select { background: var(--surface); border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 7px 10px; font-family: var(--font); font-size: 13px; flex: 1; min-width: 120px; }
+.search-box { background: var(--surface); border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 7px 12px; font-family: var(--font); font-size: 13px; flex: 2; min-width: 140px; }
+.search-box::placeholder { color: var(--muted); }
+
+/* LEAD CARDS */
+.leads-list { display: flex; flex-direction: column; gap: 10px; }
+.lead-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; cursor: pointer; transition: all .15s; position: relative; }
+.lead-card:hover { border-color: var(--accent); }
+.lead-card.overdue { border-left: 3px solid var(--red); }
+.lead-card.due-today { border-left: 3px solid var(--orange); }
+.lead-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.lead-company { font-size: 15px; font-weight: 600; color: var(--text); }
+.lead-customer { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.lead-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+.tag { padding: 3px 8px; border-radius: 20px; font-size: 11px; font-weight: 500; }
+.tag-stage { background: #1e2a4a; color: var(--blue); }
+.tag-priority-high { background: #3a1a1a; color: var(--red); }
+.tag-priority-medium { background: #3a2a10; color: var(--orange); }
+.tag-priority-low { background: #1a2a1a; color: var(--green); }
+.tag-oem { background: var(--surface2); color: var(--muted); }
+.tag-amount { background: #2a2210; color: var(--accent); }
+.lead-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+.lead-followup { font-size: 11px; }
+.lead-followup.overdue { color: var(--red); }
+.lead-followup.due-today { color: var(--orange); }
+.lead-followup.upcoming { color: var(--green); }
+.lead-followup.none { color: var(--muted); }
+.lead-age { font-size: 11px; color: var(--muted); }
+
+/* BADGE */
+.status-badge { padding: 3px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.status-active { background: #0d2b1f; color: var(--green); }
+.status-lost { background: #2b0d0d; color: var(--red); }
+.status-hold { background: #2b2010; color: var(--orange); }
+.status-won { background: #102b20; color: #6effc2; }
+
+/* MODAL */
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 200; display: none; align-items: flex-end; justify-content: center; }
+.overlay.open { display: flex; }
+.modal { background: var(--surface); border-radius: 20px 20px 0 0; width: 100%; max-width: 640px; max-height: 92vh; overflow-y: auto; padding: 20px; animation: slideUp .2s ease; }
+@media (min-width: 640px) { .overlay { align-items: center; } .modal { border-radius: 20px; max-height: 88vh; } }
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.modal-handle { width: 40px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 16px; }
+.modal-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--accent); margin-bottom: 18px; }
+
+/* FORM */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-full { grid-column: 1 / -1; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+input, select, textarea { background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 9px 12px; font-family: var(--font); font-size: 14px; width: 100%; transition: border .15s; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); }
+select option { background: var(--bg); }
+textarea { resize: vertical; min-height: 60px; }
+.form-actions { display: flex; gap: 10px; margin-top: 18px; }
+.form-actions .btn { flex: 1; justify-content: center; }
+
+/* SETTINGS PANEL */
+.settings-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; }
+.settings-panel h3 { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.settings-note { font-size: 11px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+.settings-note a { color: var(--blue); }
+
+/* DETAIL VIEW */
+.detail-section { margin-bottom: 16px; }
+.detail-section h4 { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; font-weight: 600; margin-bottom: 8px; }
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.detail-item label { font-size: 10px; color: var(--muted); display: block; }
+.detail-item span { font-size: 14px; color: var(--text); }
+.detail-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; border-top: 1px solid var(--border); padding-top: 16px; }
+
+/* TOAST */
+.toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 10px 18px; border-radius: 30px; font-size: 13px; font-weight: 500; z-index: 500; display: none; animation: fadeIn .2s; box-shadow: 0 4px 20px rgba(0,0,0,.4); }
+.toast.show { display: block; }
+.toast.success { border-color: var(--green); color: var(--green); }
+.toast.error { border-color: var(--red); color: var(--red); }
+@keyframes fadeIn { from { opacity: 0; transform: translateX(-50%) translateY(10px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+
+/* SYNC INDICATOR */
+.sync-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; background: var(--muted); }
+.sync-dot.ok { background: var(--green); }
+.sync-dot.err { background: var(--red); }
+.sync-dot.syncing { background: var(--orange); animation: pulse .8s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+
+/* EMPTY STATE */
+.empty { text-align: center; padding: 48px 16px; }
+.empty-icon { font-size: 40px; margin-bottom: 12px; }
+.empty h3 { font-size: 16px; color: var(--text); margin-bottom: 6px; }
+.empty p { color: var(--muted); font-size: 13px; }
+
+/* SHARE MODAL */
+.share-box { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-size: 12px; color: var(--muted); white-space: pre-wrap; word-break: break-word; max-height: 200px; overflow-y: auto; line-height: 1.6; }
+
+/* IMPORT */
+.import-drop { border: 2px dashed var(--border); border-radius: var(--radius); padding: 24px 16px; text-align: center; cursor: pointer; transition: all .2s; margin-top: 12px; }
+.import-drop:hover, .import-drop.drag { border-color: var(--accent); background: rgba(245,200,66,.04); }
+.import-drop p { color: var(--muted); font-size: 13px; margin-top: 6px; }
+.import-preview-table { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 10px; }
+.import-preview-table th { background: var(--surface2); color: var(--muted); padding: 6px 8px; text-align: left; font-weight: 600; border-bottom: 1px solid var(--border); }
+.import-preview-table td { padding: 6px 8px; border-bottom: 1px solid var(--border); color: var(--text); white-space: nowrap; max-width: 140px; overflow: hidden; text-overflow: ellipsis; }
+.import-preview-table tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+.import-row-ok td:first-child { border-left: 3px solid var(--green); }
+.import-row-dup td:first-child { border-left: 3px solid var(--orange); }
+.import-row-err td:first-child { border-left: 3px solid var(--red); }
+.import-legend { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; font-size: 11px; color: var(--muted); }
+.import-legend span::before { content: '■ '; }
+.ok-dot::before { color: var(--green); }
+.dup-dot::before { color: var(--orange); }
+.err-dot::before { color: var(--red); }
+.import-scroll { max-height: 260px; overflow: auto; border: 1px solid var(--border); border-radius: 8px; }
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-brand">
+    LeadTrack
+    <span>BFL OEM South India</span>
+  </div>
+  <div class="nav-actions">
+    <div class="sync-dot" id="syncDot" title="Sync status"></div>
+    <button class="btn-icon" onclick="openSettings()" title="Settings">⚙️</button>
+    <button class="btn btn-primary" onclick="openAddLead()">+ Add</button>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="setTab('all',this)">All Leads</div>
+  <div class="tab" onclick="setTab('followup',this)">Follow-up Due</div>
+  <div class="tab" onclick="setTab('active',this)">Active</div>
+  <div class="tab" onclick="setTab('won',this)">Won</div>
+  <div class="tab" onclick="setTab('lost',this)">Lost</div>
+  <div class="tab" onclick="setTab('settings',this)">⚙ Setup</div>
+</div>
+
+<!-- MAIN -->
+<div class="main" id="mainContent">
+  <!-- rendered by JS -->
+</div>
+
+<!-- ADD/EDIT MODAL -->
+<div class="overlay" id="formOverlay" onclick="closeFormModal(event)">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="formTitle">Add Lead</div>
+    <div class="form-grid" id="leadForm">
+      <!-- Section: Customer -->
+      <div class="form-full"><label style="color:var(--accent);font-size:12px;">📋 CUSTOMER DETAILS</label></div>
+      <div class="form-group">
+        <label>Company Name *</label>
+        <input id="f_company" type="text" placeholder="ABC Industries"/>
+      </div>
+      <div class="form-group">
+        <label>Customer Name *</label>
+        <input id="f_customer" type="text" placeholder="Rajesh Kumar"/>
+      </div>
+      <div class="form-group">
+        <label>Phone Number *</label>
+        <input id="f_phone" type="tel" placeholder="9876543210"/>
+      </div>
+      <div class="form-group">
+        <label>Other Number</label>
+        <input id="f_phone2" type="tel" placeholder="Alternate"/>
+      </div>
+      <div class="form-group form-full">
+        <label>Email</label>
+        <input id="f_email" type="email" placeholder="customer@email.com"/>
+      </div>
+      <div class="form-group">
+        <label>Location / City</label>
+        <input id="f_city" type="text" placeholder="Bengaluru"/>
+      </div>
+      <div class="form-group">
+        <label>Segment</label>
+        <select id="f_segment">
+          <option value="">Select</option>
+          <option>Medical</option>
+          <option>Industrial</option>
+          <option>Construction</option>
+          <option>Mining</option>
+          <option>Agriculture</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group form-full">
+        <label>Address</label>
+        <textarea id="f_address" placeholder="Full address (optional)" style="min-height:48px"></textarea>
+      </div>
+
+      <!-- Section: Lead Source -->
+      <div class="form-full" style="margin-top:8px;"><label style="color:var(--accent);font-size:12px;">🔗 LEAD SOURCE</label></div>
+      <div class="form-group">
+        <label>Lead Received From</label>
+        <input id="f_source" type="text" placeholder="Dealer / Person name"/>
+      </div>
+      <div class="form-group">
+        <label>OEM Name</label>
+        <input id="f_oem" type="text" placeholder="e.g. XCMG, Komatsu"/>
+      </div>
+      <div class="form-group">
+        <label>Source Type</label>
+        <select id="f_sourceType">
+          <option value="">Select</option>
+          <option>OEM Referral</option>
+          <option>Dealer Referral</option>
+          <option>DSA</option>
+          <option>Direct Walk-in</option>
+          <option>Existing Customer</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <!-- Section: Deal -->
+      <div class="form-full" style="margin-top:8px;"><label style="color:var(--accent);font-size:12px;">💰 DEAL DETAILS</label></div>
+      <div class="form-group">
+        <label>Machine Requirement</label>
+        <input id="f_machine" type="text" placeholder="e.g. 20T Excavator"/>
+      </div>
+      <div class="form-group">
+        <label>Expected Loan Amt (₹)</label>
+        <input id="f_amount" type="number" placeholder="5000000"/>
+      </div>
+      <div class="form-group">
+        <label>Subvention Applicable</label>
+        <select id="f_subvention">
+          <option value="">Not Sure</option>
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Priority</label>
+        <select id="f_priority">
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+          <option value="Low">Low</option>
+        </select>
+      </div>
+
+      <!-- Section: Pipeline -->
+      <div class="form-full" style="margin-top:8px;"><label style="color:var(--accent);font-size:12px;">📊 PIPELINE</label></div>
+      <div class="form-group">
+        <label>Stage</label>
+        <select id="f_stage" onchange="if(this.value==='Closed Lost'){document.getElementById('f_status').value='Lost'}">
+          <option>New</option>
+          <option>Contacted</option>
+          <option>Docs Collected</option>
+          <option>Credit Review</option>
+          <option>Sanctioned</option>
+          <option>Disbursed</option>
+          <option>Closed Lost</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Status</label>
+        <select id="f_status">
+          <option value="Active">Active</option>
+          <option value="On Hold">On Hold</option>
+          <option value="Won">Won</option>
+          <option value="Lost">Lost</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Lead Date</label>
+        <input id="f_leadDate" type="date"/>
+      </div>
+      <div class="form-group">
+        <label>Next Follow-up</label>
+        <input id="f_followup" type="date"/>
+      </div>
+      <div class="form-group">
+        <label>Last Contacted</label>
+        <input id="f_lastContact" type="date"/>
+      </div>
+      <div class="form-group form-full">
+        <label>Reason / Remarks</label>
+        <input id="f_reason" type="text" placeholder="e.g. Customer negotiating, On hold pending sanction"/>
+      </div>
+      <div class="form-group form-full">
+        <label>Other Details / Notes</label>
+        <textarea id="f_notes" placeholder="Any additional context..."></textarea>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-ghost" onclick="closeForm()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveLead()">💾 Save Lead</button>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="overlay" id="detailOverlay" onclick="closeDetailModal(event)">
+  <div class="modal" id="detailContent"></div>
+</div>
+
+<!-- SHARE MODAL -->
+<div class="overlay" id="shareOverlay" onclick="closeShareModal(event)">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="shareTitle">Share Lead</div>
+    <div id="shareContent"></div>
+    <div style="display:flex;gap:8px;margin-top:14px;">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeShareOverlay()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- IMPORT MODAL -->
+<input type="file" id="csvFileInput" accept=".csv" style="display:none" onchange="handleFileSelect(this)"/>
+<div class="overlay" id="importOverlay" onclick="closeImportModal(event)">
+  <div class="modal" style="max-width:700px">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Import Leads from CSV</div>
+    <div id="importBody">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────
+let leads = [];
+let editingId = null;
+let currentTab = 'all';
+let ghFileSHA = null;
+
+const STORAGE_KEY = 'lt_leads_local';
+const SETTINGS_KEY = 'lt_gh_settings';
+
+// ─────────────────────────────────────────
+// UTILS
+// ─────────────────────────────────────────
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2); }
+function today() { return new Date().toISOString().slice(0,10); }
+function daysBetween(a, b) {
+  const da = new Date(a), db = new Date(b);
+  return Math.round((db - da) / 86400000);
+}
+function fmtDate(d) {
+  if (!d) return '—';
+  const [y,m,day] = d.split('-');
+  return `${day}/${m}/${y}`;
+}
+function fmtAmt(n) {
+  if (!n) return '—';
+  const num = parseInt(n);
+  if (num >= 10000000) return `₹${(num/10000000).toFixed(2)}Cr`;
+  if (num >= 100000) return `₹${(num/100000).toFixed(1)}L`;
+  return `₹${num.toLocaleString('en-IN')}`;
+}
+function toast(msg, type='') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `toast show ${type}`;
+  setTimeout(() => el.className = 'toast', 2500);
+}
+
+// ─────────────────────────────────────────
+// GITHUB SETTINGS
+// ─────────────────────────────────────────
+function getSettings() {
+  try { return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {}; } catch { return {}; }
+}
+function saveSettings(s) { localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); }
+
+// ─────────────────────────────────────────
+// GITHUB API
+// ─────────────────────────────────────────
+async function ghRequest(method, path, body) {
+  const s = getSettings();
+  if (!s.token || !s.owner || !s.repo) return null;
+  const res = await fetch(`https://api.github.com${path}`, {
+    method,
+    headers: {
+      'Authorization': `token ${s.token}`,
+      'Content-Type': 'application/json',
+      'Accept': 'application/vnd.github.v3+json'
+    },
+    body: body ? JSON.stringify(body) : undefined
+  });
+  if (!res.ok) throw new Error(`GitHub ${res.status}: ${res.statusText}`);
+  return res.json();
+}
+
+async function loadFromGithub() {
+  const s = getSettings();
+  if (!s.token) return false;
+  const filePath = s.filePath || 'leads.json';
+  setSyncDot('syncing');
+  try {
+    const data = await ghRequest('GET', `/repos/${s.owner}/${s.repo}/contents/${filePath}`);
+    ghFileSHA = data.sha;
+    const decoded = atob(data.content.replace(/\n/g,''));
+    leads = JSON.parse(decoded);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
+    setSyncDot('ok');
+    return true;
+  } catch(e) {
+    if (e.message.includes('404')) {
+      ghFileSHA = null;
+      setSyncDot('ok');
+      return true; // file doesn't exist yet, that's fine
+    }
+    setSyncDot('err');
+    toast('GitHub sync failed: ' + e.message, 'error');
+    return false;
+  }
+}
+
+async function saveToGithub() {
+  const s = getSettings();
+  if (!s.token) return;
+  const filePath = s.filePath || 'leads.json';
+  setSyncDot('syncing');
+  try {
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(leads, null, 2))));
+    const body = {
+      message: `Update leads – ${new Date().toLocaleString('en-IN')}`,
+      content,
+      ...(ghFileSHA ? { sha: ghFileSHA } : {})
+    };
+    const res = await ghRequest('PUT', `/repos/${s.owner}/${s.repo}/contents/${filePath}`, body);
+    ghFileSHA = res.content.sha;
+    setSyncDot('ok');
+    toast('Saved to GitHub ✓', 'success');
+  } catch(e) {
+    setSyncDot('err');
+    toast('GitHub save failed: ' + e.message, 'error');
+  }
+}
+
+function setSyncDot(state) {
+  const el = document.getElementById('syncDot');
+  el.className = `sync-dot ${state}`;
+  el.title = state === 'ok' ? 'Synced' : state === 'err' ? 'Sync error' : 'Syncing...';
+}
+
+// ─────────────────────────────────────────
+// LOAD
+// ─────────────────────────────────────────
+async function initApp() {
+  const local = localStorage.getItem(STORAGE_KEY);
+  if (local) leads = JSON.parse(local);
+  render();
+  const ok = await loadFromGithub();
+  if (ok) render();
+}
+
+// ─────────────────────────────────────────
+// FILTERS
+// ─────────────────────────────────────────
+let filterOEM = '', filterStatus = '', filterPriority = '', filterStage = '', filterSegment = '', searchQ = '';
+
+function filteredLeads() {
+  const t = today();
+  return leads.filter(l => {
+    if (currentTab === 'followup') {
+      if (!l.followup) return false;
+      return l.followup <= t;
+    }
+    if (currentTab === 'active') return l.status === 'Active';
+    if (currentTab === 'won') return l.status === 'Won';
+    if (currentTab === 'lost') return l.status === 'Lost';
+    return true;
+  }).filter(l => {
+    if (filterOEM && l.oem !== filterOEM) return false;
+    if (filterStatus && l.status !== filterStatus) return false;
+    if (filterPriority && l.priority !== filterPriority) return false;
+    if (filterStage && l.stage !== filterStage) return false;
+    if (filterSegment && l.segment !== filterSegment) return false;
+    if (searchQ) {
+      const q = searchQ.toLowerCase();
+      return (l.company||'').toLowerCase().includes(q) ||
+             (l.customer||'').toLowerCase().includes(q) ||
+             (l.phone||'').includes(q) ||
+             (l.oem||'').toLowerCase().includes(q) ||
+             (l.source||'').toLowerCase().includes(q) ||
+             (l.city||'').toLowerCase().includes(q);
+    }
+    return true;
+  });
+}
+
+// ─────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────
+function render() {
+  const container = document.getElementById('mainContent');
+  if (currentTab === 'settings') { renderSettings(container); return; }
+
+  const t = today();
+  const fl = filteredLeads();
+  const oemsUniq = [...new Set(leads.map(l=>l.oem).filter(Boolean))].sort();
+
+  // Stats
+  const totalAmt = leads.filter(l=>l.status==='Active').reduce((s,l)=>s+(parseInt(l.amount)||0),0);
+  const overdueCount = leads.filter(l=>l.followup && l.followup < t && l.status === 'Active').length;
+  const wonCount = leads.filter(l=>l.status==='Won').length;
+
+  let html = `
+  <div class="stats">
+    <div class="stat"><div class="stat-val">${leads.length}</div><div class="stat-label">Total Leads</div></div>
+    <div class="stat"><div class="stat-val">${leads.filter(l=>l.status==='Active').length}</div><div class="stat-label">Active</div></div>
+    <div class="stat"><div class="stat-val" style="color:var(--red)">${overdueCount}</div><div class="stat-label">Overdue</div></div>
+    <div class="stat"><div class="stat-val" style="color:var(--green)">${wonCount}</div><div class="stat-label">Won</div></div>
+  </div>
+  <div class="filters">
+    <input class="search-box" type="text" placeholder="🔍  Search company, customer, OEM..." value="${searchQ}" oninput="searchQ=this.value;render()"/>
+    <select class="filter-select" onchange="filterOEM=this.value;render()">
+      <option value="">All OEMs</option>
+      ${oemsUniq.map(o=>`<option value="${o}" ${filterOEM===o?'selected':''}>${o}</option>`).join('')}
+    </select>
+    <select class="filter-select" onchange="filterStatus=this.value;render()">
+      <option value="">All Status</option>
+      <option value="Active" ${filterStatus==='Active'?'selected':''}>Active</option>
+      <option value="On Hold" ${filterStatus==='On Hold'?'selected':''}>On Hold</option>
+      <option value="Won" ${filterStatus==='Won'?'selected':''}>Won</option>
+      <option value="Lost" ${filterStatus==='Lost'?'selected':''}>Lost</option>
+    </select>
+    <select class="filter-select" onchange="filterPriority=this.value;render()">
+      <option value="">All Priority</option>
+      <option value="High" ${filterPriority==='High'?'selected':''}>🔴 High</option>
+      <option value="Medium" ${filterPriority==='Medium'?'selected':''}>🟡 Medium</option>
+      <option value="Low" ${filterPriority==='Low'?'selected':''}>🟢 Low</option>
+    </select>
+    <select class="filter-select" onchange="filterSegment=this.value;render()">
+      <option value="">All Segments</option>
+      <option value="Medical" ${filterSegment==='Medical'?'selected':''}>🏥 Medical</option>
+      <option value="Industrial" ${filterSegment==='Industrial'?'selected':''}>🏭 Industrial</option>
+      <option value="Construction" ${filterSegment==='Construction'?'selected':''}>🏗 Construction</option>
+      <option value="Mining" ${filterSegment==='Mining'?'selected':''}>⛏ Mining</option>
+      <option value="Agriculture" ${filterSegment==='Agriculture'?'selected':''}>🌾 Agriculture</option>
+      <option value="Other" ${filterSegment==='Other'?'selected':''}>Other</option>
+    </select>
+  </div>
+  <div class="leads-list">`;
+
+  if (fl.length === 0) {
+    html += `<div class="empty"><div class="empty-icon">📭</div><h3>No leads here</h3><p>Add your first lead or adjust filters</p></div>`;
+  } else {
+    // Sort: overdue first, then by priority, then by followup date
+    const priorityOrder = {High:0,Medium:1,Low:2,'':3};
+    fl.sort((a,b) => {
+      const aOverdue = a.followup && a.followup < t ? -1 : 0;
+      const bOverdue = b.followup && b.followup < t ? -1 : 0;
+      if (aOverdue !== bOverdue) return aOverdue - bOverdue;
+      return (priorityOrder[a.priority]||3) - (priorityOrder[b.priority]||3);
+    });
+
+    fl.forEach(l => {
+      const isOverdue = l.followup && l.followup < t && l.status === 'Active';
+      const isToday = l.followup === t;
+      let cardClass = '';
+      if (isOverdue) cardClass = 'overdue';
+      else if (isToday) cardClass = 'due-today';
+
+      let followupLabel = '';
+      let fuClass = 'none';
+      if (l.followup) {
+        const days = daysBetween(t, l.followup);
+        if (isOverdue) { followupLabel = `⚠ Follow-up overdue (${fmtDate(l.followup)})`; fuClass = 'overdue'; }
+        else if (isToday) { followupLabel = `🔔 Follow-up today`; fuClass = 'due-today'; }
+        else { followupLabel = `📅 Follow-up ${fmtDate(l.followup)}`; fuClass = 'upcoming'; }
+      } else { followupLabel = 'No follow-up set'; }
+
+      const age = l.leadDate ? daysBetween(l.leadDate, t) : null;
+      const statusClass = l.status==='Active'?'status-active':l.status==='Lost'?'status-lost':l.status==='Won'?'status-won':'status-hold';
+      const priorityClass = l.priority==='High'?'tag-priority-high':l.priority==='Low'?'tag-priority-low':'tag-priority-medium';
+
+      html += `
+      <div class="lead-card ${cardClass}" onclick="openDetail('${l.id}')">
+        <div class="lead-card-header">
+          <div>
+            <div class="lead-company">${l.company || '—'}</div>
+            <div class="lead-customer">${l.customer || ''}${l.city ? ` · ${l.city}` : ''}</div>
+          </div>
+          <span class="status-badge ${statusClass}">${l.status||'Active'}</span>
+        </div>
+        <div class="lead-tags">
+          ${l.stage ? `<span class="tag tag-stage">${l.stage}</span>` : ''}
+          ${l.segment ? `<span class="tag" style="background:#1a1e3a;color:#a0aaff">${l.segment}</span>` : ''}
+          ${l.priority ? `<span class="tag ${priorityClass}">${l.priority}</span>` : ''}
+          ${l.oem ? `<span class="tag tag-oem">${l.oem}</span>` : ''}
+          ${l.amount ? `<span class="tag tag-amount">${fmtAmt(l.amount)}</span>` : ''}
+          ${l.subvention === 'Yes' ? `<span class="tag" style="background:#1a2a20;color:var(--green)">Subv. ✓</span>` : ''}
+          ${l.machine ? `<span class="tag tag-oem">${l.machine}</span>` : ''}
+        </div>
+        <div class="lead-footer">
+          <span class="lead-followup ${fuClass}">${followupLabel}</span>
+          <span class="lead-age">${age !== null ? `${age}d old` : ''}</span>
+        </div>
+      </div>`;
+    });
+  }
+
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+function renderSettings(container) {
+  const s = getSettings();
+  container.innerHTML = `
+  <div class="settings-panel">
+    <h3>🔗 GitHub Sync Setup</h3>
+    <div class="form-grid">
+      <div class="form-group form-full">
+        <label>Personal Access Token</label>
+        <input type="password" id="s_token" value="${s.token||''}" placeholder="ghp_xxxxxxxxxxxx"/>
+      </div>
+      <div class="form-group">
+        <label>GitHub Username</label>
+        <input type="text" id="s_owner" value="${s.owner||''}" placeholder="your-username"/>
+      </div>
+      <div class="form-group">
+        <label>Repository Name</label>
+        <input type="text" id="s_repo" value="${s.repo||''}" placeholder="your-repo-name"/>
+      </div>
+      <div class="form-group form-full">
+        <label>File Path in Repo</label>
+        <input type="text" id="s_filePath" value="${s.filePath||'leads.json'}" placeholder="leads.json"/>
+      </div>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:8px;">
+      <button class="btn btn-primary" onclick="saveGHSettings()">Save &amp; Sync</button>
+      <button class="btn btn-ghost" onclick="manualSync()">↻ Sync Now</button>
+    </div>
+    <div class="settings-note">
+      🔐 Your token is saved only in your browser (localStorage). It never leaves your device. <br/>
+      Generate a token at <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a> with <strong>repo</strong> scope. <br/>
+      The app will read and write <strong>${s.filePath||'leads.json'}</strong> in <strong>${s.owner||'your-username'}/${s.repo||'your-repo'}</strong>.
+    </div>
+  </div>
+
+  <div class="settings-panel" style="margin-top:12px;">
+    <h3>📥 Import Leads from CSV</h3>
+    <p style="color:var(--muted);font-size:12px;line-height:1.6;margin-bottom:12px;">
+      Download the template, fill it in Excel or Google Sheets, and import it back. Duplicate leads (matched by phone number) are flagged before saving.
+    </p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn-primary btn-sm" onclick="downloadTemplate()">⬇️ Download Template</button>
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('csvFileInput').click()">📂 Import CSV File</button>
+    </div>
+    <div class="settings-note" style="margin-top:10px;">
+      ✅ <strong>Valid values for dropdowns:</strong><br/>
+      <strong>Priority:</strong> High, Medium, Low &nbsp;|&nbsp;
+      <strong>Stage:</strong> New, Contacted, Docs Collected, Credit Review, Sanctioned, Disbursed, Closed Lost<br/>
+      <strong>Status:</strong> Active, On Hold, Won, Lost &nbsp;|&nbsp;
+      <strong>Subvention:</strong> Yes, No<br/>
+      <strong>Dates:</strong> YYYY-MM-DD format (e.g. 2026-04-06) &nbsp;|&nbsp;
+      <strong>Amount:</strong> Numbers only, no ₹ or commas
+    </div>
+  </div>
+
+  <div class="settings-panel" style="margin-top:12px;">
+    <h3>📤 Export All Leads</h3>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn-ghost btn-sm" onclick="exportAllWA()">📱 WhatsApp Summary</button>
+      <button class="btn btn-ghost btn-sm" onclick="exportAllEmail()">📧 Email Table</button>
+      <button class="btn btn-ghost btn-sm" onclick="exportCSV()">📊 Download CSV</button>
+    </div>
+  </div>`;
+}
+
+// ─────────────────────────────────────────
+// TABS
+// ─────────────────────────────────────────
+function setTab(tab, el) {
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  render();
+}
+
+// ─────────────────────────────────────────
+// SETTINGS ACTIONS
+// ─────────────────────────────────────────
+function saveGHSettings() {
+  const s = {
+    token: document.getElementById('s_token').value.trim(),
+    owner: document.getElementById('s_owner').value.trim(),
+    repo: document.getElementById('s_repo').value.trim(),
+    filePath: document.getElementById('s_filePath').value.trim() || 'leads.json',
+  };
+  saveSettings(s);
+  toast('Settings saved!', 'success');
+  loadFromGithub().then(ok => { if (ok) render(); });
+}
+
+async function manualSync() {
+  toast('Syncing...', '');
+  const ok = await loadFromGithub();
+  if (ok) { render(); toast('Synced ✓', 'success'); }
+}
+
+function openSettings() {
+  currentTab = 'settings';
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab')[5].classList.add('active');
+  render();
+}
+
+// ─────────────────────────────────────────
+// ADD / EDIT FORM
+// ─────────────────────────────────────────
+const FIELDS = ['company','customer','phone','phone2','email','city','segment','address','source','oem','sourceType','machine','amount','subvention','priority','stage','status','leadDate','followup','lastContact','reason','notes'];
+
+function openAddLead() {
+  editingId = null;
+  document.getElementById('formTitle').textContent = 'New Lead';
+  FIELDS.forEach(f => {
+    const el = document.getElementById('f_'+f);
+    if (!el) return;
+    if (f === 'leadDate') el.value = today();
+    else if (f === 'priority') el.value = 'Medium';
+    else if (f === 'stage') el.value = 'New';
+    else if (f === 'status') el.value = 'Active';
+    else el.value = '';
+  });
+  document.getElementById('formOverlay').classList.add('open');
+}
+
+function openEdit(id) {
+  const l = leads.find(x => x.id === id);
+  if (!l) return;
+  editingId = id;
+  document.getElementById('formTitle').textContent = 'Edit Lead';
+  FIELDS.forEach(f => {
+    const el = document.getElementById('f_'+f);
+    if (!el) return;
+    el.value = l[f] || '';
+  });
+  document.getElementById('detailOverlay').classList.remove('open');
+  document.getElementById('formOverlay').classList.add('open');
+}
+
+function closeForm() { document.getElementById('formOverlay').classList.remove('open'); }
+function closeFormModal(e) { if (e.target === document.getElementById('formOverlay')) closeForm(); }
+
+async function saveLead() {
+  const company = document.getElementById('f_company').value.trim();
+  const customer = document.getElementById('f_customer').value.trim();
+  if (!company && !customer) { toast('Company or Customer name required', 'error'); return; }
+
+  const lead = {};
+  FIELDS.forEach(f => {
+    const el = document.getElementById('f_'+f);
+    lead[f] = el ? el.value.trim() : '';
+  });
+  // Auto-set status to Lost when stage is Closed Lost
+  if (lead.stage === 'Closed Lost') lead.status = 'Lost';
+  lead.id = editingId || uid();
+  lead.updatedAt = new Date().toISOString();
+
+  if (editingId) {
+    const idx = leads.findIndex(x => x.id === editingId);
+    leads[idx] = lead;
+  } else {
+    leads.unshift(lead);
+  }
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
+  closeForm();
+  render();
+  await saveToGithub();
+}
+
+// ─────────────────────────────────────────
+// DETAIL VIEW
+// ─────────────────────────────────────────
+function openDetail(id) {
+  const l = leads.find(x => x.id === id);
+  if (!l) return;
+  const t = today();
+  const isOverdue = l.followup && l.followup < t;
+  const statusClass = l.status==='Active'?'status-active':l.status==='Lost'?'status-lost':l.status==='Won'?'status-won':'status-hold';
+
+  document.getElementById('detailContent').innerHTML = `
+  <div class="modal-handle"></div>
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:16px;">
+    <div>
+      <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--accent)">${l.company||'—'}</div>
+      <div style="color:var(--muted);font-size:13px;margin-top:2px">${l.customer||''}${l.city?` · ${l.city}`:''}</div>
+    </div>
+    <span class="status-badge ${statusClass}">${l.status||'Active'}</span>
+  </div>
+
+  <div class="detail-section">
+    <h4>Customer</h4>
+    <div class="detail-grid">
+      <div class="detail-item"><label>Phone</label><span>${l.phone||'—'}</span></div>
+      <div class="detail-item"><label>Alt Phone</label><span>${l.phone2||'—'}</span></div>
+      <div class="detail-item"><label>Email</label><span style="word-break:break-all">${l.email||'—'}</span></div>
+      <div class="detail-item"><label>City</label><span>${l.city||'—'}</span></div>
+      <div class="detail-item"><label>Segment</label><span>${l.segment||'—'}</span></div>
+    </div>
+    ${l.address ? `<div style="margin-top:8px"><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Address</label><div style="font-size:13px;color:var(--muted);margin-top:3px;line-height:1.5">${l.address}</div></div>` : ''}
+  </div>
+
+  <div class="detail-section">
+    <h4>Lead Source</h4>
+    <div class="detail-grid">
+      <div class="detail-item"><label>Received From</label><span>${l.source||'—'}</span></div>
+      <div class="detail-item"><label>OEM</label><span>${l.oem||'—'}</span></div>
+      <div class="detail-item"><label>Source Type</label><span>${l.sourceType||'—'}</span></div>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <h4>Deal</h4>
+    <div class="detail-grid">
+      <div class="detail-item"><label>Machine</label><span>${l.machine||'—'}</span></div>
+      <div class="detail-item"><label>Loan Amount</label><span>${fmtAmt(l.amount)}</span></div>
+      <div class="detail-item"><label>Subvention</label><span>${l.subvention||'—'}</span></div>
+      <div class="detail-item"><label>Priority</label><span>${l.priority||'—'}</span></div>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <h4>Pipeline</h4>
+    <div class="detail-grid">
+      <div class="detail-item"><label>Stage</label><span>${l.stage||'—'}</span></div>
+      <div class="detail-item"><label>Lead Date</label><span>${fmtDate(l.leadDate)}</span></div>
+      <div class="detail-item"><label>Next Follow-up</label><span style="color:${isOverdue?'var(--red)':'inherit'}">${fmtDate(l.followup)}${isOverdue?' ⚠':''}</span></div>
+      <div class="detail-item"><label>Last Contacted</label><span>${fmtDate(l.lastContact)}</span></div>
+    </div>
+  </div>
+
+  ${l.reason ? `<div class="detail-section"><h4>Reason</h4><div style="color:var(--text);font-size:14px">${l.reason}</div></div>` : ''}
+  ${l.notes ? `<div class="detail-section"><h4>Notes</h4><div style="color:var(--muted);font-size:13px;line-height:1.6">${l.notes}</div></div>` : ''}
+
+  <div class="detail-actions">
+    ${l.phone ? `<a href="tel:${l.phone}" class="btn btn-ghost btn-sm">📞 Call</a>` : ''}
+    ${l.phone ? `<a href="https://wa.me/91${l.phone.replace(/\D/g,'')}" target="_blank" class="btn btn-ghost btn-sm">💬 WhatsApp</a>` : ''}
+    ${l.email ? `<a href="mailto:${l.email}" class="btn btn-ghost btn-sm">✉️ Email</a>` : ''}
+    <button class="btn btn-ghost btn-sm" onclick="shareWA('${l.id}')">📤 Copy WA</button>
+    <button class="btn btn-ghost btn-sm" onclick="shareEmail('${l.id}')">📧 Copy Email</button>
+    <button class="btn btn-primary btn-sm" onclick="openEdit('${l.id}')">✏️ Edit</button>
+    <button class="btn btn-ghost btn-sm" style="color:var(--red);border-color:var(--red)" onclick="deleteLead('${l.id}')">🗑 Delete</button>
+  </div>`;
+
+  document.getElementById('detailOverlay').classList.add('open');
+}
+
+function closeDetailModal(e) { if (e.target === document.getElementById('detailOverlay')) document.getElementById('detailOverlay').classList.remove('open'); }
+
+async function deleteLead(id) {
+  if (!confirm('Delete this lead?')) return;
+  leads = leads.filter(l => l.id !== id);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
+  document.getElementById('detailOverlay').classList.remove('open');
+  render();
+  await saveToGithub();
+}
+
+// ─────────────────────────────────────────
+// SHARE
+// ─────────────────────────────────────────
+function waText(l) {
+  const lines = [
+    `*Lead Summary – ${l.company || l.customer}*`,
+    ``,
+    `*Customer:* ${l.customer||'—'}`,
+    `*Company:* ${l.company||'—'}`,
+    `*Phone:* ${l.phone||'—'}${l.phone2?' / '+l.phone2:''}`,
+    `*Email:* ${l.email||'—'}`,
+    `*City:* ${l.city||'—'}`,
+    ``,
+    `*OEM:* ${l.oem||'—'}`,
+    `*Machine:* ${l.machine||'—'}`,
+    `*Loan Amount:* ${fmtAmt(l.amount)}`,
+    `*Subvention:* ${l.subvention||'—'}`,
+    `*Lead From:* ${l.source||'—'} (${l.sourceType||'—'})`,
+    ``,
+    `*Stage:* ${l.stage||'—'}`,
+    `*Status:* ${l.status||'—'}`,
+    `*Priority:* ${l.priority||'—'}`,
+    `*Lead Date:* ${fmtDate(l.leadDate)}`,
+    `*Next Follow-up:* ${fmtDate(l.followup)}`,
+    l.reason ? `*Reason:* ${l.reason}` : null,
+    l.notes ? `*Notes:* ${l.notes}` : null,
+  ].filter(Boolean).join('\n');
+  return lines;
+}
+
+function emailTable(l) {
+  const rows = [
+    ['Company', l.company], ['Customer', l.customer], ['Phone', l.phone],
+    ['Alt Phone', l.phone2], ['Email', l.email], ['City', l.city],
+    ['OEM', l.oem], ['Machine', l.machine], ['Loan Amount', fmtAmt(l.amount)],
+    ['Subvention', l.subvention], ['Lead From', l.source], ['Source Type', l.sourceType],
+    ['Stage', l.stage], ['Status', l.status], ['Priority', l.priority],
+    ['Lead Date', fmtDate(l.leadDate)], ['Next Follow-up', fmtDate(l.followup)],
+    ['Last Contacted', fmtDate(l.lastContact)], ['Reason', l.reason], ['Notes', l.notes],
+  ].filter(([,v]) => v);
+  return `<table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:13px;">
+<thead><tr style="background:#f5c842;"><th colspan="2">Lead – ${l.company||l.customer}</th></tr></thead>
+<tbody>${rows.map(([k,v])=>`<tr><td style="background:#f5f5f5;font-weight:bold;min-width:130px">${k}</td><td>${v}</td></tr>`).join('')}</tbody>
+</table>`;
+}
+
+function shareWA(id) {
+  const l = leads.find(x => x.id === id);
+  if (!l) return;
+  const text = waText(l);
+  copyText(text);
+  toast('Copied for WhatsApp ✓', 'success');
+  document.getElementById('detailOverlay').classList.remove('open');
+}
+
+function shareEmail(id) {
+  const l = leads.find(x => x.id === id);
+  if (!l) return;
+  const html = emailTable(l);
+  // Open in new tab for email copy
+  const w = window.open('', '_blank');
+  w.document.write(`<!DOCTYPE html><html><head><title>Lead – ${l.company||l.customer}</title></head><body style="padding:20px;font-family:Arial">${html}<br/><p style="color:#999;font-size:11px">Select the table above and copy, then paste into your email.</p></body></html>`);
+  w.document.close();
+}
+
+function copyText(txt) {
+  if (navigator.clipboard) { navigator.clipboard.writeText(txt); }
+  else {
+    const el = document.createElement('textarea');
+    el.value = txt; document.body.appendChild(el);
+    el.select(); document.execCommand('copy'); document.body.removeChild(el);
+  }
+}
+
+// EXPORT ALL
+function exportAllWA() {
+  const fl = leads.filter(l=>l.status==='Active');
+  let text = `*Active Leads Summary – ${new Date().toLocaleDateString('en-IN')}*\n\n`;
+  fl.forEach((l,i) => {
+    text += `${i+1}. *${l.company||l.customer}* – ${l.machine||'—'} – ${fmtAmt(l.amount)} – ${l.stage||'—'} – FU: ${fmtDate(l.followup)}\n`;
+  });
+  copyText(text);
+  toast('Active leads summary copied!', 'success');
+}
+
+function exportAllEmail() {
+  const rows = leads.map(l => [l.company, l.customer, l.phone, l.oem, l.machine, fmtAmt(l.amount), l.stage, l.status, l.priority, fmtDate(l.followup)]);
+  const headers = ['Company','Customer','Phone','OEM','Machine','Amount','Stage','Status','Priority','Next Follow-up'];
+  let html = `<table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:12px;">
+<thead><tr style="background:#f5c842;">${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
+<tbody>${rows.map((r,i)=>`<tr style="background:${i%2?'#f9f9f9':'#fff'}">${r.map(v=>`<td>${v||'—'}</td>`).join('')}</tr>`).join('')}</tbody>
+</table>`;
+  const w = window.open('', '_blank');
+  w.document.write(`<!DOCTYPE html><html><head><title>All Leads</title></head><body style="padding:20px">${html}</body></html>`);
+  w.document.close();
+}
+
+function exportCSV() {
+  const headers = ['Company','Customer','Phone','Alt Phone','Email','City','Segment','Address','OEM','Machine','Amount','Subvention','Lead From','Source Type','Stage','Status','Priority','Lead Date','Next Follow-up','Last Contacted','Reason','Notes'];
+  const keys = ['company','customer','phone','phone2','email','city','segment','address','oem','machine','amount','subvention','source','sourceType','stage','status','priority','leadDate','followup','lastContact','reason','notes'];
+  const rows = [headers, ...leads.map(l => keys.map(k => `"${(l[k]||'').replace(/"/g,'""')}"` ))];
+  const csv = rows.map(r=>r.join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,\uFEFF' + encodeURIComponent(csv);
+  a.download = `leads_${today()}.csv`;
+  a.click();
+}
+
+function closeShareOverlay() { document.getElementById('shareOverlay').classList.remove('open'); }
+function closeShareModal(e) { if (e.target === document.getElementById('shareOverlay')) closeShareOverlay(); }
+
+// ─────────────────────────────────────────
+// IMPORT
+// ─────────────────────────────────────────
+
+const CSV_HEADERS = ['Company','Customer Name','Phone','Alt Phone','Email','City','Segment','Address','Lead Received From','Source Type','OEM Name','Machine Requirement','Loan Amount','Subvention','Priority','Stage','Status','Lead Date','Next Follow-up','Last Contacted','Reason','Notes'];
+const CSV_KEYS    = ['company','customer','phone','phone2','email','city','segment','address','source','sourceType','oem','machine','amount','subvention','priority','stage','status','leadDate','followup','lastContact','reason','notes'];
+
+const TEMPLATE_SAMPLE = [
+  'ABC Industries','Rajesh Kumar','9876543210','9876500000','rajesh@abc.com','Bengaluru','Industrial','Plot 12, KIADB Peenya Industrial Area, Bengaluru 560058','Arun – XCMG Dealer','OEM Referral','XCMG','20T Excavator','5500000','Yes','High','Contacted','Active','2026-04-01','2026-04-10','2026-04-05','Interested, needs to check finance','Referred by Suresh'
+];
+
+function downloadTemplate() {
+  const header = CSV_HEADERS.join(',');
+  const sample = TEMPLATE_SAMPLE.map(v => `"${v}"`).join(',');
+  const instructions = [
+    '# INSTRUCTIONS (delete this row before importing)',
+    '# Priority: High / Medium / Low',
+    '# Stage: New / Contacted / Docs Collected / Credit Review / Sanctioned / Disbursed / Closed Lost',
+    '# Status: Active / On Hold / Won / Lost',
+    '# Subvention: Yes / No',
+    '# Dates: YYYY-MM-DD format (e.g. 2026-04-06)',
+    '# Loan Amount: Numbers only (e.g. 5500000)',
+  ].join('\n# ,,,,,,,,,,,,,,,,,,,\n');
+
+  const csv = `${header}\n${sample}\n# ,,,,,,,,,,,,,,,,,,,\n${instructions}`;
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,\uFEFF' + encodeURIComponent(csv);
+  a.download = 'leads_import_template.csv';
+  a.click();
+  toast('Template downloaded!', 'success');
+}
+
+function parseCSV(text) {
+  // Remove BOM
+  text = text.replace(/^\uFEFF/, '');
+  const lines = text.split(/\r?\n/).filter(l => l.trim() && !l.trim().startsWith('#'));
+  if (lines.length < 2) return { headers: [], rows: [] };
+
+  function parseLine(line) {
+    const result = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') {
+        if (inQ && line[i+1] === '"') { cur += '"'; i++; }
+        else inQ = !inQ;
+      } else if (ch === ',' && !inQ) {
+        result.push(cur.trim()); cur = '';
+      } else cur += ch;
+    }
+    result.push(cur.trim());
+    return result;
+  }
+
+  const headers = parseLine(lines[0]);
+  const rows = lines.slice(1).map(l => parseLine(l));
+  return { headers, rows };
+}
+
+function handleFileSelect(input) {
+  const file = input.files[0];
+  if (!file) return;
+  input.value = ''; // reset so same file can be re-selected
+  const reader = new FileReader();
+  reader.onload = e => processImportFile(e.target.result, file.name);
+  reader.readAsText(file, 'UTF-8');
+}
+
+let pendingImport = [];
+
+function processImportFile(text, filename) {
+  const { headers, rows } = parseCSV(text);
+  if (!headers.length) { toast('Could not read CSV file', 'error'); return; }
+
+  // Map CSV headers to field keys (case-insensitive, flexible)
+  const normalize = s => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const normHeaders = CSV_HEADERS.map(normalize);
+  const colMap = headers.map(h => {
+    const idx = normHeaders.indexOf(normalize(h));
+    return idx >= 0 ? CSV_KEYS[idx] : null;
+  });
+
+  const existingPhones = new Set(leads.map(l => (l.phone||'').replace(/\D/g,'')).filter(Boolean));
+
+  const parsed = rows.map((row, i) => {
+    const lead = {};
+    colMap.forEach((key, ci) => { if (key) lead[key] = (row[ci] || '').trim(); });
+
+    // Normalise date fields: accept DD/MM/YYYY → YYYY-MM-DD
+    ['leadDate','followup','lastContact'].forEach(k => {
+      if (lead[k] && /^\d{2}\/\d{2}\/\d{4}$/.test(lead[k])) {
+        const [d,m,y] = lead[k].split('/');
+        lead[k] = `${y}-${m}-${d}`;
+      }
+    });
+
+    const cleanPhone = (lead.phone||'').replace(/\D/g,'');
+    const isDup = cleanPhone && existingPhones.has(cleanPhone);
+    const hasMin = lead.company || lead.customer || lead.phone;
+    return { lead, isDup, hasMin, row: i+2 }; // row+2 for 1-indexed + header
+  });
+
+  pendingImport = parsed;
+  renderImportPreview(filename, parsed);
+  document.getElementById('importOverlay').classList.add('open');
+}
+
+function renderImportPreview(filename, parsed) {
+  const ok  = parsed.filter(r => r.hasMin && !r.isDup);
+  const dup = parsed.filter(r => r.hasMin && r.isDup);
+  const err = parsed.filter(r => !r.hasMin);
+
+  const previewRows = parsed.slice(0,50).map(r => {
+    const cls = !r.hasMin ? 'import-row-err' : r.isDup ? 'import-row-dup' : 'import-row-ok';
+    const flag = !r.hasMin ? '❌' : r.isDup ? '⚠️' : '✅';
+    const l = r.lead;
+    return `<tr class="${cls}">
+      <td>${flag}</td>
+      <td>${l.company||'—'}</td>
+      <td>${l.customer||'—'}</td>
+      <td>${l.phone||'—'}</td>
+      <td>${l.oem||'—'}</td>
+      <td>${l.machine||'—'}</td>
+      <td>${l.stage||'—'}</td>
+      <td>${l.status||'—'}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('importBody').innerHTML = `
+    <p style="color:var(--muted);font-size:12px;margin-bottom:10px;">File: <strong style="color:var(--text)">${filename}</strong> · ${parsed.length} rows found</p>
+    <div class="import-legend">
+      <span class="ok-dot">${ok.length} new leads to import</span>
+      <span class="dup-dot">${dup.length} duplicates (phone match)</span>
+      <span class="err-dot">${err.length} rows skipped (no name/phone)</span>
+    </div>
+    <div class="import-scroll" style="margin-top:12px;">
+      <table class="import-preview-table">
+        <thead><tr><th></th><th>Company</th><th>Customer</th><th>Phone</th><th>OEM</th><th>Machine</th><th>Stage</th><th>Status</th></tr></thead>
+        <tbody>${previewRows}</tbody>
+      </table>
+    </div>
+    ${parsed.length > 50 ? `<p style="color:var(--muted);font-size:11px;margin-top:6px;">Showing first 50 rows of ${parsed.length}</p>` : ''}
+    <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeImportModal()">Cancel</button>
+      ${dup.length > 0 ? `<button class="btn btn-ghost" style="flex:1;color:var(--orange);border-color:var(--orange)" onclick="confirmImport(true)">Import All incl. Duplicates (${ok.length+dup.length})</button>` : ''}
+      ${ok.length > 0 ? `<button class="btn btn-primary" style="flex:1" onclick="confirmImport(false)">✅ Import ${ok.length} New Leads</button>` : '<p style="color:var(--muted);font-size:12px;width:100%;text-align:center">No new leads to import.</p>'}
+    </div>`;
+}
+
+async function confirmImport(includeDups) {
+  const toImport = includeDups
+    ? pendingImport.filter(r => r.hasMin)
+    : pendingImport.filter(r => r.hasMin && !r.isDup);
+
+  const newLeads = toImport.map(r => ({
+    ...r.lead,
+    id: uid(),
+    updatedAt: new Date().toISOString(),
+    priority: r.lead.priority || 'Medium',
+    stage: r.lead.stage || 'New',
+    status: r.lead.status || 'Active',
+    leadDate: r.lead.leadDate || today(),
+  }));
+
+  leads = [...newLeads, ...leads];
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
+  document.getElementById('importOverlay').classList.remove('open');
+  render();
+  toast(`Imported ${newLeads.length} leads ✓`, 'success');
+  await saveToGithub();
+}
+
+function closeImportModal(e) {
+  if (!e || e.target === document.getElementById('importOverlay')) {
+    document.getElementById('importOverlay').classList.remove('open');
+  }
+}
+
+// ─────────────────────────────────────────
+// START
+// ─────────────────────────────────────────
+initApp();
+</script>
+</body>
+</html>
