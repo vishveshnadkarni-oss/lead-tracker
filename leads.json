@@ -1075,13 +1075,13 @@
     "segment": "Industrial",
     "address": "No.45, 2nd floor, 2nd main, Sankey Road, Sadashivanagar, Bangalore - 560 080.",
     "source": "Sanyal",
-    "sourceType": "BFL Employee",
-    "oem": "BFL",
+    "oem": "Non-Standard",
+    "sourceType": "Existing Customer",
     "machine": "",
     "amount": "70000000",
     "subvention": "No",
     "priority": "Medium",
-    "stage": "On hold",
+    "stage": "",
     "status": "Active",
     "leadDate": "2026-03-10",
     "followup": "",
@@ -1089,7 +1089,7 @@
     "reason": "Needs funding for HVAC also. Has loan sanctioned from Siemens",
     "notes": "",
     "id": "mnyovzw20ubkjdmyl6x",
-    "updatedAt": "2026-04-14T14:00:57.458Z"
+    "updatedAt": "2026-04-14T14:16:31.701Z"
   },
   {
     "company": "Shivnanda Hospital",
