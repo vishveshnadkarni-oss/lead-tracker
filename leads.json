@@ -814,9 +814,9 @@
     "city": "Bengaluru",
     "segment": "Industrial",
     "address": "16/A, Millers Rd, Kaverappa Layout, Vasanth Nagar",
-    "source": "",
-    "sourceType": "",
-    "oem": "",
+    "source": "Vineet Thomas",
+    "oem": "HSG",
+    "sourceType": "OEM Referral",
     "machine": "",
     "amount": "",
     "subvention": "",
@@ -829,7 +829,7 @@
     "reason": "",
     "notes": "",
     "id": "mnyovzw23d3v0o4ko82",
-    "updatedAt": "2026-04-14T14:00:57.458Z"
+    "updatedAt": "2026-04-14T14:30:59.600Z"
   },
   {
     "company": "Bengaluru",
