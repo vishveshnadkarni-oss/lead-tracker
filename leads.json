@@ -1133,15 +1133,15 @@
     "amount": "70000000",
     "subvention": "No",
     "priority": "Medium",
-    "stage": "",
-    "status": "Active",
+    "stage": "Closed Lost",
+    "status": "Lost",
     "leadDate": "2026-03-10",
     "followup": "",
     "lastContact": "",
     "reason": "Needs funding for HVAC also. Has loan sanctioned from Siemens",
     "notes": "",
     "id": "mnyovzw20ubkjdmyl6x",
-    "updatedAt": "2026-04-14T14:16:31.701Z"
+    "updatedAt": "2026-04-14T14:50:03.429Z"
   },
   {
     "company": "Shivnanda Hospital",
