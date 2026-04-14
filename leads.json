@@ -2011,8 +2011,8 @@
     "segment": "Industrial",
     "address": "",
     "source": "Narayan JY",
-    "sourceType": "OEM Referral",
     "oem": "GPY Machine Tools",
+    "sourceType": "Dealer Referral",
     "machine": "NA",
     "amount": "0",
     "subvention": "No",
@@ -2025,7 +2025,7 @@
     "reason": "Not interested in taking loan",
     "notes": "",
     "id": "mnyhv7qocx57a9yji6u",
-    "updatedAt": "2026-04-14T10:44:23.664Z"
+    "updatedAt": "2026-04-14T14:36:32.182Z"
   },
   {
     "company": "Venttup Ventures Pvt Ltd",
