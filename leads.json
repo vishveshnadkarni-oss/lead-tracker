@@ -1673,8 +1673,8 @@
     "segment": "Medical",
     "address": "Take from Phaniraj",
     "source": "Sarabjit",
-    "sourceType": "OEM Referral",
     "oem": "Biomedix",
+    "sourceType": "OEM Referral",
     "machine": "",
     "amount": "0",
     "subvention": "Yes",
@@ -1685,9 +1685,9 @@
     "followup": "2026-04-15",
     "lastContact": "",
     "reason": "",
-    "notes": "Take contact details from Sarabjit",
+    "notes": "Take contact details from Sujith. Tell him lead was from Sarabjit",
     "id": "mnyovzw38ztc6knshja",
-    "updatedAt": "2026-04-14T14:00:57.459Z"
+    "updatedAt": "2026-04-15T06:16:18.677Z"
   },
   {
     "company": "Sanjay Sajjan",
