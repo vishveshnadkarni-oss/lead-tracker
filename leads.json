@@ -168,7 +168,7 @@
     "oem": "Biomedix",
     "sourceType": "OEM Referral",
     "machine": "",
-    "amount": "",
+    "amount": "1500000",
     "subvention": "Yes",
     "priority": "Medium",
     "stage": "New",
@@ -176,10 +176,10 @@
     "leadDate": "2026-03-18",
     "followup": "2026-04-15",
     "lastContact": "",
-    "reason": "",
+    "reason": "21L. 6L. 24 months",
     "notes": "Details yet to received From Mr. Phaniraj",
     "id": "mnypinab0gkuc25sxons",
-    "updatedAt": "2026-04-14T14:53:10.094Z"
+    "updatedAt": "2026-04-15T06:51:12.544Z"
   },
   {
     "company": "Tri Colour Hospital",
