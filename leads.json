@@ -26,9 +26,9 @@
     "updatedAt": "2026-04-15T13:44:59.489Z"
   },
   {
-    "company": "Details yet to recieve",
-    "customer": "GF customer",
-    "phone": "000000",
+    "company": "Bharathi innovative",
+    "customer": "Govardhan",
+    "phone": "74987 51192",
     "phone2": "",
     "email": "",
     "city": "Hyderabad",
@@ -38,18 +38,18 @@
     "oem": "GF",
     "sourceType": "OEM Referral",
     "machine": "",
-    "amount": "",
-    "subvention": "",
+    "amount": "12000000",
+    "subvention": "No",
     "priority": "Medium",
     "stage": "New",
     "status": "Active",
     "leadDate": "2026-04-15",
-    "followup": "",
-    "lastContact": "",
+    "followup": "2026-04-18",
+    "lastContact": "2026-04-16",
     "reason": "",
-    "notes": "Take details of machine from Abhishek and forward lead to Hyderabad",
+    "notes": "Take details of machine from Abhishek and forward lead to Hyderabad.\n\nLead sent to manohar. He will check and tell of possible. They have also reached out to makino where vintage is low and commercials are poor",
     "id": "mnztcqqlrvb4z34hr8",
-    "updatedAt": "2026-04-15T10:06:32.461Z"
+    "updatedAt": "2026-04-16T09:31:19.773Z"
   },
   {
     "company": "Details yet to receive",
