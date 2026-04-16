@@ -1855,8 +1855,8 @@
     "segment": "Industrial",
     "address": "Vinayagar Kovil Street, 8th street, Ganapathy, Coimbatore - 641006",
     "source": "Sendhil",
-    "sourceType": "OEM Referral",
     "oem": "Cosmos",
+    "sourceType": "OEM Referral",
     "machine": "",
     "amount": "0",
     "subvention": "No",
@@ -1864,12 +1864,12 @@
     "stage": "Contacted",
     "status": "Active",
     "leadDate": "2026-04-07",
-    "followup": "2026-04-16",
-    "lastContact": "",
+    "followup": "2026-04-21",
+    "lastContact": "2026-04-16",
     "reason": "",
-    "notes": "",
+    "notes": "Karthick will meet customer on Monday.",
     "id": "mnyovzw3y7yrzp3v4hj",
-    "updatedAt": "2026-04-14T14:00:57.459Z"
+    "updatedAt": "2026-04-16T09:39:28.891Z"
   },
   {
     "company": "Aim Tech",
