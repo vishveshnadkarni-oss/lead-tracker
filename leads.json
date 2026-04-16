@@ -15,15 +15,15 @@
     "amount": "5000000",
     "subvention": "",
     "priority": "High",
-    "stage": "Contacted",
-    "status": "Active",
+    "stage": "Closed Lost",
+    "status": "Lost",
     "leadDate": "2026-04-15",
     "followup": "2026-04-25",
     "lastContact": "2026-04-15",
-    "reason": "",
+    "reason": "Location is far. Chances of clearance is poor because area is bad",
     "notes": "The customer has 2cr loan on books. His audit is on 25th April. He will try to remove the 2cr loan",
     "id": "mo03rbdtpmppats44qg",
-    "updatedAt": "2026-04-15T13:44:59.489Z"
+    "updatedAt": "2026-04-16T09:37:07.249Z"
   },
   {
     "company": "Bharathi innovative",
