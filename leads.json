@@ -41,15 +41,15 @@
     "amount": "12000000",
     "subvention": "No",
     "priority": "Medium",
-    "stage": "New",
-    "status": "Active",
+    "stage": "Closed Lost",
+    "status": "Lost",
     "leadDate": "2026-04-15",
-    "followup": "2026-04-18",
+    "followup": "",
     "lastContact": "2026-04-16",
-    "reason": "",
+    "reason": "Customer wants to go with SBI bank",
     "notes": "Take details of machine from Abhishek and forward lead to Hyderabad.\n\nLead sent to manohar. He will check and tell of possible. They have also reached out to makino where vintage is low and commercials are poor",
     "id": "mnztcqqlrvb4z34hr8",
-    "updatedAt": "2026-04-16T09:31:19.773Z"
+    "updatedAt": "2026-04-16T13:53:09.203Z"
   },
   {
     "company": "Details yet to receive",
