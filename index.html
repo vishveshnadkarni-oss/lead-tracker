@@ -205,8 +205,10 @@ textarea { resize: vertical; min-height: 60px; }
 <!-- ADD/EDIT MODAL -->
 <div class="overlay" id="formOverlay" onclick="closeFormModal(event)">
   <div class="modal">
-    <div class="modal-handle"></div>
-    <div class="modal-title" id="formTitle">Add Lead</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+      <button onclick="closeForm()" style="background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;padding:0;line-height:1;">←</button>
+      <div class="modal-title" id="formTitle" style="margin-bottom:0">Add Lead</div>
+    </div>
     <div class="form-grid" id="leadForm">
       <!-- Section: Customer -->
       <div class="form-full"><label style="color:var(--accent);font-size:12px;">📋 CUSTOMER DETAILS</label></div>
@@ -549,15 +551,23 @@ function mergeLeads(localArr, remoteArr) {
 }
 
 async function initApp() {
-  // Load local first so app is usable immediately
   const local = localStorage.getItem(STORAGE_KEY);
   const localLeads = local ? JSON.parse(local) : [];
   leads = localLeads;
-  render();
-
-  // Then load from GitHub and merge
   const s = getSettings();
-  if (!s.token) return;
+
+  // If localStorage is empty but GitHub is configured — show loading, don't flash zero
+  if (!localLeads.length && s.token) {
+    document.getElementById('mainContent').innerHTML = `
+      <div style="text-align:center;padding:60px 16px">
+        <div style="font-size:28px;margin-bottom:12px">⏳</div>
+        <div style="color:var(--muted);font-size:14px">Loading your leads from GitHub...</div>
+      </div>`;
+  } else {
+    render();
+  }
+
+  if (!s.token) { render(); return; }
   setSyncDot('syncing');
   const filePath = s.filePath || 'leads.json';
   try {
@@ -568,21 +578,21 @@ async function initApp() {
     if (raw) {
       try { remoteLeads = JSON.parse(atob(raw)) || []; } catch(e) { remoteLeads = []; }
     }
-    // Always merge — never blindly replace local with remote
     leads = mergeLeads(localLeads, remoteLeads);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
     setSyncDot('ok');
+    // Force full shell rebuild
+    document.getElementById('mainContent').innerHTML = '';
     render();
-    // If local had leads that remote didn't — push the merged result back
     if (localLeads.some(l => !remoteLeads.find(r => r.id === l.id))) {
       await saveToGithub();
     }
-    // Run daily backup after load (silent, once per day)
     setTimeout(runDailyBackup, 3000);
   } catch(e) {
-    if (e.message.includes('404')) { ghFileSHA = null; setSyncDot('ok'); return; }
+    if (e.message.includes('404')) { ghFileSHA = null; setSyncDot('ok'); render(); return; }
     setSyncDot('err');
     toast('GitHub sync failed: ' + e.message, 'error');
+    render(); // show local data even if GitHub fails
   }
 }
 
@@ -906,6 +916,9 @@ function openAddLead() {
   });
   document.getElementById('formOverlay').classList.add('open');
   pushModalState();
+}
+
+function openEdit(id) {
   const l = leads.find(x => x.id === id);
   if (!l) return;
   editingId = id;
@@ -962,9 +975,9 @@ function openDetail(id) {
   const statusClass = l.status==='Active'?'status-active':l.status==='Lost'?'status-lost':l.status==='Won'?'status-won':'status-hold';
 
   document.getElementById('detailContent').innerHTML = `
-  <div class="modal-handle"></div>
-  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:16px;">
-    <div>
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+    <button onclick="document.getElementById('detailOverlay').classList.remove('open')" style="background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;padding:0;line-height:1;">←</button>
+    <div style="flex:1">
       <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--accent)">${l.company||'—'}</div>
       <div style="color:var(--muted);font-size:13px;margin-top:2px">${l.customer||''}${l.city?` · ${l.city}`:''}</div>
     </div>
