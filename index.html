@@ -456,8 +456,15 @@ async function loadFromGithub() {
   try {
     const data = await ghRequest('GET', `/repos/${s.owner}/${s.repo}/contents/${filePath}`);
     ghFileSHA = data.sha;
-    const decoded = atob(data.content.replace(/\n/g,''));
-    leads = JSON.parse(decoded);
+    // Handle empty file
+    const raw = data.content ? data.content.replace(/\n/g,'') : '';
+    if (!raw) { setSyncDot('ok'); return true; }
+    let decoded;
+    try { decoded = atob(raw); } catch(e) { throw new Error('Could not decode file'); }
+    if (!decoded.trim()) { setSyncDot('ok'); return true; }
+    let parsed;
+    try { parsed = JSON.parse(decoded); } catch(e) { throw new Error('File is corrupted – resetting'); }
+    if (Array.isArray(parsed)) leads = parsed;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
     setSyncDot('ok');
     return true;
@@ -465,11 +472,30 @@ async function loadFromGithub() {
     if (e.message.includes('404')) {
       ghFileSHA = null;
       setSyncDot('ok');
-      return true; // file doesn't exist yet, that's fine
+      return true;
+    }
+    // Corrupted file — delete SHA so next save recreates it cleanly
+    if (e.message.includes('corrupted')) {
+      ghFileSHA = null;
+      setSyncDot('err');
+      toast('Remote file was corrupted. Save a lead to recreate it.', 'error');
+      return false;
     }
     setSyncDot('err');
     toast('GitHub sync failed: ' + e.message, 'error');
     return false;
+  }
+}
+
+async function getLatestSHA() {
+  // Always fetch latest SHA before writing to avoid conflicts
+  const s = getSettings();
+  const filePath = s.filePath || 'leads.json';
+  try {
+    const data = await ghRequest('GET', `/repos/${s.owner}/${s.repo}/contents/${filePath}`);
+    return data.sha;
+  } catch(e) {
+    return null; // file doesn't exist yet
   }
 }
 
@@ -479,11 +505,13 @@ async function saveToGithub() {
   const filePath = s.filePath || 'leads.json';
   setSyncDot('syncing');
   try {
+    // Always get the latest SHA before writing to avoid stale SHA conflicts
+    const latestSHA = await getLatestSHA();
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(leads, null, 2))));
     const body = {
       message: `Update leads – ${new Date().toLocaleString('en-IN')}`,
       content,
-      ...(ghFileSHA ? { sha: ghFileSHA } : {})
+      ...(latestSHA ? { sha: latestSHA } : {})
     };
     const res = await ghRequest('PUT', `/repos/${s.owner}/${s.repo}/contents/${filePath}`, body);
     ghFileSHA = res.content.sha;
@@ -535,13 +563,10 @@ function filteredLeads() {
     if (filterStage && l.stage !== filterStage) return false;
     if (filterSegment && l.segment !== filterSegment) return false;
     if (searchQ) {
-      const q = searchQ.toLowerCase();
-      return (l.company||'').toLowerCase().includes(q) ||
-             (l.customer||'').toLowerCase().includes(q) ||
-             (l.phone||'').includes(q) ||
-             (l.oem||'').toLowerCase().includes(q) ||
-             (l.source||'').toLowerCase().includes(q) ||
-             (l.city||'').toLowerCase().includes(q);
+      const words = searchQ.toLowerCase().trim().split(/\s+/);
+      const haystack = [l.company, l.customer, l.phone, l.phone2, l.oem, l.source, l.city, l.machine, l.segment, l.status, l.stage]
+        .map(v => (v||'').toLowerCase()).join(' ');
+      return words.every(w => haystack.includes(w));
     }
     return true;
   });
@@ -686,9 +711,14 @@ function renderSettings(container) {
         <input type="text" id="s_filePath" value="${s.filePath||'leads.json'}" placeholder="leads.json"/>
       </div>
     </div>
-    <div style="margin-top:12px;display:flex;gap:8px;">
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
       <button class="btn btn-primary" onclick="saveGHSettings()">Save &amp; Sync</button>
-      <button class="btn btn-ghost" onclick="manualSync()">↻ Sync Now</button>
+      <button class="btn btn-ghost" onclick="manualSync()">↻ Pull from GitHub</button>
+      <button class="btn btn-ghost" style="color:var(--orange);border-color:var(--orange)" onclick="mergeAndPush()">⬆ Merge &amp; Push Local</button>
+    </div>
+    <div class="settings-note" style="margin-top:8px;">
+      <strong style="color:var(--text)">↻ Pull</strong> — loads GitHub data into this device.<br/>
+      <strong style="color:var(--orange)">⬆ Merge &amp; Push</strong> — combines this device's leads with GitHub, keeps the newer version of each lead, and pushes the result. Use this when you've added leads on your phone and want them on your laptop too.
     </div>
     <div class="settings-note">
       🔐 Your token is saved only in your browser (localStorage). It never leaves your device. <br/>
@@ -756,6 +786,48 @@ async function manualSync() {
   toast('Syncing...', '');
   const ok = await loadFromGithub();
   if (ok) { render(); toast('Synced ✓', 'success'); }
+}
+
+async function mergeAndPush() {
+  // Load what's on GitHub, merge with local (newer updatedAt wins per ID), push result
+  setSyncDot('syncing');
+  const s = getSettings();
+  if (!s.token) { toast('Set up GitHub first', 'error'); return; }
+  toast('Merging...', '');
+  const filePath = s.filePath || 'leads.json';
+  let remoteLeads = [];
+  try {
+    const data = await ghRequest('GET', `/repos/${s.owner}/${s.repo}/contents/${filePath}`);
+    ghFileSHA = data.sha;
+    const raw = data.content ? data.content.replace(/\n/g,'') : '';
+    if (raw) {
+      try { remoteLeads = JSON.parse(atob(raw)) || []; } catch(e) { remoteLeads = []; }
+    }
+  } catch(e) {
+    if (!e.message.includes('404')) {
+      setSyncDot('err');
+      toast('Merge failed: ' + e.message, 'error');
+      return;
+    }
+  }
+
+  // Build merged map: local + remote, newer updatedAt wins
+  const map = {};
+  remoteLeads.forEach(l => { map[l.id] = l; });
+  leads.forEach(l => {
+    if (!map[l.id]) { map[l.id] = l; } // only on local → keep
+    else {
+      const rDate = new Date(map[l.id].updatedAt || 0);
+      const lDate = new Date(l.updatedAt || 0);
+      if (lDate >= rDate) map[l.id] = l; // local is newer or same → keep local
+    }
+  });
+
+  leads = Object.values(map).sort((a,b) => new Date(b.updatedAt||0) - new Date(a.updatedAt||0));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
+  render();
+  await saveToGithub();
+  toast(`Merged ✓ — ${leads.length} total leads synced`, 'success');
 }
 
 function openSettings() {
