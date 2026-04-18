@@ -532,18 +532,62 @@ function setSyncDot(state) {
 // ─────────────────────────────────────────
 // LOAD
 // ─────────────────────────────────────────
+function mergeLeads(localArr, remoteArr) {
+  // Combine both arrays; newer updatedAt wins per ID; leads only on one side are kept
+  const map = {};
+  remoteArr.forEach(l => { if (l.id) map[l.id] = l; });
+  localArr.forEach(l => {
+    if (!l.id) return;
+    if (!map[l.id]) { map[l.id] = l; }
+    else {
+      const rDate = new Date(map[l.id].updatedAt || 0);
+      const lDate = new Date(l.updatedAt || 0);
+      if (lDate >= rDate) map[l.id] = l;
+    }
+  });
+  return Object.values(map).sort((a,b) => new Date(b.updatedAt||0) - new Date(a.updatedAt||0));
+}
+
 async function initApp() {
+  // Load local first so app is usable immediately
   const local = localStorage.getItem(STORAGE_KEY);
-  if (local) leads = JSON.parse(local);
+  const localLeads = local ? JSON.parse(local) : [];
+  leads = localLeads;
   render();
-  const ok = await loadFromGithub();
-  if (ok) render();
+
+  // Then load from GitHub and merge
+  const s = getSettings();
+  if (!s.token) return;
+  setSyncDot('syncing');
+  const filePath = s.filePath || 'leads.json';
+  try {
+    const data = await ghRequest('GET', `/repos/${s.owner}/${s.repo}/contents/${filePath}`);
+    ghFileSHA = data.sha;
+    const raw = data.content ? data.content.replace(/\n/g,'') : '';
+    let remoteLeads = [];
+    if (raw) {
+      try { remoteLeads = JSON.parse(atob(raw)) || []; } catch(e) { remoteLeads = []; }
+    }
+    // Always merge — never blindly replace local with remote
+    leads = mergeLeads(localLeads, remoteLeads);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
+    setSyncDot('ok');
+    render();
+    // If local had leads that remote didn't — push the merged result back
+    if (localLeads.some(l => !remoteLeads.find(r => r.id === l.id))) {
+      await saveToGithub();
+    }
+  } catch(e) {
+    if (e.message.includes('404')) { ghFileSHA = null; setSyncDot('ok'); return; }
+    setSyncDot('err');
+    toast('GitHub sync failed: ' + e.message, 'error');
+  }
 }
 
 // ─────────────────────────────────────────
 // FILTERS
 // ─────────────────────────────────────────
-let filterOEM = '', filterStatus = '', filterPriority = '', filterStage = '', filterSegment = '', searchQ = '';
+let filterOEM = '', filterStatus = '', filterPriority = '', filterStage = '', filterSegment = '', filterMonth = '', searchQ = '';
 
 function filteredLeads() {
   const t = today();
@@ -562,6 +606,7 @@ function filteredLeads() {
     if (filterPriority && l.priority !== filterPriority) return false;
     if (filterStage && l.stage !== filterStage) return false;
     if (filterSegment && l.segment !== filterSegment) return false;
+    if (filterMonth && (l.leadDate||'').slice(0,7) !== filterMonth) return false;
     if (searchQ) {
       const words = searchQ.toLowerCase().trim().split(/\s+/);
       const haystack = [l.company, l.customer, l.phone, l.phone2, l.oem, l.source, l.city, l.machine, l.segment, l.status, l.stage]
@@ -580,112 +625,123 @@ function render() {
   if (currentTab === 'settings') { renderSettings(container); return; }
 
   const t = today();
-  const fl = filteredLeads();
   const oemsUniq = [...new Set(leads.map(l=>l.oem).filter(Boolean))].sort();
+  const monthsUniq = [...new Set(leads.map(l=>(l.leadDate||'').slice(0,7)).filter(Boolean))].sort().reverse();
+  const monthNames = {1:'Jan',2:'Feb',3:'Mar',4:'Apr',5:'May',6:'Jun',7:'Jul',8:'Aug',9:'Sep',10:'Oct',11:'Nov',12:'Dec'};
+  function fmtMonth(ym) { if (!ym) return ''; const [y,m] = ym.split('-'); return `${monthNames[parseInt(m)]} ${y}`; }
 
-  // Stats
-  const totalAmt = leads.filter(l=>l.status==='Active').reduce((s,l)=>s+(parseInt(l.amount)||0),0);
   const overdueCount = leads.filter(l=>l.followup && l.followup < t && l.status === 'Active').length;
   const wonCount = leads.filter(l=>l.status==='Won').length;
 
-  let html = `
-  <div class="stats">
-    <div class="stat"><div class="stat-val">${leads.length}</div><div class="stat-label">Total Leads</div></div>
-    <div class="stat"><div class="stat-val">${leads.filter(l=>l.status==='Active').length}</div><div class="stat-label">Active</div></div>
-    <div class="stat"><div class="stat-val" style="color:var(--red)">${overdueCount}</div><div class="stat-label">Overdue</div></div>
-    <div class="stat"><div class="stat-val" style="color:var(--green)">${wonCount}</div><div class="stat-label">Won</div></div>
-  </div>
-  <div class="filters">
-    <input class="search-box" type="text" placeholder="🔍  Search company, customer, OEM..." value="${searchQ}" oninput="searchQ=this.value;render()"/>
-    <select class="filter-select" onchange="filterOEM=this.value;render()">
-      <option value="">All OEMs</option>
-      ${oemsUniq.map(o=>`<option value="${o}" ${filterOEM===o?'selected':''}>${o}</option>`).join('')}
-    </select>
-    <select class="filter-select" onchange="filterStatus=this.value;render()">
-      <option value="">All Status</option>
-      <option value="Active" ${filterStatus==='Active'?'selected':''}>Active</option>
-      <option value="On Hold" ${filterStatus==='On Hold'?'selected':''}>On Hold</option>
-      <option value="Won" ${filterStatus==='Won'?'selected':''}>Won</option>
-      <option value="Lost" ${filterStatus==='Lost'?'selected':''}>Lost</option>
-    </select>
-    <select class="filter-select" onchange="filterPriority=this.value;render()">
-      <option value="">All Priority</option>
-      <option value="High" ${filterPriority==='High'?'selected':''}>🔴 High</option>
-      <option value="Medium" ${filterPriority==='Medium'?'selected':''}>🟡 Medium</option>
-      <option value="Low" ${filterPriority==='Low'?'selected':''}>🟢 Low</option>
-    </select>
-    <select class="filter-select" onchange="filterSegment=this.value;render()">
-      <option value="">All Segments</option>
-      <option value="Medical" ${filterSegment==='Medical'?'selected':''}>🏥 Medical</option>
-      <option value="Industrial" ${filterSegment==='Industrial'?'selected':''}>🏭 Industrial</option>
-      <option value="Construction" ${filterSegment==='Construction'?'selected':''}>🏗 Construction</option>
-      <option value="Mining" ${filterSegment==='Mining'?'selected':''}>⛏ Mining</option>
-      <option value="Agriculture" ${filterSegment==='Agriculture'?'selected':''}>🌾 Agriculture</option>
-      <option value="Other" ${filterSegment==='Other'?'selected':''}>Other</option>
-    </select>
-  </div>
-  <div class="leads-list">`;
+  // Only rebuild shell if it doesn't exist yet (prevents search input from being destroyed)
+  if (!document.getElementById('leadsListContainer')) {
+    container.innerHTML = `
+    <div class="stats">
+      <div class="stat"><div class="stat-val" id="stat-total">${leads.length}</div><div class="stat-label">Total Leads</div></div>
+      <div class="stat"><div class="stat-val" id="stat-active">${leads.filter(l=>l.status==='Active').length}</div><div class="stat-label">Active</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--red)" id="stat-overdue">${overdueCount}</div><div class="stat-label">Overdue</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--green)" id="stat-won">${wonCount}</div><div class="stat-label">Won</div></div>
+    </div>
+    <div class="filters">
+      <input id="searchInput" class="search-box" type="text" placeholder="🔍  Search name, company, OEM..." value="${searchQ}" oninput="searchQ=this.value;renderLeadsList()"/>
+      <select class="filter-select" id="sel-oem" onchange="filterOEM=this.value;renderLeadsList()">
+        <option value="">All OEMs</option>
+        ${oemsUniq.map(o=>`<option value="${o}" ${filterOEM===o?'selected':''}>${o}</option>`).join('')}
+      </select>
+      <select class="filter-select" onchange="filterStatus=this.value;renderLeadsList()">
+        <option value="">All Status</option>
+        <option value="Active" ${filterStatus==='Active'?'selected':''}>Active</option>
+        <option value="On Hold" ${filterStatus==='On Hold'?'selected':''}>On Hold</option>
+        <option value="Won" ${filterStatus==='Won'?'selected':''}>Won</option>
+        <option value="Lost" ${filterStatus==='Lost'?'selected':''}>Lost</option>
+      </select>
+      <select class="filter-select" onchange="filterPriority=this.value;renderLeadsList()">
+        <option value="">All Priority</option>
+        <option value="High" ${filterPriority==='High'?'selected':''}>🔴 High</option>
+        <option value="Medium" ${filterPriority==='Medium'?'selected':''}>🟡 Medium</option>
+        <option value="Low" ${filterPriority==='Low'?'selected':''}>🟢 Low</option>
+      </select>
+      <select class="filter-select" onchange="filterSegment=this.value;renderLeadsList()">
+        <option value="">All Segments</option>
+        <option value="Medical" ${filterSegment==='Medical'?'selected':''}>🏥 Medical</option>
+        <option value="Industrial" ${filterSegment==='Industrial'?'selected':''}>🏭 Industrial</option>
+        <option value="Construction" ${filterSegment==='Construction'?'selected':''}>🏗 Construction</option>
+        <option value="Mining" ${filterSegment==='Mining'?'selected':''}>⛏ Mining</option>
+        <option value="Agriculture" ${filterSegment==='Agriculture'?'selected':''}>🌾 Agriculture</option>
+        <option value="Other" ${filterSegment==='Other'?'selected':''}>Other</option>
+      </select>
+      <select class="filter-select" onchange="filterMonth=this.value;renderLeadsList()">
+        <option value="">All Months</option>
+        ${monthsUniq.map(m=>`<option value="${m}" ${filterMonth===m?'selected':''}>📅 ${fmtMonth(m)}</option>`).join('')}
+      </select>
+    </div>
+    <div id="leadsListContainer" class="leads-list"></div>`;
+  } else {
+    // Shell already exists — just update stats silently
+    const el = id => document.getElementById(id);
+    if(el('stat-total')) el('stat-total').textContent = leads.length;
+    if(el('stat-active')) el('stat-active').textContent = leads.filter(l=>l.status==='Active').length;
+    if(el('stat-overdue')) el('stat-overdue').textContent = overdueCount;
+    if(el('stat-won')) el('stat-won').textContent = wonCount;
+  }
+  renderLeadsList();
+}
+
+function renderLeadsList() {
+  const container = document.getElementById('leadsListContainer');
+  if (!container) { render(); return; }
+  const t = today();
+  const fl = filteredLeads();
+  const priorityOrder = {High:0,Medium:1,Low:2,'':3};
+  fl.sort((a,b) => {
+    const aOv = a.followup && a.followup < t ? -1 : 0;
+    const bOv = b.followup && b.followup < t ? -1 : 0;
+    if (aOv !== bOv) return aOv - bOv;
+    return (priorityOrder[a.priority]||3) - (priorityOrder[b.priority]||3);
+  });
 
   if (fl.length === 0) {
-    html += `<div class="empty"><div class="empty-icon">📭</div><h3>No leads here</h3><p>Add your first lead or adjust filters</p></div>`;
-  } else {
-    // Sort: overdue first, then by priority, then by followup date
-    const priorityOrder = {High:0,Medium:1,Low:2,'':3};
-    fl.sort((a,b) => {
-      const aOverdue = a.followup && a.followup < t ? -1 : 0;
-      const bOverdue = b.followup && b.followup < t ? -1 : 0;
-      if (aOverdue !== bOverdue) return aOverdue - bOverdue;
-      return (priorityOrder[a.priority]||3) - (priorityOrder[b.priority]||3);
-    });
-
-    fl.forEach(l => {
-      const isOverdue = l.followup && l.followup < t && l.status === 'Active';
-      const isToday = l.followup === t;
-      let cardClass = '';
-      if (isOverdue) cardClass = 'overdue';
-      else if (isToday) cardClass = 'due-today';
-
-      let followupLabel = '';
-      let fuClass = 'none';
-      if (l.followup) {
-        const days = daysBetween(t, l.followup);
-        if (isOverdue) { followupLabel = `⚠ Follow-up overdue (${fmtDate(l.followup)})`; fuClass = 'overdue'; }
-        else if (isToday) { followupLabel = `🔔 Follow-up today`; fuClass = 'due-today'; }
-        else { followupLabel = `📅 Follow-up ${fmtDate(l.followup)}`; fuClass = 'upcoming'; }
-      } else { followupLabel = 'No follow-up set'; }
-
-      const age = l.leadDate ? daysBetween(l.leadDate, t) : null;
-      const statusClass = l.status==='Active'?'status-active':l.status==='Lost'?'status-lost':l.status==='Won'?'status-won':'status-hold';
-      const priorityClass = l.priority==='High'?'tag-priority-high':l.priority==='Low'?'tag-priority-low':'tag-priority-medium';
-
-      html += `
-      <div class="lead-card ${cardClass}" onclick="openDetail('${l.id}')">
-        <div class="lead-card-header">
-          <div>
-            <div class="lead-company">${l.company || '—'}</div>
-            <div class="lead-customer">${l.customer || ''}${l.city ? ` · ${l.city}` : ''}</div>
-          </div>
-          <span class="status-badge ${statusClass}">${l.status||'Active'}</span>
-        </div>
-        <div class="lead-tags">
-          ${l.stage ? `<span class="tag tag-stage">${l.stage}</span>` : ''}
-          ${l.segment ? `<span class="tag" style="background:#1a1e3a;color:#a0aaff">${l.segment}</span>` : ''}
-          ${l.priority ? `<span class="tag ${priorityClass}">${l.priority}</span>` : ''}
-          ${l.oem ? `<span class="tag tag-oem">${l.oem}</span>` : ''}
-          ${l.amount ? `<span class="tag tag-amount">${fmtAmt(l.amount)}</span>` : ''}
-          ${l.subvention === 'Yes' ? `<span class="tag" style="background:#1a2a20;color:var(--green)">Subv. ✓</span>` : ''}
-          ${l.machine ? `<span class="tag tag-oem">${l.machine}</span>` : ''}
-        </div>
-        <div class="lead-footer">
-          <span class="lead-followup ${fuClass}">${followupLabel}</span>
-          <span class="lead-age">${age !== null ? `${age}d old` : ''}</span>
-        </div>
-      </div>`;
-    });
+    container.innerHTML = `<div class="empty"><div class="empty-icon">📭</div><h3>No leads here</h3><p>Add your first lead or adjust filters</p></div>`;
+    return;
   }
 
-  html += `</div>`;
-  container.innerHTML = html;
+  container.innerHTML = fl.map(l => {
+    const isOverdue = l.followup && l.followup < t && l.status === 'Active';
+    const isToday = l.followup === t;
+    const cardClass = isOverdue ? 'overdue' : isToday ? 'due-today' : '';
+    let followupLabel = 'No follow-up set', fuClass = 'none';
+    if (l.followup) {
+      if (isOverdue) { followupLabel = `⚠ Overdue (${fmtDate(l.followup)})`; fuClass = 'overdue'; }
+      else if (isToday) { followupLabel = `🔔 Follow-up today`; fuClass = 'due-today'; }
+      else { followupLabel = `📅 ${fmtDate(l.followup)}`; fuClass = 'upcoming'; }
+    }
+    const age = l.leadDate ? daysBetween(l.leadDate, t) : null;
+    const statusClass = l.status==='Active'?'status-active':l.status==='Lost'?'status-lost':l.status==='Won'?'status-won':'status-hold';
+    const priorityClass = l.priority==='High'?'tag-priority-high':l.priority==='Low'?'tag-priority-low':'tag-priority-medium';
+    return `
+    <div class="lead-card ${cardClass}" onclick="openDetail('${l.id}')">
+      <div class="lead-card-header">
+        <div>
+          <div class="lead-company">${l.company||'—'}</div>
+          <div class="lead-customer">${l.customer||''}${l.city?` · ${l.city}`:''}</div>
+        </div>
+        <span class="status-badge ${statusClass}">${l.status||'Active'}</span>
+      </div>
+      <div class="lead-tags">
+        ${l.stage?`<span class="tag tag-stage">${l.stage}</span>`:''}
+        ${l.segment?`<span class="tag" style="background:#1a1e3a;color:#a0aaff">${l.segment}</span>`:''}
+        ${l.priority?`<span class="tag ${priorityClass}">${l.priority}</span>`:''}
+        ${l.oem?`<span class="tag tag-oem">${l.oem}</span>`:''}
+        ${l.amount?`<span class="tag tag-amount">${fmtAmt(l.amount)}</span>`:''}
+        ${l.subvention==='Yes'?`<span class="tag" style="background:#1a2a20;color:var(--green)">Subv. ✓</span>`:''}
+        ${l.machine?`<span class="tag tag-oem">${l.machine}</span>`:''}
+      </div>
+      <div class="lead-footer">
+        <span class="lead-followup ${fuClass}">${followupLabel}</span>
+        <span class="lead-age">${age!==null?`${age}d old`:''}</span>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 function renderSettings(container) {
@@ -764,6 +820,8 @@ function setTab(tab, el) {
   currentTab = tab;
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
+  // Clear shell so it rebuilds fresh for new tab
+  document.getElementById('mainContent').innerHTML = '';
   render();
 }
 
@@ -789,7 +847,6 @@ async function manualSync() {
 }
 
 async function mergeAndPush() {
-  // Load what's on GitHub, merge with local (newer updatedAt wins per ID), push result
   setSyncDot('syncing');
   const s = getSettings();
   if (!s.token) { toast('Set up GitHub first', 'error'); return; }
@@ -800,30 +857,13 @@ async function mergeAndPush() {
     const data = await ghRequest('GET', `/repos/${s.owner}/${s.repo}/contents/${filePath}`);
     ghFileSHA = data.sha;
     const raw = data.content ? data.content.replace(/\n/g,'') : '';
-    if (raw) {
-      try { remoteLeads = JSON.parse(atob(raw)) || []; } catch(e) { remoteLeads = []; }
-    }
+    if (raw) { try { remoteLeads = JSON.parse(atob(raw)) || []; } catch(e) { remoteLeads = []; } }
   } catch(e) {
     if (!e.message.includes('404')) {
-      setSyncDot('err');
-      toast('Merge failed: ' + e.message, 'error');
-      return;
+      setSyncDot('err'); toast('Merge failed: ' + e.message, 'error'); return;
     }
   }
-
-  // Build merged map: local + remote, newer updatedAt wins
-  const map = {};
-  remoteLeads.forEach(l => { map[l.id] = l; });
-  leads.forEach(l => {
-    if (!map[l.id]) { map[l.id] = l; } // only on local → keep
-    else {
-      const rDate = new Date(map[l.id].updatedAt || 0);
-      const lDate = new Date(l.updatedAt || 0);
-      if (lDate >= rDate) map[l.id] = l; // local is newer or same → keep local
-    }
-  });
-
-  leads = Object.values(map).sort((a,b) => new Date(b.updatedAt||0) - new Date(a.updatedAt||0));
+  leads = mergeLeads(leads, remoteLeads);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
   render();
   await saveToGithub();
@@ -855,9 +895,7 @@ function openAddLead() {
     else el.value = '';
   });
   document.getElementById('formOverlay').classList.add('open');
-}
-
-function openEdit(id) {
+  pushModalState();
   const l = leads.find(x => x.id === id);
   if (!l) return;
   editingId = id;
@@ -869,6 +907,7 @@ function openEdit(id) {
   });
   document.getElementById('detailOverlay').classList.remove('open');
   document.getElementById('formOverlay').classList.add('open');
+  pushModalState();
 }
 
 function closeForm() { document.getElementById('formOverlay').classList.remove('open'); }
@@ -977,9 +1016,8 @@ function openDetail(id) {
   </div>`;
 
   document.getElementById('detailOverlay').classList.add('open');
-}
-
-function closeDetailModal(e) { if (e.target === document.getElementById('detailOverlay')) document.getElementById('detailOverlay').classList.remove('open'); }
+  pushModalState();
+} { if (e.target === document.getElementById('detailOverlay')) document.getElementById('detailOverlay').classList.remove('open'); }
 
 async function deleteLead(id) {
   if (!confirm('Delete this lead?')) return;
@@ -1278,6 +1316,29 @@ function closeImportModal(e) {
     document.getElementById('importOverlay').classList.remove('open');
   }
 }
+
+// ─────────────────────────────────────────
+// BACK BUTTON (History API — prevents swipe-back closing app)
+// ─────────────────────────────────────────
+function pushModalState() {
+  history.pushState({ modal: true }, '');
+}
+
+window.addEventListener('popstate', function(e) {
+  // If any modal is open, close it instead of navigating away
+  if (document.getElementById('formOverlay').classList.contains('open')) {
+    closeForm(); return;
+  }
+  if (document.getElementById('detailOverlay').classList.contains('open')) {
+    document.getElementById('detailOverlay').classList.remove('open'); return;
+  }
+  if (document.getElementById('importOverlay').classList.contains('open')) {
+    document.getElementById('importOverlay').classList.remove('open'); return;
+  }
+  if (document.getElementById('shareOverlay').classList.contains('open')) {
+    document.getElementById('shareOverlay').classList.remove('open'); return;
+  }
+});
 
 // ─────────────────────────────────────────
 // START
