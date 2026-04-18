@@ -577,6 +577,8 @@ async function initApp() {
     if (localLeads.some(l => !remoteLeads.find(r => r.id === l.id))) {
       await saveToGithub();
     }
+    // Run daily backup after load (silent, once per day)
+    setTimeout(runDailyBackup, 3000);
   } catch(e) {
     if (e.message.includes('404')) { ghFileSHA = null; setSyncDot('ok'); return; }
     setSyncDot('err');
@@ -810,6 +812,14 @@ function renderSettings(container) {
       <button class="btn btn-ghost btn-sm" onclick="exportAllEmail()">📧 Email Table</button>
       <button class="btn btn-ghost btn-sm" onclick="exportCSV()">📊 Download CSV</button>
     </div>
+  </div>
+
+  <div class="settings-panel" style="margin-top:12px;border-color:var(--orange)">
+    <h3 style="color:var(--orange)">🔒 Backups</h3>
+    <p style="color:var(--muted);font-size:12px;line-height:1.6;margin-bottom:12px;">
+      A backup of your leads is saved automatically <strong style="color:var(--text)">once every day</strong> to a <code style="color:var(--accent)">backups/</code> folder in your GitHub repo. You can restore any previous version if data is lost.
+    </p>
+    <button class="btn btn-ghost btn-sm" style="color:var(--orange);border-color:var(--orange)" onclick="openBackupManager()">📦 View &amp; Restore Backups</button>
   </div>`;
 }
 
@@ -1201,10 +1211,23 @@ function parseCSV(text) {
 function handleFileSelect(input) {
   const file = input.files[0];
   if (!file) return;
-  input.value = ''; // reset so same file can be re-selected
+  input.value = '';
   const reader = new FileReader();
-  reader.onload = e => processImportFile(e.target.result, file.name);
-  reader.readAsText(file, 'UTF-8');
+  reader.onload = e => {
+    let text = e.target.result;
+    // Clean up common garbled characters from Windows encoding mismatch
+    text = text
+      .replace(/Ã¢ÂÂ/g, '–').replace(/Ã¢ÂÂ/g, '—')
+      .replace(/â€"/g, '–').replace(/â€"/g, '—')
+      .replace(/â€˜/g, "'").replace(/â€™/g, "'")
+      .replace(/â€œ/g, '"').replace(/â€/g, '"')
+      .replace(/Â·/g, '·').replace(/Ãƒ/g, 'A')
+      .replace(/[^\x00-\x7F\u00C0-\u024F\u0900-\u097F]/g, ' ') // strip other non-printable junk
+      .replace(/  +/g, ' '); // collapse double spaces
+    processImportFile(text, file.name);
+  };
+  // Try without forced encoding first — browser will auto-detect
+  reader.readAsText(file);
 }
 
 let pendingImport = [];
@@ -1315,6 +1338,100 @@ function closeImportModal(e) {
   if (!e || e.target === document.getElementById('importOverlay')) {
     document.getElementById('importOverlay').classList.remove('open');
   }
+}
+
+// ─────────────────────────────────────────
+// AUTO BACKUP
+// ─────────────────────────────────────────
+const LAST_BACKUP_KEY = 'lt_last_backup_date';
+
+async function runDailyBackup() {
+  const s = getSettings();
+  if (!s.token || !leads.length) return;
+  const lastBackup = localStorage.getItem(LAST_BACKUP_KEY);
+  const todayStr = today();
+  if (lastBackup === todayStr) return; // already backed up today
+
+  const filePath = `backups/leads_${todayStr}.json`;
+  try {
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(leads, null, 2))));
+    await ghRequest('PUT', `/repos/${s.owner}/${s.repo}/contents/${filePath}`, {
+      message: `Auto backup – ${todayStr}`,
+      content
+    });
+    localStorage.setItem(LAST_BACKUP_KEY, todayStr);
+    console.log('Auto backup saved:', filePath);
+  } catch(e) {
+    // Backup failed silently — don't bother user
+    console.warn('Auto backup failed:', e.message);
+  }
+}
+
+async function listBackups() {
+  const s = getSettings();
+  if (!s.token) return [];
+  try {
+    const data = await ghRequest('GET', `/repos/${s.owner}/${s.repo}/contents/backups`);
+    return data
+      .filter(f => f.name.startsWith('leads_') && f.name.endsWith('.json'))
+      .sort((a,b) => b.name.localeCompare(a.name)) // newest first
+      .slice(0, 30); // max 30 backups shown
+  } catch(e) { return []; }
+}
+
+async function restoreFromBackup(downloadUrl, filename) {
+  if (!confirm(`Restore from ${filename}?\n\nThis will REPLACE your current leads with the backup. Your current data will be saved as today's backup first.`)) return;
+
+  // Save current state as today's backup before overwriting
+  await runDailyBackup();
+
+  try {
+    const res = await fetch(downloadUrl);
+    const restored = await res.json();
+    if (!Array.isArray(restored)) { toast('Invalid backup file', 'error'); return; }
+    leads = restored;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
+    render();
+    await saveToGithub();
+    toast(`Restored ${leads.length} leads from ${filename} ✓`, 'success');
+    document.getElementById('importOverlay').classList.remove('open');
+  } catch(e) {
+    toast('Restore failed: ' + e.message, 'error');
+  }
+}
+
+async function openBackupManager() {
+  document.getElementById('importBody').innerHTML = `<p style="color:var(--muted);font-size:13px">Loading backups...</p>`;
+  document.getElementById('importOverlay').classList.add('open');
+  pushModalState();
+
+  const backups = await listBackups();
+  if (!backups.length) {
+    document.getElementById('importBody').innerHTML = `
+      <p style="color:var(--muted);font-size:13px;text-align:center;padding:24px 0">No backups found yet.<br/>The first backup will be created automatically tonight when you open the app.</p>
+      <button class="btn btn-ghost" style="width:100%;margin-top:8px" onclick="document.getElementById('importOverlay').classList.remove('open')">Close</button>`;
+    return;
+  }
+
+  const rows = backups.map(f => {
+    const dateStr = f.name.replace('leads_','').replace('.json','');
+    const [y,m,d] = dateStr.split('-');
+    const monthNames = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const label = `${d} ${monthNames[parseInt(m)]} ${y}`;
+    const sizekb = (f.size / 1024).toFixed(1);
+    return `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);">
+      <div>
+        <div style="font-size:14px;color:var(--text);font-weight:500">📦 ${label}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">${sizekb} KB · ${f.name}</div>
+      </div>
+      <button class="btn btn-ghost btn-sm" onclick="restoreFromBackup('${f.download_url}','${f.name}')">↩ Restore</button>
+    </div>`;
+  }).join('');
+
+  document.getElementById('importBody').innerHTML = `
+    <p style="color:var(--muted);font-size:12px;margin-bottom:12px">Backups are taken automatically once a day. Tap Restore to roll back to any date.</p>
+    <div style="max-height:320px;overflow-y:auto">${rows}</div>
+    <button class="btn btn-ghost" style="width:100%;margin-top:14px" onclick="document.getElementById('importOverlay').classList.remove('open')">Close</button>`;
 }
 
 // ─────────────────────────────────────────
