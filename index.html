@@ -853,9 +853,13 @@ function renderSettings(container) {
   <div class="settings-panel" style="margin-top:12px;border-color:var(--orange)">
     <h3 style="color:var(--orange)">🔒 Backups</h3>
     <p style="color:var(--muted);font-size:12px;line-height:1.6;margin-bottom:12px;">
-      A backup of your leads is saved automatically <strong style="color:var(--text)">once every day</strong> to a <code style="color:var(--accent)">backups/</code> folder in your GitHub repo. You can restore any previous version if data is lost.
+      A backup is saved to <code style="color:var(--accent)">backups/leads_YYYY-MM-DD.json</code> in your GitHub repo every time you open the app. You can also push one manually anytime.<br/><br/>
+      <strong style="color:var(--orange)">Note:</strong> Backups only happen when the app is open — there is no background process.
     </p>
-    <button class="btn btn-ghost btn-sm" style="color:var(--orange);border-color:var(--orange)" onclick="openBackupManager()">📦 View &amp; Restore Backups</button>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn-primary btn-sm" onclick="pushBackupNow(false)">⬆ Push Backup Now</button>
+      <button class="btn btn-ghost btn-sm" style="color:var(--orange);border-color:var(--orange)" onclick="openBackupManager()">📦 View &amp; Restore Backups</button>
+    </div>
   </div>`;
 }
 
@@ -1385,32 +1389,38 @@ function closeImportModal(e) {
 const LAST_BACKUP_KEY = 'lt_last_backup_date';
 
 async function runDailyBackup() {
-  const s = getSettings();
-  if (!s.token || !leads.length) return;
-  const lastBackup = localStorage.getItem(LAST_BACKUP_KEY);
-  const todayStr = today();
-  if (lastBackup === todayStr) return; // already backed up today on this device
+  // Just calls the manual backup silently — runs on every app open
+  await pushBackupNow(true);
+}
 
+async function pushBackupNow(silent = false) {
+  const s = getSettings();
+  if (!s.token) { if (!silent) toast('Set up GitHub first', 'error'); return; }
+  if (!leads.length) { if (!silent) toast('No leads to backup', 'error'); return; }
+
+  const todayStr = today();
   const filePath = `backups/leads_${todayStr}.json`;
+  if (!silent) toast('Backing up...', '');
   try {
-    // Check if today's backup already exists — if so, just mark as done
+    // Check if today's backup already exists to get its SHA (for overwrite)
+    let existingSHA = null;
     try {
-      await ghRequest('GET', `/repos/${s.owner}/${s.repo}/contents/${filePath}`);
-      localStorage.setItem(LAST_BACKUP_KEY, todayStr);
-      return; // already exists
-    } catch(e) {
-      if (!e.message.includes('404')) return; // unknown error, skip
-    }
-    // File doesn't exist — create it
+      const existing = await ghRequest('GET', `/repos/${s.owner}/${s.repo}/contents/${filePath}`);
+      existingSHA = existing.sha;
+    } catch(e) { /* file doesn't exist yet, that's fine */ }
+
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(leads, null, 2))));
     await ghRequest('PUT', `/repos/${s.owner}/${s.repo}/contents/${filePath}`, {
-      message: `Auto backup – ${todayStr}`,
-      content
+      message: `Backup – ${todayStr} (${leads.length} leads)`,
+      content,
+      ...(existingSHA ? { sha: existingSHA } : {})
     });
     localStorage.setItem(LAST_BACKUP_KEY, todayStr);
-    console.log('Auto backup saved:', filePath);
+    if (!silent) toast(`Backup saved ✓ — ${leads.length} leads`, 'success');
+    else console.log('Auto backup saved:', filePath);
   } catch(e) {
-    console.warn('Auto backup failed:', e.message);
+    if (!silent) toast('Backup failed: ' + e.message, 'error');
+    else console.warn('Auto backup failed:', e.message);
   }
 }
 
