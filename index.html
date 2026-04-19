@@ -397,6 +397,7 @@ let ghFileSHA = null;
 
 const STORAGE_KEY = 'lt_leads_local';
 const SETTINGS_KEY = 'lt_gh_settings';
+const LAST_BACKUP_KEY = 'lt_last_backup_date';
 
 // ─────────────────────────────────────────
 // UTILS
@@ -1386,8 +1387,6 @@ function closeImportModal(e) {
 // ─────────────────────────────────────────
 // AUTO BACKUP
 // ─────────────────────────────────────────
-const LAST_BACKUP_KEY = 'lt_last_backup_date';
-
 async function runDailyBackup() {
   // Just calls the manual backup silently — runs on every app open
   await pushBackupNow(true);
