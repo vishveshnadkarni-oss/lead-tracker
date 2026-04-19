@@ -707,6 +707,9 @@ function render() {
         ${monthsUniq.map(m=>`<option value="${m}" ${filterMonth===m?'selected':''}>📅 ${fmtMonth(m)}</option>`).join('')}
       </select>
     </div>
+    <div style="display:flex;justify-content:flex-end;margin-bottom:10px;">
+      <button class="btn btn-ghost btn-sm" onclick="copyFilteredWA()" style="gap:6px;">📱 Copy WA Summary</button>
+    </div>
     <div id="leadsListContainer" class="leads-list"></div>`;
   } else {
     // Shell exists — renderLeadsList will update stats
@@ -1157,6 +1160,50 @@ function copyText(txt) {
 }
 
 // EXPORT ALL
+function copyFilteredWA() {
+  const fl = filteredLeads();
+  if (!fl.length) { toast('No leads to copy', 'error'); return; }
+
+  // Build a label describing the current filter
+  const parts = [];
+  if (filterOEM) parts.push(filterOEM);
+  if (filterSegment) parts.push(filterSegment);
+  if (filterStatus) parts.push(filterStatus);
+  if (filterPriority) parts.push(filterPriority + ' Priority');
+  if (filterMonth) {
+    const monthNames = {1:'Jan',2:'Feb',3:'Mar',4:'Apr',5:'May',6:'Jun',7:'Jul',8:'Aug',9:'Sep',10:'Oct',11:'Nov',12:'Dec'};
+    const [y,m] = filterMonth.split('-');
+    parts.push(`${monthNames[parseInt(m)]} ${y}`);
+  }
+  if (searchQ) parts.push(`"${searchQ}"`);
+  if (currentTab !== 'all') parts.push(currentTab.charAt(0).toUpperCase() + currentTab.slice(1));
+  const label = parts.length ? parts.join(' · ') : 'All Leads';
+
+  const t = today();
+  let text = `*Lead Summary – ${label}*\n`;
+  text += `_${new Date().toLocaleDateString('en-IN', {day:'numeric',month:'short',year:'numeric'})}_\n`;
+  text += `_Total: ${fl.length} leads_\n\n`;
+
+  fl.forEach((l, i) => {
+    const isOverdue = l.followup && l.followup < t;
+    const fuLine = l.followup
+      ? (isOverdue ? `⚠ Overdue (${fmtDate(l.followup)})` : `📅 ${fmtDate(l.followup)}`)
+      : 'No follow-up';
+    text += `*${i+1}. ${l.company || l.customer || '—'}*\n`;
+    if (l.customer && l.company) text += `   👤 ${l.customer}\n`;
+    if (l.phone) text += `   📞 ${l.phone}\n`;
+    if (l.oem) text += `   🏭 ${l.oem}${l.machine ? ' – ' + l.machine : ''}\n`;
+    if (l.amount && parseInt(l.amount) > 0) text += `   💰 ${fmtAmt(l.amount)}\n`;
+    text += `   📊 ${l.stage||'—'} · ${l.status||'—'}\n`;
+    text += `   ${fuLine}\n`;
+    if (l.reason) text += `   📝 ${l.reason}\n`;
+    text += '\n';
+  });
+
+  copyText(text);
+  toast(`Copied ${fl.length} leads for WhatsApp ✓`, 'success');
+}
+
 function exportAllWA() {
   const fl = leads.filter(l=>l.status==='Active');
   let text = `*Active Leads Summary – ${new Date().toLocaleDateString('en-IN')}*\n\n`;
