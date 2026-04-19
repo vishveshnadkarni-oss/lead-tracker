@@ -572,22 +572,15 @@ function mergeLeads(localArr, remoteArr) {
 }
 
 async function initApp() {
+  // Always show local data immediately — never flash zero
   const localLeads = loadLocal();
   leads = localLeads;
+  render();
+
   const s = getSettings();
+  if (!s.token) return;
 
-  // If localStorage is empty but GitHub is configured — show loading, don't flash zero
-  if (!localLeads.length && s.token) {
-    document.getElementById('mainContent').innerHTML = `
-      <div style="text-align:center;padding:60px 16px">
-        <div style="font-size:28px;margin-bottom:12px">⏳</div>
-        <div style="color:var(--muted);font-size:14px">Loading your leads from GitHub...</div>
-      </div>`;
-  } else {
-    render();
-  }
-
-  if (!s.token) { render(); return; }
+  // Always silently pull from GitHub on every open and merge
   setSyncDot('syncing');
   const filePath = s.filePath || 'leads.json';
   try {
@@ -598,21 +591,27 @@ async function initApp() {
     if (raw) {
       try { remoteLeads = JSON.parse(atob(raw)) || []; } catch(e) { remoteLeads = []; }
     }
-    leads = mergeLeads(localLeads, remoteLeads);
+    const merged = mergeLeads(localLeads, remoteLeads);
+    // Only re-render if data actually changed
+    const changed = merged.length !== localLeads.length ||
+      merged.some((l,i) => !localLeads[i] || l.id !== localLeads[i].id || l.updatedAt !== localLeads[i].updatedAt);
+    leads = merged;
     saveLocal(leads);
     setSyncDot('ok');
-    // Force full shell rebuild
-    document.getElementById('mainContent').innerHTML = '';
-    render();
+    if (changed) {
+      document.getElementById('mainContent').innerHTML = '';
+      render();
+    }
+    // Push local-only leads to GitHub
     if (localLeads.some(l => !remoteLeads.find(r => r.id === l.id))) {
       await saveToGithub();
     }
     setTimeout(runDailyBackup, 3000);
   } catch(e) {
-    if (e.message.includes('404')) { ghFileSHA = null; setSyncDot('ok'); render(); return; }
+    if (e.message.includes('404')) { ghFileSHA = null; setSyncDot('ok'); return; }
     setSyncDot('err');
-    toast('GitHub sync failed: ' + e.message, 'error');
-    render(); // show local data even if GitHub fails
+    // Don't toast on load failure — just show local data silently
+    console.warn('GitHub load failed:', e.message);
   }
 }
 
@@ -669,10 +668,10 @@ function render() {
   if (!document.getElementById('leadsListContainer')) {
     container.innerHTML = `
     <div class="stats">
-      <div class="stat"><div class="stat-val" id="stat-total">${leads.length}</div><div class="stat-label">Total Leads</div></div>
-      <div class="stat"><div class="stat-val" id="stat-active">${leads.filter(l=>l.status==='Active').length}</div><div class="stat-label">Active</div></div>
-      <div class="stat"><div class="stat-val" style="color:var(--red)" id="stat-overdue">${overdueCount}</div><div class="stat-label">Overdue</div></div>
-      <div class="stat"><div class="stat-val" style="color:var(--green)" id="stat-won">${wonCount}</div><div class="stat-label">Won</div></div>
+      <div class="stat"><div class="stat-val" id="stat-total">—</div><div class="stat-label" id="stat-total-label">Total</div></div>
+      <div class="stat"><div class="stat-val" id="stat-active">—</div><div class="stat-label">Active</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--red)" id="stat-overdue">—</div><div class="stat-label">Overdue</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--green)" id="stat-won">—</div><div class="stat-label">Won</div></div>
     </div>
     <div class="filters">
       <input id="searchInput" class="search-box" type="text" placeholder="🔍  Search name, company, OEM..." value="${searchQ}" oninput="searchQ=this.value;renderLeadsList()"/>
@@ -709,12 +708,7 @@ function render() {
     </div>
     <div id="leadsListContainer" class="leads-list"></div>`;
   } else {
-    // Shell already exists — just update stats silently
-    const el = id => document.getElementById(id);
-    if(el('stat-total')) el('stat-total').textContent = leads.length;
-    if(el('stat-active')) el('stat-active').textContent = leads.filter(l=>l.status==='Active').length;
-    if(el('stat-overdue')) el('stat-overdue').textContent = overdueCount;
-    if(el('stat-won')) el('stat-won').textContent = wonCount;
+    // Shell exists — renderLeadsList will update stats
   }
   renderLeadsList();
 }
@@ -724,6 +718,18 @@ function renderLeadsList() {
   if (!container) { render(); return; }
   const t = today();
   const fl = filteredLeads();
+
+  // Update stats to reflect current filtered view
+  const isFiltered = filterOEM || filterStatus || filterPriority || filterSegment || filterMonth || searchQ || currentTab !== 'all';
+  const statsBase = isFiltered ? fl : leads;
+  const el = id => document.getElementById(id);
+  if (el('stat-total')) {
+    el('stat-total').textContent = statsBase.length;
+    el('stat-total-label').textContent = isFiltered ? 'Filtered' : 'Total';
+  }
+  if (el('stat-active')) el('stat-active').textContent = statsBase.filter(l=>l.status==='Active').length;
+  if (el('stat-overdue')) el('stat-overdue').textContent = statsBase.filter(l=>l.followup && l.followup < t && l.status==='Active').length;
+  if (el('stat-won')) el('stat-won').textContent = statsBase.filter(l=>l.status==='Won').length;
   const priorityOrder = {High:0,Medium:1,Low:2,'':3};
   fl.sort((a,b) => {
     const aOv = a.followup && a.followup < t ? -1 : 0;
@@ -1383,10 +1389,19 @@ async function runDailyBackup() {
   if (!s.token || !leads.length) return;
   const lastBackup = localStorage.getItem(LAST_BACKUP_KEY);
   const todayStr = today();
-  if (lastBackup === todayStr) return; // already backed up today
+  if (lastBackup === todayStr) return; // already backed up today on this device
 
   const filePath = `backups/leads_${todayStr}.json`;
   try {
+    // Check if today's backup already exists — if so, just mark as done
+    try {
+      await ghRequest('GET', `/repos/${s.owner}/${s.repo}/contents/${filePath}`);
+      localStorage.setItem(LAST_BACKUP_KEY, todayStr);
+      return; // already exists
+    } catch(e) {
+      if (!e.message.includes('404')) return; // unknown error, skip
+    }
+    // File doesn't exist — create it
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(leads, null, 2))));
     await ghRequest('PUT', `/repos/${s.owner}/${s.repo}/contents/${filePath}`, {
       message: `Auto backup – ${todayStr}`,
@@ -1395,7 +1410,6 @@ async function runDailyBackup() {
     localStorage.setItem(LAST_BACKUP_KEY, todayStr);
     console.log('Auto backup saved:', filePath);
   } catch(e) {
-    // Backup failed silently — don't bother user
     console.warn('Auto backup failed:', e.message);
   }
 }
