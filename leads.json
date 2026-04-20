@@ -79,13 +79,13 @@
   },
   {
     "company": "Nithya Scanning Centre",
-    "customer": "",
-    "phone": "",
+    "customer": "Dr. Arshith Goud",
+    "phone": "99660 90545",
     "phone2": "",
     "email": "",
     "city": "Nizamabad",
     "segment": "Medical",
-    "address": "Save\nHno 5-6-21,near jj reddy chowrastha, opp. dr srisailam hospital, Dwaraka Nagar, Khaleelwadi, Nizamabad, Telangana 503003",
+    "address": "Hno 5-6-21,near jj reddy chowrastha, opp. dr srisailam hospital, Dwaraka Nagar, Khaleelwadi, Nizamabad, Telangana 503003",
     "source": "Vijay",
     "oem": "Wipro GE",
     "sourceType": "OEM Referral",
@@ -99,9 +99,9 @@
     "followup": "2026-04-20",
     "lastContact": "2026-04-20",
     "reason": "",
-    "notes": "",
+    "notes": "3 months subvention deal with GE",
     "id": "mo6wlp0arbmjgh6f0v",
-    "updatedAt": "2026-04-20T07:59:03.130Z"
+    "updatedAt": "2026-04-20T08:26:35.494Z"
   },
   {
     "company": "Aristo Eyecare Pvt Ltd",
