@@ -116,8 +116,8 @@
     "oem": "Wipro GE",
     "sourceType": "OEM Referral",
     "machine": "",
-    "amount": "",
-    "subvention": "Yes",
+    "amount": "3500000",
+    "subvention": "No",
     "priority": "Medium",
     "stage": "New",
     "status": "On Hold",
@@ -127,7 +127,7 @@
     "reason": "",
     "notes": "Customer wants to go with SBI.\nCase postponed to June",
     "id": "mo6x3qafapni5rga9e4",
-    "updatedAt": "2026-04-20T08:15:26.756Z"
+    "updatedAt": "2026-04-20T08:49:01.250Z"
   },
   {
     "company": "Details yet to receive",
