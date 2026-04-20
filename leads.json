@@ -94,14 +94,14 @@
     "subvention": "Yes",
     "priority": "Medium",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "On Hold",
     "leadDate": "2026-02-13",
     "followup": "2026-05-01",
     "lastContact": "",
-    "reason": "Case postponed to next FY",
+    "reason": "Case postponed to May 2026",
     "notes": "Subvention with 10% and 0.75% PF\nCustomer wants to get back to buying machine in May",
     "id": "mnyovzw2ojjh8hugccl",
-    "updatedAt": "2026-04-19T05:06:01.564Z"
+    "updatedAt": "2026-04-20T04:46:49.678Z"
   },
   {
     "company": "N/A",
