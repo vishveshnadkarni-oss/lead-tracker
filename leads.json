@@ -252,12 +252,12 @@
     "stage": "Contacted",
     "status": "Active",
     "leadDate": "2026-03-23",
-    "followup": "2026-04-20",
+    "followup": "2026-04-27",
     "lastContact": "2026-04-14",
     "reason": "",
-    "notes": "Customer not sharing documents.",
+    "notes": "Customer not sharing documents.\nPlanning to meet customer on 27th with Ramesh",
     "id": "mnyovzw3p3eeg7kwono",
-    "updatedAt": "2026-04-18T17:53:01.733Z"
+    "updatedAt": "2026-04-20T08:27:31.156Z"
   },
   {
     "company": "Yash Polymer",
