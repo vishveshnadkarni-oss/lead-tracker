@@ -68,14 +68,14 @@
     "subvention": "No",
     "priority": "Medium",
     "stage": "New",
-    "status": "Active",
+    "status": "On Hold",
     "leadDate": "2026-04-17",
-    "followup": "2026-04-20",
+    "followup": "2026-07-01",
     "lastContact": "2026-04-18",
     "reason": "",
-    "notes": "Take deatails from Sanyal",
+    "notes": "Take deatails from Sanyal.\n1. Machine delivery is in July.",
     "id": "mo6yyocplzv3hnrnp6h",
-    "updatedAt": "2026-04-20T09:05:08.041Z"
+    "updatedAt": "2026-04-22T12:46:38.502Z"
   },
   {
     "company": "LMV technologies",
