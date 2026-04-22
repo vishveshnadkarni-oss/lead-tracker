@@ -564,12 +564,12 @@
     "stage": "Contacted",
     "status": "Active",
     "leadDate": "2026-04-07",
-    "followup": "2026-04-21",
+    "followup": "2026-04-27",
     "lastContact": "2026-04-16",
     "reason": "",
-    "notes": "Karthick will meet customer on Monday.",
+    "notes": "Karthick will meet customer on Monday.\n1. Owner will give appointment next week",
     "id": "mnyovzw3y7yrzp3v4hj",
-    "updatedAt": "2026-04-16T09:39:28.891Z"
+    "updatedAt": "2026-04-22T18:27:12.245Z"
   },
   {
     "company": "SS Beverages",
