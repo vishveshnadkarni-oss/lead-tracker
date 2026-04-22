@@ -26,9 +26,9 @@
     "updatedAt": "2026-04-22T12:26:50.139Z"
   },
   {
-    "company": "Saab technology",
-    "customer": "",
-    "phone": "",
+    "company": "Saab Engineering",
+    "customer": "Herananda",
+    "phone": "99800 78811",
     "phone2": "",
     "email": "",
     "city": "Bengaluru",
@@ -39,17 +39,17 @@
     "sourceType": "OEM Referral",
     "machine": "",
     "amount": "",
-    "subvention": "",
+    "subvention": "No",
     "priority": "Medium",
     "stage": "New",
     "status": "Active",
     "leadDate": "2026-04-20",
-    "followup": "2026-04-23",
+    "followup": "2026-04-27",
     "lastContact": "",
     "reason": "",
-    "notes": "",
+    "notes": "1. Customer is in Delhi on 22/4/2026",
     "id": "mo7bds972qobamgqtm7",
-    "updatedAt": "2026-04-20T14:52:48.331Z"
+    "updatedAt": "2026-04-22T12:51:10.392Z"
   },
   {
     "company": "CIM Technology",
