@@ -53,8 +53,8 @@
   },
   {
     "company": "CIM Technology",
-    "customer": "",
-    "phone": "",
+    "customer": "Vishwanath",
+    "phone": "99727 33325",
     "phone2": "",
     "email": "",
     "city": "Bengaluru",
@@ -73,9 +73,9 @@
     "followup": "2026-07-01",
     "lastContact": "2026-04-18",
     "reason": "",
-    "notes": "Take deatails from Sanyal.\n1. Machine delivery is in July.",
+    "notes": "1. Machine delivery is in July.",
     "id": "mo6yyocplzv3hnrnp6h",
-    "updatedAt": "2026-04-22T12:46:38.502Z"
+    "updatedAt": "2026-04-22T12:49:17.707Z"
   },
   {
     "company": "LMV technologies",
