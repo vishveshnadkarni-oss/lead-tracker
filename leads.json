@@ -509,15 +509,15 @@
     "amount": "1295000",
     "subvention": "Yes",
     "priority": "Medium",
-    "stage": "Sanctioned",
-    "status": "Active",
+    "stage": "Disbursed",
+    "status": "Won",
     "leadDate": "2026-03-25",
     "followup": "",
     "lastContact": "",
     "reason": "",
     "notes": "Case is active in system. Some error within system thats why the delay. Subvention 10% and PF 0.75%",
     "id": "mnyovzw3mo3s77ip8c",
-    "updatedAt": "2026-04-18T13:46:59.488Z"
+    "updatedAt": "2026-04-23T06:44:59.173Z"
   },
   {
     "company": "Details yet to receive",
