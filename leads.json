@@ -506,7 +506,7 @@
     "oem": "Biomedix",
     "sourceType": "OEM Referral",
     "machine": "Octopus 600Basic",
-    "amount": "1295000",
+    "amount": "908880",
     "subvention": "Yes",
     "priority": "Medium",
     "stage": "Disbursed",
@@ -517,7 +517,7 @@
     "reason": "",
     "notes": "Case is active in system. Some error within system thats why the delay. Subvention 10% and PF 0.75%",
     "id": "mnyovzw3mo3s77ip8c",
-    "updatedAt": "2026-04-23T06:44:59.173Z"
+    "updatedAt": "2026-04-23T06:46:22.631Z"
   },
   {
     "company": "Details yet to receive",
