@@ -7,12 +7,12 @@
     "email": "",
     "city": "Coimbatore",
     "segment": "Industrial",
-    "address": "",
+    "address": "Kithana bakery back side, Eichanari, Privu, Podanur, Coimbatore, 641023",
     "source": "Gopala",
     "oem": "Milacron",
     "sourceType": "OEM Referral",
     "machine": "",
-    "amount": "",
+    "amount": "5500000",
     "subvention": "No",
     "priority": "Medium",
     "stage": "Sanctioned",
@@ -21,9 +21,9 @@
     "followup": "2026-04-24",
     "lastContact": "2026-04-24",
     "reason": "",
-    "notes": "1. Call came from Gopala to expedite the case with Karthick",
+    "notes": "1. Call came from Gopala to expedite the case with Karthick.\n2. OEM will get sanction letter by 24th April",
     "id": "mocradofnxq2ul2k03r",
-    "updatedAt": "2026-04-24T10:53:44.798Z"
+    "updatedAt": "2026-04-24T10:55:42.740Z"
   },
   {
     "company": "CIM Technology",
