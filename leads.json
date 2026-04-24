@@ -13,7 +13,7 @@
     "sourceType": "OEM Referral",
     "machine": "",
     "amount": "",
-    "subvention": "",
+    "subvention": "No",
     "priority": "Medium",
     "stage": "Sanctioned",
     "status": "Active",
@@ -23,7 +23,7 @@
     "reason": "",
     "notes": "1. Call came from Gopala to expedite the case with Karthick",
     "id": "mocradofnxq2ul2k03r",
-    "updatedAt": "2026-04-24T10:53:17.070Z"
+    "updatedAt": "2026-04-24T10:53:44.798Z"
   },
   {
     "company": "CIM Technology",
