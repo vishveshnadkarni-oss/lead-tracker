@@ -41,15 +41,15 @@
     "amount": "5500000",
     "subvention": "No",
     "priority": "Medium",
-    "stage": "Sanctioned",
-    "status": "Active",
+    "stage": "Disbursed",
+    "status": "Lost",
     "leadDate": "2026-04-24",
-    "followup": "2026-04-24",
+    "followup": "",
     "lastContact": "2026-04-24",
     "reason": "",
     "notes": "1. Call came from Gopala to expedite the case with Karthick.\n2. OEM will get sanction letter by 24th April",
     "id": "mocradofnxq2ul2k03r",
-    "updatedAt": "2026-04-27T05:20:18.722Z"
+    "updatedAt": "2026-04-27T09:59:52.747Z"
   },
   {
     "company": "CIM Technology",
