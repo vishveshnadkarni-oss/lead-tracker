@@ -616,12 +616,12 @@
     "stage": "New",
     "status": "On Hold",
     "leadDate": "2026-03-18",
-    "followup": "2026-04-20",
-    "lastContact": "2026-04-15",
+    "followup": "",
+    "lastContact": "2026-04-27",
     "reason": "21L. 6L. 24 months",
-    "notes": "Spoke with Kolkata biomedix guy Sanjeev Dash. He will update me once the customer gets interested.",
+    "notes": "1. Spoke with Kolkata biomedix guy Sanjeev Dash. He will update me once the customer gets interested.\n2. They have kept the machine on hold.",
     "id": "mnypinab0gkuc25sxons",
-    "updatedAt": "2026-04-27T08:47:33.337Z"
+    "updatedAt": "2026-04-27T09:32:42.430Z"
   },
   {
     "company": "Details yet to receive",
