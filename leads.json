@@ -729,7 +729,7 @@
   },
   {
     "company": "Details yet to recieve",
-    "customer": "Venugopal customer",
+    "customer": "Dr. Bhargava",
     "phone": "",
     "phone2": "",
     "email": "",
@@ -739,7 +739,7 @@
     "source": "Venugopal",
     "oem": "Biomedix",
     "sourceType": "OEM Referral",
-    "machine": "",
+    "machine": "52L loan",
     "amount": "4300000",
     "subvention": "Yes",
     "priority": "Low",
@@ -751,7 +751,7 @@
     "reason": "Waiting for approval from venugopal",
     "notes": "52L. 20% MM. Biomedix subvention deal. 1 and 2 years",
     "id": "mnzrb53gc8qwu7m1q49",
-    "updatedAt": "2026-04-15T07:56:29.452Z"
+    "updatedAt": "2026-04-27T09:42:01.486Z"
   },
   {
     "company": "Details yet to recieve",
