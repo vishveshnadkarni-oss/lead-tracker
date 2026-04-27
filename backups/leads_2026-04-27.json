@@ -1,5 +1,31 @@
 [
   {
+    "company": "Take from Kiran",
+    "customer": "Ramesh N Gowda",
+    "phone": "97398 63735",
+    "phone2": "",
+    "email": "",
+    "city": "Bengaluru",
+    "segment": "Industrial",
+    "address": "",
+    "source": "Lakshmisha",
+    "oem": "BFW",
+    "sourceType": "OEM Referral",
+    "machine": "",
+    "amount": "",
+    "subvention": "No",
+    "priority": "Low",
+    "stage": "Contacted",
+    "status": "Active",
+    "leadDate": "2026-04-24",
+    "followup": "2026-04-29",
+    "lastContact": "",
+    "reason": "",
+    "notes": "Mostly a failed lead. \n1. Kiran will visit the customer on 29th",
+    "id": "mogyd2c7irngr0n6or",
+    "updatedAt": "2026-04-27T08:46:01.496Z"
+  },
+  {
     "company": "NM plastics",
     "customer": "Palanisamy",
     "phone": "98429 13386",
@@ -23,7 +49,7 @@
     "reason": "",
     "notes": "1. Call came from Gopala to expedite the case with Karthick.\n2. OEM will get sanction letter by 24th April",
     "id": "mocradofnxq2ul2k03r",
-    "updatedAt": "2026-04-24T10:55:42.740Z"
+    "updatedAt": "2026-04-27T05:20:18.722Z"
   },
   {
     "company": "CIM Technology",
