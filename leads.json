@@ -12,7 +12,7 @@
     "oem": "Cosmos",
     "sourceType": "OEM Referral",
     "machine": "",
-    "amount": "",
+    "amount": "31500000",
     "subvention": "No",
     "priority": "High",
     "stage": "Contacted",
@@ -21,9 +21,9 @@
     "followup": "2026-04-29",
     "lastContact": "2026-04-29",
     "reason": "",
-    "notes": "Aerospace customer",
+    "notes": "Aerospace customer. Proposed leasing.\n1. Meeting arranged at 3pm on 29 april.",
     "id": "mojoizyfduxvxi0tqx",
-    "updatedAt": "2026-04-29T06:34:00.712Z"
+    "updatedAt": "2026-04-29T10:55:28.777Z"
   },
   {
     "company": "Details yet to recieve",
