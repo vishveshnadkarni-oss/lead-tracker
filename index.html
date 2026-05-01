@@ -153,7 +153,15 @@ textarea { resize: vertical; min-height: 60px; }
 /* SHARE MODAL */
 .share-box { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-size: 12px; color: var(--muted); white-space: pre-wrap; word-break: break-word; max-height: 200px; overflow-y: auto; line-height: 1.6; }
 
-/* IMPORT */
+/* MULTI SELECT LOCATION */
+.multi-select-wrap { position: relative; flex: 1; min-width: 140px; }
+.multi-select-btn { width: 100%; text-align: left; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: var(--surface); border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 7px 10px; font-family: var(--font); font-size: 13px; }
+.multi-select-btn:hover { border-color: var(--accent); }
+.multi-select-list { display: none; position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; z-index: 150; max-height: 220px; overflow-y: auto; padding: 4px 0; box-shadow: 0 8px 24px rgba(0,0,0,.4); min-width: 180px; }
+.multi-select-list.open { display: block; }
+.multi-select-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 13px; color: var(--text); cursor: pointer; }
+.multi-select-item:hover { background: var(--surface); }
+.multi-select-item input[type=checkbox] { accent-color: var(--accent); width: 14px; height: 14px; cursor: pointer; }
 .import-drop { border: 2px dashed var(--border); border-radius: var(--radius); padding: 24px 16px; text-align: center; cursor: pointer; transition: all .2s; margin-top: 12px; }
 .import-drop:hover, .import-drop.drag { border-color: var(--accent); background: rgba(245,200,66,.04); }
 .import-drop p { color: var(--muted); font-size: 13px; margin-top: 6px; }
@@ -619,7 +627,7 @@ async function initApp() {
 // ─────────────────────────────────────────
 // FILTERS
 // ─────────────────────────────────────────
-let filterOEM = '', filterStatus = '', filterPriority = '', filterStage = '', filterSegment = '', filterMonth = '', filterLocation = '', searchQ = '';
+let filterOEM = '', filterStatus = '', filterStage = '', filterSegment = '', filterMonth = '', filterLocation = [], searchQ = '';
 
 function filteredLeads() {
   const t = today();
@@ -639,7 +647,7 @@ function filteredLeads() {
     if (filterStage && l.stage !== filterStage) return false;
     if (filterSegment && l.segment !== filterSegment) return false;
     if (filterMonth && (l.leadDate||'').slice(0,7) !== filterMonth) return false;
-    if (filterLocation && l.city !== filterLocation) return false;
+    if (filterLocation.length && !filterLocation.includes(l.city)) return false;
     if (searchQ) {
       const words = searchQ.toLowerCase().trim().split(/\s+/);
       const haystack = [l.company, l.customer, l.phone, l.phone2, l.oem, l.source, l.city, l.machine, l.segment, l.status, l.stage]
@@ -689,10 +697,18 @@ function render() {
         <option value="Won" ${filterStatus==='Won'?'selected':''}>Won</option>
         <option value="Lost" ${filterStatus==='Lost'?'selected':''}>Lost</option>
       </select>
-      <select class="filter-select" onchange="filterLocation=this.value;renderLeadsList()">
-        <option value="">All Locations</option>
-        ${citiesUniq.map(c=>`<option value="${c}" ${filterLocation===c?'selected':''}>${c}</option>`).join('')}
-      </select>
+      <div class="multi-select-wrap" id="locationDropWrap">
+        <button class="filter-select multi-select-btn" onclick="toggleLocationDrop(event)" id="locationDropBtn">
+          <span id="locationDropLabel">All Locations</span> ▾
+        </button>
+        <div class="multi-select-list" id="locationDropList">
+          ${citiesUniq.map(c=>`
+          <label class="multi-select-item">
+            <input type="checkbox" value="${c}" ${filterLocation.includes(c)?'checked':''} onchange="toggleLocationFilter(this)"/>
+            ${c}
+          </label>`).join('')}
+        </div>
+      </div>
       <select class="filter-select" onchange="filterSegment=this.value;renderLeadsList()">
         <option value="">All Segments</option>
         <option value="Medical" ${filterSegment==='Medical'?'selected':''}>🏥 Medical</option>
@@ -720,7 +736,7 @@ function renderLeadsList() {
   const fl = filteredLeads();
 
   // Update stats to reflect current filtered view
-  const isFiltered = filterOEM || filterStatus || filterSegment || filterMonth || filterLocation || searchQ || currentTab !== 'all';
+  const isFiltered = filterOEM || filterStatus || filterSegment || filterMonth || filterLocation.length || searchQ || currentTab !== 'all';
   const statsBase = isFiltered ? fl : leads;
   const el = id => document.getElementById(id);
   if (el('stat-total')) {
@@ -866,11 +882,34 @@ function renderSettings(container) {
 // ─────────────────────────────────────────
 // TABS
 // ─────────────────────────────────────────
+function toggleLocationDrop(e) {
+  e.stopPropagation();
+  document.getElementById('locationDropList').classList.toggle('open');
+}
+function toggleLocationFilter(cb) {
+  const city = cb.value;
+  if (cb.checked) {
+    if (!filterLocation.includes(city)) filterLocation.push(city);
+  } else {
+    filterLocation = filterLocation.filter(c => c !== city);
+  }
+  // Update button label
+  const label = document.getElementById('locationDropLabel');
+  if (label) label.textContent = filterLocation.length ? filterLocation.join(', ') : 'All Locations';
+  renderLeadsList();
+}
+// Close location dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  const list = document.getElementById('locationDropList');
+  const wrap = document.getElementById('locationDropWrap');
+  if (list && wrap && !wrap.contains(e.target)) list.classList.remove('open');
+});
+
 function setTab(tab, el) {
   currentTab = tab;
+  filterLocation = [];
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
-  // Clear shell so it rebuilds fresh for new tab
   document.getElementById('mainContent').innerHTML = '';
   render();
 }
@@ -1165,7 +1204,7 @@ function copyFilteredWA() {
   if (filterOEM) parts.push(filterOEM);
   if (filterSegment) parts.push(filterSegment);
   if (filterStatus) parts.push(filterStatus);
-  if (filterLocation) parts.push(filterLocation);
+  if (filterLocation.length) parts.push(filterLocation.join(', '));
   if (filterMonth) {
     const monthNames = {1:'Jan',2:'Feb',3:'Mar',4:'Apr',5:'May',6:'Jun',7:'Jul',8:'Aug',9:'Sep',10:'Oct',11:'Nov',12:'Dec'};
     const [y,m] = filterMonth.split('-');
