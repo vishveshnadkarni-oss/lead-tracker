@@ -245,10 +245,6 @@ textarea { resize: vertical; min-height: 60px; }
           <option value="">Select</option>
           <option>Medical</option>
           <option>Industrial</option>
-          <option>Construction</option>
-          <option>Mining</option>
-          <option>Agriculture</option>
-          <option>Other</option>
         </select>
       </div>
       <div class="form-group form-full">
@@ -290,11 +286,15 @@ textarea { resize: vertical; min-height: 60px; }
         <input id="f_amount" type="number" placeholder="5000000"/>
       </div>
       <div class="form-group">
-        <label>Subvention Applicable</label>
+        <label>Scheme</label>
         <select id="f_subvention">
-          <option value="">Not Sure</option>
-          <option>Yes</option>
-          <option>No</option>
+          <option value="None">None</option>
+          <option value="Subvention">Subvention</option>
+          <option value="Leasing">Leasing</option>
+          <option value="Credit Days Subvention">Credit Days Subvention</option>
+          <option value="Hybrid Flexi">Hybrid Flexi</option>
+          <option value="EMI Holiday">EMI Holiday</option>
+          <option value="Principal Morat">Principal Morat</option>
         </select>
       </div>
       <div class="form-group">
@@ -619,7 +619,7 @@ async function initApp() {
 // ─────────────────────────────────────────
 // FILTERS
 // ─────────────────────────────────────────
-let filterOEM = '', filterStatus = '', filterPriority = '', filterStage = '', filterSegment = '', filterMonth = '', searchQ = '';
+let filterOEM = '', filterStatus = '', filterPriority = '', filterStage = '', filterSegment = '', filterMonth = '', filterLocation = '', searchQ = '';
 
 function filteredLeads() {
   const t = today();
@@ -639,6 +639,7 @@ function filteredLeads() {
     if (filterStage && l.stage !== filterStage) return false;
     if (filterSegment && l.segment !== filterSegment) return false;
     if (filterMonth && (l.leadDate||'').slice(0,7) !== filterMonth) return false;
+    if (filterLocation && l.city !== filterLocation) return false;
     if (searchQ) {
       const words = searchQ.toLowerCase().trim().split(/\s+/);
       const haystack = [l.company, l.customer, l.phone, l.phone2, l.oem, l.source, l.city, l.machine, l.segment, l.status, l.stage]
@@ -658,6 +659,7 @@ function render() {
 
   const t = today();
   const oemsUniq = [...new Set(leads.map(l=>l.oem).filter(Boolean))].sort();
+  const citiesUniq = [...new Set(leads.map(l=>l.city).filter(Boolean))].sort();
   const monthsUniq = [...new Set(leads.map(l=>(l.leadDate||'').slice(0,7)).filter(Boolean))].sort().reverse();
   const monthNames = {1:'Jan',2:'Feb',3:'Mar',4:'Apr',5:'May',6:'Jun',7:'Jul',8:'Aug',9:'Sep',10:'Oct',11:'Nov',12:'Dec'};
   function fmtMonth(ym) { if (!ym) return ''; const [y,m] = ym.split('-'); return `${monthNames[parseInt(m)]} ${y}`; }
@@ -687,20 +689,14 @@ function render() {
         <option value="Won" ${filterStatus==='Won'?'selected':''}>Won</option>
         <option value="Lost" ${filterStatus==='Lost'?'selected':''}>Lost</option>
       </select>
-      <select class="filter-select" onchange="filterPriority=this.value;renderLeadsList()">
-        <option value="">All Priority</option>
-        <option value="High" ${filterPriority==='High'?'selected':''}>🔴 High</option>
-        <option value="Medium" ${filterPriority==='Medium'?'selected':''}>🟡 Medium</option>
-        <option value="Low" ${filterPriority==='Low'?'selected':''}>🟢 Low</option>
+      <select class="filter-select" onchange="filterLocation=this.value;renderLeadsList()">
+        <option value="">All Locations</option>
+        ${citiesUniq.map(c=>`<option value="${c}" ${filterLocation===c?'selected':''}>${c}</option>`).join('')}
       </select>
       <select class="filter-select" onchange="filterSegment=this.value;renderLeadsList()">
         <option value="">All Segments</option>
         <option value="Medical" ${filterSegment==='Medical'?'selected':''}>🏥 Medical</option>
         <option value="Industrial" ${filterSegment==='Industrial'?'selected':''}>🏭 Industrial</option>
-        <option value="Construction" ${filterSegment==='Construction'?'selected':''}>🏗 Construction</option>
-        <option value="Mining" ${filterSegment==='Mining'?'selected':''}>⛏ Mining</option>
-        <option value="Agriculture" ${filterSegment==='Agriculture'?'selected':''}>🌾 Agriculture</option>
-        <option value="Other" ${filterSegment==='Other'?'selected':''}>Other</option>
       </select>
       <select class="filter-select" onchange="filterMonth=this.value;renderLeadsList()">
         <option value="">All Months</option>
@@ -724,7 +720,7 @@ function renderLeadsList() {
   const fl = filteredLeads();
 
   // Update stats to reflect current filtered view
-  const isFiltered = filterOEM || filterStatus || filterPriority || filterSegment || filterMonth || searchQ || currentTab !== 'all';
+  const isFiltered = filterOEM || filterStatus || filterSegment || filterMonth || filterLocation || searchQ || currentTab !== 'all';
   const statsBase = isFiltered ? fl : leads;
   const el = id => document.getElementById(id);
   if (el('stat-total')) {
@@ -775,7 +771,7 @@ function renderLeadsList() {
         ${l.priority?`<span class="tag ${priorityClass}">${l.priority}</span>`:''}
         ${l.oem?`<span class="tag tag-oem">${l.oem}</span>`:''}
         ${l.amount?`<span class="tag tag-amount">${fmtAmt(l.amount)}</span>`:''}
-        ${l.subvention==='Yes'?`<span class="tag" style="background:#1a2a20;color:var(--green)">Subv. ✓</span>`:''}
+        ${l.subvention && l.subvention !== 'None' ? `<span class="tag" style="background:#1a2a20;color:var(--green)">${l.subvention}</span>` : ''}
         ${l.machine?`<span class="tag tag-oem">${l.machine}</span>`:''}
       </div>
       <div class="lead-footer">
@@ -1044,7 +1040,7 @@ function openDetail(id) {
     <div class="detail-grid">
       <div class="detail-item"><label>Machine</label><span>${l.machine||'—'}</span></div>
       <div class="detail-item"><label>Loan Amount</label><span>${fmtAmt(l.amount)}</span></div>
-      <div class="detail-item"><label>Subvention</label><span>${l.subvention||'—'}</span></div>
+      <div class="detail-item"><label>Scheme</label><span>${l.subvention||'None'}</span></div>
       <div class="detail-item"><label>Priority</label><span>${l.priority||'—'}</span></div>
     </div>
   </div>
@@ -1169,7 +1165,7 @@ function copyFilteredWA() {
   if (filterOEM) parts.push(filterOEM);
   if (filterSegment) parts.push(filterSegment);
   if (filterStatus) parts.push(filterStatus);
-  if (filterPriority) parts.push(filterPriority + ' Priority');
+  if (filterLocation) parts.push(filterLocation);
   if (filterMonth) {
     const monthNames = {1:'Jan',2:'Feb',3:'Mar',4:'Apr',5:'May',6:'Jun',7:'Jul',8:'Aug',9:'Sep',10:'Oct',11:'Nov',12:'Dec'};
     const [y,m] = filterMonth.split('-');
