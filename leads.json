@@ -117,17 +117,17 @@
     "sourceType": "OEM Referral",
     "machine": "VMC Model VL850",
     "amount": "3300000",
-    "subvention": "No",
+    "subvention": "",
     "priority": "Medium",
-    "stage": "Contacted",
-    "status": "Active",
+    "stage": "Credit Review",
+    "status": "Lost",
     "leadDate": "2026-04-27",
     "followup": "2026-04-29",
     "lastContact": "2026-04-27",
-    "reason": "",
+    "reason": "Financials are poor. And Turnover is poor",
     "notes": "Lead received to Sanyal. Case logged in",
     "id": "moib6i29lmdx609r5m",
-    "updatedAt": "2026-04-28T07:41:04.463Z"
+    "updatedAt": "2026-05-02T09:06:49.072Z"
   },
   {
     "company": "Details yet to receive",
