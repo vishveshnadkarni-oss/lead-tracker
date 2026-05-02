@@ -643,7 +643,6 @@ function filteredLeads() {
   }).filter(l => {
     if (filterOEM && l.oem !== filterOEM) return false;
     if (filterStatus && l.status !== filterStatus) return false;
-    if (filterPriority && l.priority !== filterPriority) return false;
     if (filterStage && l.stage !== filterStage) return false;
     if (filterSegment && l.segment !== filterSegment) return false;
     if (filterMonth && (l.leadDate||'').slice(0,7) !== filterMonth) return false;
