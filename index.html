@@ -718,8 +718,9 @@ function render() {
         ${monthsUniq.map(m=>`<option value="${m}" ${filterMonth===m?'selected':''}>📅 ${fmtMonth(m)}</option>`).join('')}
       </select>
     </div>
-    <div style="display:flex;justify-content:flex-end;margin-bottom:10px;">
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:10px;">
       <button class="btn btn-ghost btn-sm" onclick="copyFilteredWA()" style="gap:6px;">📱 Copy WA Summary</button>
+      <button class="btn btn-ghost btn-sm" onclick="copyFilteredExcel()" style="gap:6px;">📊 Copy for Excel</button>
     </div>
     <div id="leadsListContainer" class="leads-list"></div>`;
   } else {
@@ -1260,6 +1261,41 @@ function copyFilteredWA() {
 
   copyText(text);
   toast(`Copied ${fl.length} leads for WhatsApp ✓`, 'success');
+}
+
+function copyFilteredExcel() {
+  const fl = filteredLeads();
+  if (!fl.length) { toast('No leads to copy', 'error'); return; }
+
+  const headers = [
+    'Company', 'Customer Name', 'Phone', 'Alt Phone', 'Email', 'City', 'Address',
+    'Segment', 'Lead Received From', 'Source Type', 'OEM', 'Machine',
+    'Loan Amount', 'Scheme', 'Priority', 'Stage', 'Status',
+    'Lead Date', 'Next Follow-up', 'Last Contacted', 'Days Since Lead', 'Reason', 'Notes'
+  ];
+
+  const t = today();
+  const rows = fl.map(l => {
+    const age = l.leadDate ? daysBetween(l.leadDate, t) : '';
+    return [
+      l.company, l.customer, l.phone, l.phone2, l.email, l.city, l.address,
+      l.segment, l.source, l.sourceType, l.oem, l.machine,
+      l.amount ? parseInt(l.amount) : '', l.subvention, l.priority, l.stage, l.status,
+      l.leadDate ? fmtDate(l.leadDate) : '',
+      l.followup ? fmtDate(l.followup) : '',
+      l.lastContact ? fmtDate(l.lastContact) : '',
+      age, l.reason, l.notes
+    ].map(v => {
+      // Escape tabs and newlines inside cell values
+      const str = (v === null || v === undefined) ? '' : String(v);
+      return str.replace(/\t/g, ' ').replace(/\n/g, ' ').replace(/\r/g, '');
+    });
+  });
+
+  // Tab-separated: pastes perfectly into Excel and Google Sheets
+  const tsv = [headers, ...rows].map(r => r.join('\t')).join('\n');
+  copyText(tsv);
+  toast(`Copied ${fl.length} leads for Excel ✓`, 'success');
 }
 
 function exportAllWA() {
