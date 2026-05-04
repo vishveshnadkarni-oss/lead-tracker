@@ -559,7 +559,7 @@
     "sourceType": "OEM Referral",
     "machine": "Icare DRS",
     "amount": "1250000",
-    "subvention": "Yes",
+    "subvention": "",
     "priority": "Medium",
     "stage": "Contacted",
     "status": "Active",
@@ -567,9 +567,9 @@
     "followup": "2026-04-27",
     "lastContact": "2026-04-14",
     "reason": "",
-    "notes": "Customer not sharing documents.\n1. Planning to meet customer on 27th with Ramesh.",
+    "notes": "Customer not sharing documents.\n1. Planning to meet customer on 27th with Ramesh.\n2. Customer has not paid the entire advance payment. Check with Ramesh sir on 4th May.",
     "id": "mnyovzw3p3eeg7kwono",
-    "updatedAt": "2026-04-27T10:01:20.386Z"
+    "updatedAt": "2026-05-04T09:25:20.428Z"
   },
   {
     "company": "Details yet to recieve",
