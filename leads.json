@@ -681,7 +681,7 @@
     "phone": "99001 55221",
     "phone2": "",
     "email": "",
-    "city": "Bangalore",
+    "city": "Bengaluru",
     "segment": "Industrial",
     "address": "Survey No. 121/5, Kumbalgodu Industrial area, 1st Phase, Kengeri, Kumbalgodu, Bengaluru, 560074",
     "source": "Gurucharan",
@@ -689,7 +689,7 @@
     "sourceType": "OEM Referral",
     "machine": "",
     "amount": "9000000",
-    "subvention": "Yes",
+    "subvention": "",
     "priority": "Low",
     "stage": "New",
     "status": "On Hold",
@@ -699,7 +699,7 @@
     "reason": "Check with Guru charan",
     "notes": "Yash polymer has outsourced Mould to some one else. Will take time.",
     "id": "mnyovzw37pjoeq7l7z",
-    "updatedAt": "2026-04-18T17:52:48.176Z"
+    "updatedAt": "2026-05-04T06:04:48.812Z"
   },
   {
     "company": "Details yet to receive",
