@@ -2085,15 +2085,15 @@
     "phone": "91085 06925",
     "phone2": "",
     "email": "",
-    "city": "Bangalore",
+    "city": "Bengaluru",
     "segment": "Industrial",
     "address": "48/1, Primex, 1st cross, 8th main, SLV industrial area, Bangalore",
     "source": "Gurucharan",
-    "sourceType": "OEM Referral",
     "oem": "Milacron",
+    "sourceType": "OEM Referral",
     "machine": "",
     "amount": "5000000",
-    "subvention": "No",
+    "subvention": "",
     "priority": "Medium",
     "stage": "Closed Lost",
     "status": "Lost",
@@ -2103,7 +2103,7 @@
     "reason": "Customer changed mind. Is not buying",
     "notes": "",
     "id": "mnyovzw2eq5q3ocuzoj",
-    "updatedAt": "2026-04-14T14:00:57.458Z"
+    "updatedAt": "2026-05-04T06:06:13.960Z"
   },
   {
     "company": "Alpha Omega Manufacturing",
