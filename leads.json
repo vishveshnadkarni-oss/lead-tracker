@@ -1383,15 +1383,15 @@
     "phone": "99003 80080",
     "phone2": "",
     "email": "",
-    "city": "Bangalore",
+    "city": "Bengaluru",
     "segment": "Industrial",
     "address": "No. 54, 14th Cross, Doddanna Industrial Area, Peenya, 2nd Stage,",
     "source": "Chandrashekhar Sajjan",
-    "sourceType": "OEM Referral",
     "oem": "BFW",
+    "sourceType": "OEM Referral",
     "machine": "",
     "amount": "0",
-    "subvention": "No",
+    "subvention": "",
     "priority": "Medium",
     "stage": "Closed Lost",
     "status": "Lost",
@@ -1401,7 +1401,7 @@
     "reason": "Poor financials. Didnt log in",
     "notes": "",
     "id": "mnyovzw3aevyz1p96x9",
-    "updatedAt": "2026-04-14T14:00:57.459Z"
+    "updatedAt": "2026-05-04T06:05:23.329Z"
   },
   {
     "company": "Ovale Healthcare",
