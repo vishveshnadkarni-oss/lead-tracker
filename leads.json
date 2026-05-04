@@ -2033,15 +2033,15 @@
     "phone": "73531 50847",
     "phone2": "",
     "email": "",
-    "city": "Bangalore",
+    "city": "Bengaluru",
     "segment": "Industrial",
     "address": "P6/240, 3rd stage, Peenya industrial estate, Bangalore, 560058",
     "source": "Milind Navale",
-    "sourceType": "OEM Referral",
     "oem": "Cosmos",
+    "sourceType": "OEM Referral",
     "machine": "",
     "amount": "3000000",
-    "subvention": "No",
+    "subvention": "",
     "priority": "Medium",
     "stage": "Closed Lost",
     "status": "Lost",
@@ -2051,7 +2051,7 @@
     "reason": "EMI to turnover ratio is low. Vintage is 2 yrs",
     "notes": "",
     "id": "mnyovzw2y78skxymvf",
-    "updatedAt": "2026-04-14T14:00:57.458Z"
+    "updatedAt": "2026-05-04T06:05:44.620Z"
   },
   {
     "company": "Saraswati",
