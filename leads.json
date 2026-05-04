@@ -1747,15 +1747,15 @@
     "phone": "97420 47188",
     "phone2": "",
     "email": "",
-    "city": "Bangalore",
+    "city": "Bengaluru",
     "segment": "Industrial",
     "address": "",
     "source": "Mr. Mahanto",
-    "sourceType": "OEM Referral",
     "oem": "Cosmos",
+    "sourceType": "OEM Referral",
     "machine": "",
     "amount": "3500000",
-    "subvention": "No",
+    "subvention": "",
     "priority": "Medium",
     "stage": "Closed Lost",
     "status": "Lost",
@@ -1765,7 +1765,7 @@
     "reason": "Want to go with Banks",
     "notes": "",
     "id": "mnyovzw287pbla9i67u",
-    "updatedAt": "2026-04-14T14:00:57.458Z"
+    "updatedAt": "2026-05-04T06:05:34.317Z"
   },
   {
     "company": "Dr. Swathi",
