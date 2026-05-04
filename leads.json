@@ -915,7 +915,7 @@
     "phone": "98450 16036",
     "phone2": "",
     "email": "",
-    "city": "Bangalore",
+    "city": "Bengaluru",
     "segment": "Industrial",
     "address": "S-303, 3rd floor, Brigade plaza, Sc Road, Anand Rao Circle, Bangalore, 560009",
     "source": "Sanyal",
@@ -923,7 +923,7 @@
     "sourceType": "Existing Customer",
     "machine": "",
     "amount": "50000000",
-    "subvention": "No",
+    "subvention": "",
     "priority": "Medium",
     "stage": "Sanctioned",
     "status": "Won",
@@ -933,7 +933,7 @@
     "reason": "Went in 2 tranches",
     "notes": "",
     "id": "mnyovzw2qiui8gc7mup",
-    "updatedAt": "2026-04-14T14:43:47.590Z"
+    "updatedAt": "2026-05-04T06:05:10.031Z"
   },
   {
     "company": "Venttup Ventures Pvt Ltd",
