@@ -394,6 +394,7 @@ textarea { resize: vertical; min-height: 60px; }
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 // ─────────────────────────────────────────
 // STATE
@@ -720,7 +721,7 @@ function render() {
     </div>
     <div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:10px;">
       <button class="btn btn-ghost btn-sm" onclick="copyFilteredWA()" style="gap:6px;">📱 Copy WA Summary</button>
-      <button class="btn btn-ghost btn-sm" onclick="copyFilteredExcel()" style="gap:6px;">📊 Copy for Excel</button>
+      <button class="btn btn-ghost btn-sm" onclick="copyFilteredExcel()" style="gap:6px;">📊 Download Excel</button>
     </div>
     <div id="leadsListContainer" class="leads-list"></div>`;
   } else {
@@ -1265,37 +1266,61 @@ function copyFilteredWA() {
 
 function copyFilteredExcel() {
   const fl = filteredLeads();
-  if (!fl.length) { toast('No leads to copy', 'error'); return; }
-
-  const headers = [
-    'Company', 'Customer Name', 'Phone', 'Alt Phone', 'Email', 'City', 'Address',
-    'Segment', 'Lead Received From', 'Source Type', 'OEM', 'Machine',
-    'Loan Amount', 'Scheme', 'Priority', 'Stage', 'Status',
-    'Lead Date', 'Next Follow-up', 'Last Contacted', 'Days Since Lead', 'Reason', 'Notes'
-  ];
+  if (!fl.length) { toast('No leads to export', 'error'); return; }
 
   const t = today();
+
+  // Build rows with all fields
+  const headers = [
+    'Company', 'Customer Name', 'Phone', 'Alt Phone', 'Email',
+    'City', 'Address', 'Segment', 'Lead Received From', 'Source Type',
+    'OEM', 'Machine', 'Loan Amount (₹)', 'Scheme', 'Priority',
+    'Stage', 'Status', 'Lead Date', 'Next Follow-up', 'Last Contacted',
+    'Days Since Lead', 'Reason', 'Notes'
+  ];
+
   const rows = fl.map(l => {
     const age = l.leadDate ? daysBetween(l.leadDate, t) : '';
     return [
-      l.company, l.customer, l.phone, l.phone2, l.email, l.city, l.address,
-      l.segment, l.source, l.sourceType, l.oem, l.machine,
-      l.amount ? parseInt(l.amount) : '', l.subvention, l.priority, l.stage, l.status,
+      l.company||'', l.customer||'', l.phone||'', l.phone2||'', l.email||'',
+      l.city||'', l.address||'', l.segment||'', l.source||'', l.sourceType||'',
+      l.oem||'', l.machine||'', l.amount ? parseInt(l.amount) : '', l.subvention||'', l.priority||'',
+      l.stage||'', l.status||'',
       l.leadDate ? fmtDate(l.leadDate) : '',
       l.followup ? fmtDate(l.followup) : '',
       l.lastContact ? fmtDate(l.lastContact) : '',
-      age, l.reason, l.notes
-    ].map(v => {
-      // Escape tabs and newlines inside cell values
-      const str = (v === null || v === undefined) ? '' : String(v);
-      return str.replace(/\t/g, ' ').replace(/\n/g, ' ').replace(/\r/g, '');
-    });
+      age, l.reason||'', l.notes||''
+    ];
   });
 
-  // Tab-separated: pastes perfectly into Excel and Google Sheets
-  const tsv = [headers, ...rows].map(r => r.join('\t')).join('\n');
-  copyText(tsv);
-  toast(`Copied ${fl.length} leads for Excel ✓`, 'success');
+  // Build worksheet
+  const wsData = [headers, ...rows];
+  const ws = XLSX.utils.aoa_to_sheet(wsData);
+
+  // Column widths
+  ws['!cols'] = [
+    {wch:28},{wch:22},{wch:14},{wch:14},{wch:26},
+    {wch:16},{wch:36},{wch:12},{wch:22},{wch:18},
+    {wch:18},{wch:20},{wch:14},{wch:22},{wch:10},
+    {wch:16},{wch:10},{wch:12},{wch:14},{wch:14},
+    {wch:12},{wch:32},{wch:40}
+  ];
+
+  // Build filename with filter context
+  const parts = [];
+  if (filterOEM) parts.push(filterOEM);
+  if (filterSegment) parts.push(filterSegment);
+  if (filterStatus) parts.push(filterStatus);
+  if (filterLocation.length) parts.push(filterLocation.join('_'));
+  if (filterMonth) parts.push(filterMonth);
+  const label = parts.length ? parts.join('_') : 'All_Leads';
+  const filename = `Leads_${label}_${t}.xlsx`;
+
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Leads');
+  XLSX.writeFile(wb, filename);
+
+  toast(`Downloaded ${fl.length} leads as Excel ✓`, 'success');
 }
 
 function exportAllWA() {
