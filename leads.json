@@ -1,5 +1,31 @@
 [
   {
+    "company": "Prems's Eye Hospital",
+    "customer": "Dr. Reshmy AR",
+    "phone": "90744 61772",
+    "phone2": "",
+    "email": "drpremseyehospitalvanchiyoor@gmail.com",
+    "city": "Trivandrum",
+    "segment": "Medical",
+    "address": "Prems's Eye Hospital, Vanchiyoor, Trivandrum-695035",
+    "source": "Mr. Phaniraj",
+    "oem": "Biomedix",
+    "sourceType": "OEM Referral",
+    "machine": "Octopus 600Basic",
+    "amount": "908880",
+    "subvention": "",
+    "priority": "Medium",
+    "stage": "Sanctioned",
+    "status": "Active",
+    "leadDate": "2026-03-25",
+    "followup": "",
+    "lastContact": "",
+    "reason": "",
+    "notes": "Case is active in system. Some error within system thats why the delay. Subvention 10% and PF 0.75%",
+    "id": "mnyovzw3mo3s77ip8c",
+    "updatedAt": "2026-05-04T06:07:44.754Z"
+  },
+  {
     "company": "Frontier Modulars",
     "customer": "Mr. Prashant",
     "phone": "97409 99777",
@@ -338,7 +364,7 @@
     "updatedAt": "2026-05-02T09:57:07.209Z"
   },
   {
-    "company": "Take from Kiran",
+    "company": "",
     "customer": "Ramesh N Gowda",
     "phone": "97398 63735",
     "phone2": "",
@@ -361,7 +387,7 @@
     "reason": "No GST returns with the customer",
     "notes": "Mostly a failed lead. \n1. Kiran will visit the customer on 29th",
     "id": "mogyd2c7irngr0n6or",
-    "updatedAt": "2026-05-02T09:09:07.086Z"
+    "updatedAt": "2026-05-04T07:35:45.119Z"
   },
   {
     "company": "Chetana industries",
@@ -752,32 +778,6 @@
     "notes": "3 months subvention deal with GE.\n1. Customer not supporting with documents.\n2. He is making full payment. Does not want to take loan.",
     "id": "mo6wlp0arbmjgh6f0v",
     "updatedAt": "2026-04-24T04:57:03.615Z"
-  },
-  {
-    "company": "Prems's Eye Hospital",
-    "customer": "Dr. Reshmy AR",
-    "phone": "90744 61772",
-    "phone2": "",
-    "email": "drpremseyehospitalvanchiyoor@gmail.com",
-    "city": "Trivandrum",
-    "segment": "Medical",
-    "address": "Prems's Eye Hospital, Vanchiyoor, Trivandrum-695035",
-    "source": "Mr. Phaniraj",
-    "oem": "Biomedix",
-    "sourceType": "OEM Referral",
-    "machine": "Octopus 600Basic",
-    "amount": "908880",
-    "subvention": "",
-    "priority": "Medium",
-    "stage": "Sanctioned",
-    "status": "Active",
-    "leadDate": "2026-03-25",
-    "followup": "",
-    "lastContact": "",
-    "reason": "",
-    "notes": "Case is active in system. Some error within system thats why the delay. Subvention 10% and PF 0.75%",
-    "id": "mnyovzw3mo3s77ip8c",
-    "updatedAt": "2026-05-04T06:07:44.754Z"
   },
   {
     "company": "AMV products",
