@@ -889,7 +889,7 @@
     "phone": "98450 35515",
     "phone2": "",
     "email": "",
-    "city": "Bangalore",
+    "city": "Bengaluru",
     "segment": "Industrial",
     "address": "No.45, 2nd floor, 2nd main, Sankey Road, Sadashivanagar, Bangalore - 560 080.",
     "source": "Sanyal",
@@ -897,7 +897,7 @@
     "sourceType": "Existing Customer",
     "machine": "",
     "amount": "70000000",
-    "subvention": "No",
+    "subvention": "",
     "priority": "Medium",
     "stage": "Closed Lost",
     "status": "Lost",
@@ -907,7 +907,7 @@
     "reason": "Needs funding for HVAC also. Has loan sanctioned from Siemens",
     "notes": "",
     "id": "mnyovzw20ubkjdmyl6x",
-    "updatedAt": "2026-04-14T14:50:03.429Z"
+    "updatedAt": "2026-05-04T06:04:31.869Z"
   },
   {
     "company": "Vignesh Techpack Pvt Ltd",
