@@ -2137,15 +2137,15 @@
     "phone": "97409 99777",
     "phone2": "",
     "email": "",
-    "city": "Bangalore",
+    "city": "Bengaluru",
     "segment": "Industrial",
     "address": "#24, manjunath industrial estate, herohalli, mahadeshwaranagar, Magadi main road, Bangalore 560 091",
     "source": "Charan",
-    "sourceType": "OEM Referral",
     "oem": "HSG",
+    "sourceType": "OEM Referral",
     "machine": "",
     "amount": "0",
-    "subvention": "No",
+    "subvention": "",
     "priority": "Medium",
     "stage": "Closed Lost",
     "status": "Lost",
@@ -2155,7 +2155,7 @@
     "reason": "Wants to go with bank",
     "notes": "",
     "id": "mnyovzw2g04z6cmtjj",
-    "updatedAt": "2026-04-14T14:00:57.458Z"
+    "updatedAt": "2026-05-04T06:06:36.676Z"
   },
   {
     "company": "SR CNC",
