@@ -785,7 +785,7 @@
     "phone": "94481 29097",
     "phone2": "",
     "email": "",
-    "city": "Bangalore",
+    "city": "Bengaluru",
     "segment": "Medical",
     "address": "225, Anubhava Nagar, Nagarbhavi Main Road, Near Axis Bank, Nagarbhavi",
     "source": "Venugopal",
@@ -793,7 +793,7 @@
     "sourceType": "OEM Referral",
     "machine": "",
     "amount": "1750000",
-    "subvention": "Yes",
+    "subvention": "",
     "priority": "Medium",
     "stage": "Contacted",
     "status": "On Hold",
@@ -803,7 +803,7 @@
     "reason": "",
     "notes": "Venugopal said doctor has put the deal on hold. Will pursue after 6 months. Reach out in october",
     "id": "mnyovzw3754rhenw1td",
-    "updatedAt": "2026-04-15T08:51:54.461Z"
+    "updatedAt": "2026-05-04T06:04:15.974Z"
   },
   {
     "company": "Nilavai Technologies",
