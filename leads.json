@@ -2059,15 +2059,15 @@
     "phone": "94480 70490",
     "phone2": "",
     "email": "",
-    "city": "Bangalore",
+    "city": "Bengaluru",
     "segment": "Industrial",
     "address": "No 7/E, 5th Main, 3rd phase, Peenya industrial estate, 560058",
     "source": "Milind Navale",
-    "sourceType": "OEM Referral",
     "oem": "Cosmos",
+    "sourceType": "OEM Referral",
     "machine": "",
     "amount": "0",
-    "subvention": "No",
+    "subvention": "",
     "priority": "Medium",
     "stage": "Closed Lost",
     "status": "Lost",
@@ -2077,7 +2077,7 @@
     "reason": "Does not want to go with Bajaj",
     "notes": "",
     "id": "mnyovzw2miy5tpnwmyg",
-    "updatedAt": "2026-04-14T14:00:57.458Z"
+    "updatedAt": "2026-05-04T06:06:01.041Z"
   },
   {
     "company": "Primex Plastics",
