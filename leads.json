@@ -2111,15 +2111,15 @@
     "phone": "73386 29911",
     "phone2": "",
     "email": "",
-    "city": "Bangalore",
+    "city": "Bengaluru",
     "segment": "Industrial",
     "address": "#252, Kabbalamma Nilya, Sri Chakra Nagar, 1st Cross, Vishwaneedem post, Andhrahalli, Bangalore, 560091",
     "source": "Manju Palled",
-    "sourceType": "OEM Referral",
     "oem": "S&T",
+    "sourceType": "OEM Referral",
     "machine": "",
     "amount": "2500000",
-    "subvention": "No",
+    "subvention": "",
     "priority": "Medium",
     "stage": "Closed Lost",
     "status": "Lost",
@@ -2129,7 +2129,7 @@
     "reason": "No residence in Bangalore. Low CIBIL",
     "notes": "",
     "id": "mnyovzw2muuxdjj6zoi",
-    "updatedAt": "2026-04-14T14:00:57.458Z"
+    "updatedAt": "2026-05-04T06:06:26.353Z"
   },
   {
     "company": "Frontier Modulars",
