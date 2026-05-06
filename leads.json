@@ -767,7 +767,7 @@
     "sourceType": "OEM Referral",
     "machine": "",
     "amount": "16285000",
-    "subvention": "No",
+    "subvention": "",
     "priority": "Medium",
     "stage": "New",
     "status": "Active",
@@ -775,9 +775,9 @@
     "followup": "2026-05-10",
     "lastContact": "2026-04-27",
     "reason": "",
-    "notes": "1. Have sent calculation to venugopal.\n2. Existing customer. Wants 9.25, 0.5, 3 years. Have sent calculation.\n3. He took loan from Toshbro on subvention and wants lower emi. Venugopal will sit with his team and finalise the quotation by 27april.\n4. The doctor is out of station. Venugopal will connect with the doctor on 10th May",
+    "notes": "1. Have sent calculation to venugopal.\n2. Existing customer. Wants 9.25, 0.5, 3 years. Have sent calculation.\n3. He took loan from Toshbro on subvention and wants lower emi. Venugopal will sit with his team and finalise the quotation by 27april.\n4. The doctor is out of station. Venugopal will connect with the doctor on 12th May.",
     "id": "moa11rq3jrgqj0yaa1j",
-    "updatedAt": "2026-04-27T09:39:19.679Z"
+    "updatedAt": "2026-05-06T06:50:04.827Z"
   },
   {
     "company": "Optisight eye hospital",
