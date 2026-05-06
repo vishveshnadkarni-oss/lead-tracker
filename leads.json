@@ -611,17 +611,17 @@
     "sourceType": "OEM Referral",
     "machine": "52L loan",
     "amount": "4300000",
-    "subvention": "Yes",
+    "subvention": "",
     "priority": "Low",
     "stage": "New",
     "status": "Active",
     "leadDate": "2026-04-07",
-    "followup": "2026-05-01",
-    "lastContact": "2026-04-27",
+    "followup": "",
+    "lastContact": "2026-05-06",
     "reason": "Waiting for approval from venugopal",
-    "notes": "52L. 20% MM. Biomedix subvention deal. 1 and 2 years.\n1. Dr. Bhargava wants a demo which he will get on the last week of April after that he will decide",
+    "notes": "52L. 20% MM. Biomedix subvention deal. 1 and 2 years.\n1. Dr. Bhargava wants a demo which he will get on the last week of April after that he will decide.\n2. He is waiting for his investors to take a call. Venugopal will tell when he is ready to take a loan.",
     "id": "mnzrb53gc8qwu7m1q49",
-    "updatedAt": "2026-04-29T04:53:17.441Z"
+    "updatedAt": "2026-05-06T06:49:43.047Z"
   },
   {
     "company": "Saab Engineering",
