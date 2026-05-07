@@ -96,12 +96,12 @@
     "stage": "New",
     "status": "Active",
     "leadDate": "2026-05-06",
-    "followup": "2026-05-07",
+    "followup": "2026-05-15",
     "lastContact": "2026-05-06",
     "reason": "",
-    "notes": "1. Tried calling. But customer didn't answer.",
+    "notes": "1. Tried calling. But customer didn't answer.\n2. He has asked us to call after 15th may",
     "id": "motl6fygo0qnw64c8p",
-    "updatedAt": "2026-05-06T04:57:57.832Z"
+    "updatedAt": "2026-05-07T03:25:59.273Z"
   },
   {
     "company": "Adani group customer",
