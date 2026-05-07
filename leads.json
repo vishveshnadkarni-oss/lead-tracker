@@ -7,7 +7,7 @@
     "email": "",
     "city": "Bengaluru",
     "segment": "Industrial",
-    "address": "",
+    "address": "20, Aerospace SEZ Sector, Hitech Defence and Aerospace Park Kavadadasanahalli, Devanahalli, Taluk, Bengaluru, Karnataka 562165",
     "source": "Jambunath",
     "oem": "Manav Marketing",
     "sourceType": "OEM Referral",
@@ -18,12 +18,12 @@
     "stage": "Contacted",
     "status": "Active",
     "leadDate": "2026-05-05",
-    "followup": "2026-05-07",
-    "lastContact": "2026-05-05",
+    "followup": "",
+    "lastContact": "2026-05-07",
     "reason": "",
     "notes": "1. Customer asked to call on 6 may\n2. There is a review, because of which they have delayed the machine purchase. In the mean time need to send them leasing calculation.\n\nTake name from customer. Looking for leasing option. Siemens didn't do cause of defence deal",
     "id": "motk41ck7u8d1nyl0g5",
-    "updatedAt": "2026-05-07T05:37:57.409Z"
+    "updatedAt": "2026-05-07T05:39:48.460Z"
   },
   {
     "company": "Halmanee Aerospace",
