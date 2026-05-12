@@ -722,10 +722,10 @@
     "leadDate": "2026-02-04",
     "followup": "2026-05-04",
     "lastContact": "2026-04-30",
-    "reason": "Customer wanted LTV of 85% which Siemens was giving. We approved LTV of 75%",
-    "notes": "Offering him leasing.",
+    "reason": "",
+    "notes": "-1. Customer wanted LTV of 85% which Siemens was giving. We approved LTV of 75%\n0. Offering him leasing.\n1. Sent him leasing vs loan.\n2. Customer postponed machine purchase because his raw material price increased cause of war.",
     "id": "mnyovzw2wke59ehumzo",
-    "updatedAt": "2026-05-04T06:03:58.243Z"
+    "updatedAt": "2026-05-12T10:09:22.532Z"
   },
   {
     "company": "Chetana industries",
