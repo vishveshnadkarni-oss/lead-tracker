@@ -221,17 +221,17 @@
     "sourceType": "OEM Referral",
     "machine": "Icare DRS",
     "amount": "1250000",
-    "subvention": "",
+    "subvention": "None",
     "priority": "Medium",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-03-23",
     "followup": "2026-05-08",
     "lastContact": "2026-04-14",
-    "reason": "",
-    "notes": "Customer not sharing documents.\n1. Planning to meet customer on 27th with Ramesh.\n2. Customer has not paid the entire advance payment. Check with Ramesh sir on 7th May.",
+    "reason": "Does not want to go with banks or NBFC",
+    "notes": "Customer not sharing documents.\n1. Planning to meet customer on 27th with Ramesh.\n2. Customer has not paid the entire advance payment. Check with Ramesh sir on 7th May.\n3. As per Rameshm he wants to pay on his own does not want to go with any banks or nbfc",
     "id": "mnyovzw3p3eeg7kwono",
-    "updatedAt": "2026-05-07T03:25:25.022Z"
+    "updatedAt": "2026-05-12T10:07:48.868Z"
   },
   {
     "company": "Lakshmi Industries",
