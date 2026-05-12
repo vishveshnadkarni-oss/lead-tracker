@@ -143,17 +143,17 @@
     "sourceType": "OEM Referral",
     "machine": "",
     "amount": "0",
-    "subvention": "",
+    "subvention": "None",
     "priority": "Medium",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "On Hold",
     "leadDate": "2026-04-07",
-    "followup": "2026-05-06",
-    "lastContact": "2026-05-05",
+    "followup": "",
+    "lastContact": "2026-05-12",
     "reason": "",
-    "notes": "Karthick will meet customer on Monday.\n1. Owner will give appointment next week.\n2. Meeting with owner on 6th May. Karthick went, but customer was not there.",
+    "notes": "Karthick will meet customer on Monday.\n1. Owner will give appointment next week.\n2. Meeting with owner on 6th May. Karthick went, but customer was not there.\n3. Owner not giving appointment. Karthick will update me once owner confirms.",
     "id": "mnyovzw3y7yrzp3v4hj",
-    "updatedAt": "2026-05-07T09:20:45.636Z"
+    "updatedAt": "2026-05-12T09:39:10.462Z"
   },
   {
     "company": "Alpha Design Technologies Limited",
