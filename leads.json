@@ -174,12 +174,12 @@
     "stage": "Contacted",
     "status": "Active",
     "leadDate": "2026-05-12",
-    "followup": "2026-05-13",
-    "lastContact": "2026-05-12",
+    "followup": "",
+    "lastContact": "2026-05-13",
     "reason": "",
-    "notes": "1. Met the customer. Did not seem so interested. But will send him leasing vs loan calculation.",
+    "notes": "1. Met the customer. Did not seem so interested. But will send him leasing vs loan calculation.\n2. He had queries on leasing. Connected with Sanyal.",
     "id": "mp2doe73ot8bnix4z5",
-    "updatedAt": "2026-05-12T08:37:54.018Z"
+    "updatedAt": "2026-05-13T06:31:41.504Z"
   },
   {
     "company": "GK Funnel",
