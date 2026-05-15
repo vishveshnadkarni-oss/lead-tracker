@@ -353,7 +353,7 @@
     "amount": "4000000",
     "subvention": "None",
     "priority": "Medium",
-    "stage": "Contacted",
+    "stage": "Credit Review",
     "status": "Active",
     "leadDate": "2026-05-09",
     "followup": "2026-05-11",
@@ -361,7 +361,7 @@
     "reason": "",
     "notes": "Lead from jomy. Calculation sent",
     "id": "moy5yx9remk2z7uteof",
-    "updatedAt": "2026-05-09T09:51:03.663Z"
+    "updatedAt": "2026-05-15T12:12:23.053Z"
   },
   {
     "company": "Alpha Design Technologies Limited",
