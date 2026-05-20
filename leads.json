@@ -380,14 +380,14 @@
     "subvention": "Hybrid Flexi",
     "priority": "Medium",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-05-12",
     "followup": "",
     "lastContact": "2026-05-13",
-    "reason": "",
+    "reason": "Low CIBIL of 663. Had 10 existing loans.",
     "notes": "1. Met the customer. Did not seem so interested. But will send him leasing vs loan calculation.\n2. He had queries on leasing. Connected with Sanyal.",
     "id": "mp2doe73ot8bnix4z5",
-    "updatedAt": "2026-05-13T06:31:41.504Z"
+    "updatedAt": "2026-05-20T08:27:06.011Z"
   },
   {
     "company": "GK Funnel",
