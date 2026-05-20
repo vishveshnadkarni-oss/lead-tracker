@@ -304,12 +304,12 @@
     "stage": "Credit Review",
     "status": "Active",
     "leadDate": "2026-05-09",
-    "followup": "2026-05-11",
+    "followup": "",
     "lastContact": "2026-05-09",
     "reason": "",
-    "notes": "Lead from jomy. Calculation sent",
+    "notes": "Lead from jomy. Calculation sent.\n1. 1st PD done on 20th may",
     "id": "moy5yx9remk2z7uteof",
-    "updatedAt": "2026-05-15T12:12:23.053Z"
+    "updatedAt": "2026-05-20T08:24:44.937Z"
   },
   {
     "company": "Tirupathi Balaji eye hospital",
