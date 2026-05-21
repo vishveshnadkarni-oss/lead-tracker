@@ -18,12 +18,12 @@
     "stage": "Contacted",
     "status": "Active",
     "leadDate": "2026-05-21",
-    "followup": "2026-05-21",
+    "followup": "",
     "lastContact": "2026-05-21",
-    "reason": "",
+    "reason": "Very low turnover of 12L",
     "notes": "1. Quotation not shared with customer yet.",
     "id": "mpf3buubu74yt6acqd",
-    "updatedAt": "2026-05-21T06:09:13.187Z"
+    "updatedAt": "2026-05-21T10:58:57.011Z"
   },
   {
     "company": "Halmanee Aerospace",
