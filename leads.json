@@ -93,15 +93,15 @@
     "amount": "3000000",
     "subvention": "None",
     "priority": "Medium",
-    "stage": "Contacted",
+    "stage": "Docs Collected",
     "status": "Active",
     "leadDate": "2026-05-22",
     "followup": "2026-05-23",
     "lastContact": "2026-05-22",
     "reason": "",
-    "notes": "Cold calling lead.\n1. Asked to meet on 23 may in office",
+    "notes": "Cold calling lead.\n1. Asked to meet on 23 may in office\n2. Met in office going ahead with login.",
     "id": "mpgy5zx6j12hcvksdu",
-    "updatedAt": "2026-05-22T13:20:14.107Z"
+    "updatedAt": "2026-05-23T07:37:53.878Z"
   },
   {
     "company": "Prorack storage Solutions",
