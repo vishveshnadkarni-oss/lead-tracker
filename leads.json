@@ -1,5 +1,31 @@
 [
   {
+    "company": "Lakshmi Industries",
+    "customer": "R Palani Velu",
+    "phone": "98452 08575",
+    "phone2": "",
+    "email": "lakshmiindustries@yahoo.co.in",
+    "city": "Bengaluru",
+    "segment": "Industrial",
+    "address": "#12/1A, Lakshmi garden, Lakshmipura main road, Abbigere, Chikkabanavara post, Bengaluru, 560090",
+    "source": "Milind Navale",
+    "oem": "Cosmos",
+    "sourceType": "OEM Referral",
+    "machine": "",
+    "amount": "11300000",
+    "subvention": "Leasing",
+    "priority": "High",
+    "stage": "Contacted",
+    "status": "Active",
+    "leadDate": "2026-04-30",
+    "followup": "",
+    "lastContact": "2026-05-06",
+    "reason": "Wants lower ROI. Lower than 9.",
+    "notes": "He needs 10 machines. Interested in leasing. Tata capital and siemens all have approached.\n1. Customer asked to meet on 6th May.\n2. Custimer asked to meet on 9th may.\n3. Customer wants 9% ROI. He will update on 18th may\n4. He will consider after sanyals visit on 22nd",
+    "id": "moo5vzr1bibfuqjb9js",
+    "updatedAt": "2026-05-23T08:12:18.330Z"
+  },
+  {
     "company": "Lakshmi Precision Tools",
     "customer": "Mahesh Srinivas",
     "phone": "9900466775",
@@ -286,7 +312,7 @@
     "updatedAt": "2026-05-21T11:05:15.549Z"
   },
   {
-    "company": "Halmanee Aerospace",
+    "company": "Halamanee Aerospace",
     "customer": "Dayanand",
     "phone": "99000 08736",
     "phone2": "",
@@ -309,7 +335,7 @@
     "reason": "",
     "notes": "1. Tried calling. But customer didn't answer.\n2. He has asked us to call after 15th may.\n3. Customer want to connect on 20th.\n4. Kiran visited on 21st may. Customer not there. He will go on 22nd morning.",
     "id": "motl6fygo0qnw64c8p",
-    "updatedAt": "2026-05-21T10:57:35.168Z"
+    "updatedAt": "2026-05-25T06:29:17.044Z"
   },
   {
     "company": "AJM enterprises",
@@ -336,32 +362,6 @@
     "notes": "1. Met the customer. Did not seem so interested. But will send him leasing vs loan calculation.\n2. He had queries on leasing. Connected with Sanyal.",
     "id": "mp2doe73ot8bnix4z5",
     "updatedAt": "2026-05-20T08:27:06.011Z"
-  },
-  {
-    "company": "Lakshmi Industries",
-    "customer": "R Palani Velu",
-    "phone": "98452 08575",
-    "phone2": "",
-    "email": "lakshmiindustries@yahoo.co.in",
-    "city": "Bengaluru",
-    "segment": "Industrial",
-    "address": "#12/1A, Lakshmi garden, Lakshmipura main road, Abbigere, Chikkabanavara post, Bengaluru, 560090",
-    "source": "Milind Navale",
-    "oem": "Cosmos",
-    "sourceType": "OEM Referral",
-    "machine": "",
-    "amount": "11300000",
-    "subvention": "Leasing",
-    "priority": "High",
-    "stage": "Contacted",
-    "status": "Active",
-    "leadDate": "2026-04-30",
-    "followup": "",
-    "lastContact": "2026-05-06",
-    "reason": "Wants lower ROI. Lower than 9.",
-    "notes": "He needs 10 machines. Interested in leasing. Tata capital and siemens all have approached.\n1. Customer asked to meet on 6th May.\n2. Custimer asked to meet on 9th may.\n3. Customer wants 9% ROI. He will update on 18th may\n4. He will consider after sanyals visit on 22nd",
-    "id": "moo5vzr1bibfuqjb9js",
-    "updatedAt": "2026-05-23T08:12:18.330Z"
   },
   {
     "company": "Aradhya eye care",
