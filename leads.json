@@ -1383,7 +1383,7 @@
     "phone": "99815 45317",
     "phone2": "",
     "email": "brajeshvishwakarmamedikal@gmail.com",
-    "city": "Panna",
+    "city": "Panna (MP)",
     "segment": "Medical",
     "address": "176 ward no 01 Pawai S.O (Panna), Pawai, Madhya Pradesh, 488446",
     "source": "Vijay",
@@ -1391,7 +1391,7 @@
     "sourceType": "OEM Referral",
     "machine": "Versana Essential R2",
     "amount": "1500000",
-    "subvention": "Yes",
+    "subvention": "",
     "priority": "Low",
     "stage": "Closed Lost",
     "status": "Lost",
@@ -1401,7 +1401,7 @@
     "reason": "Non medico customer",
     "notes": "",
     "id": "mo6yb30iqmhksbobh58",
-    "updatedAt": "2026-04-20T08:46:47.298Z"
+    "updatedAt": "2026-05-25T09:47:19.091Z"
   },
   {
     "company": "Aristo Eyecare Pvt Ltd",
