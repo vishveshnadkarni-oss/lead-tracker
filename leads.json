@@ -328,14 +328,14 @@
     "subvention": "None",
     "priority": "Medium",
     "stage": "Credit Review",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-05-09",
     "followup": "",
     "lastContact": "2026-05-09",
     "reason": "",
-    "notes": "Lead from jomy. Calculation sent.\n1. 1st PD done on 21st may.\n2. Turnover to debt ratio is poor. 11.5cr turnover and debt is 7.8cr",
+    "notes": "Lead from jomy. Calculation sent.\n1. 1st PD done on 21st may.\n2. Turnover to debt ratio is poor. 11.5cr turnover and debt is 7.8cr.\n3. Sanyal has raised it with BH for approval.",
     "id": "moy5yx9remk2z7uteof",
-    "updatedAt": "2026-05-23T05:49:43.827Z"
+    "updatedAt": "2026-05-28T10:48:12.742Z"
   },
   {
     "company": "Details yet to receive from Madhu babu",
