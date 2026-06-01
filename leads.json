@@ -13,7 +13,7 @@
     "sourceType": "Dealer Referral",
     "machine": "",
     "amount": "",
-    "subvention": "None",
+    "subvention": "Leasing",
     "priority": "Medium",
     "stage": "New",
     "status": "Active",
@@ -21,9 +21,9 @@
     "followup": "",
     "lastContact": "",
     "reason": "",
-    "notes": "He wants to close the deal soon.",
+    "notes": "He wants to go with more machines.\nFirst machine from GPY machine tools, he will go with Kotak.\nHe is interested in leasing.",
     "id": "mpup32jrp8ib8spo9j",
-    "updatedAt": "2026-06-01T08:11:34.268Z"
+    "updatedAt": "2026-06-01T12:09:27.739Z"
   },
   {
     "company": "(Aerospace company)",
