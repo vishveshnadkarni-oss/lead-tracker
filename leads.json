@@ -668,12 +668,12 @@
     "stage": "Contacted",
     "status": "Lost",
     "leadDate": "2026-05-19",
-    "followup": "2026-05-19",
+    "followup": "",
     "lastContact": "2026-05-19",
     "reason": "Greenfield project.",
     "notes": "It's a startup has an LOI of 3 years from customer.",
     "id": "mpcd5ti37lhjz2hu7vd",
-    "updatedAt": "2026-05-21T11:08:00.244Z"
+    "updatedAt": "2026-06-01T21:38:05.618Z"
   },
   {
     "company": "Gorantla Geo-synthetics Ltd",
