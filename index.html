@@ -276,7 +276,7 @@ textarea { resize: vertical; min-height: 60px; }
           <option value="">Select</option>
           <option>OEM Referral</option>
           <option>Dealer Referral</option>
-          <option>Events & Open House</option>
+          <option>DSA</option>
           <option>Direct Walk-in</option>
           <option>Existing Customer</option>
           <option>Other</option>
@@ -747,12 +747,11 @@ function renderLeadsList() {
   if (el('stat-active')) el('stat-active').textContent = statsBase.filter(l=>l.status==='Active').length;
   if (el('stat-overdue')) el('stat-overdue').textContent = statsBase.filter(l=>l.followup && l.followup < t && l.status==='Active').length;
   if (el('stat-won')) el('stat-won').textContent = statsBase.filter(l=>l.status==='Won').length;
-  const priorityOrder = {High:0,Medium:1,Low:2,'':3};
+  // Sort: newest lead first (by updatedAt, then leadDate)
   fl.sort((a,b) => {
-    const aOv = a.followup && a.followup < t ? -1 : 0;
-    const bOv = b.followup && b.followup < t ? -1 : 0;
-    if (aOv !== bOv) return aOv - bOv;
-    return (priorityOrder[a.priority]||3) - (priorityOrder[b.priority]||3);
+    const aTime = new Date(a.updatedAt || a.leadDate || 0).getTime();
+    const bTime = new Date(b.updatedAt || b.leadDate || 0).getTime();
+    return bTime - aTime;
   });
 
   if (fl.length === 0) {
