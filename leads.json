@@ -44,12 +44,12 @@
     "stage": "New",
     "status": "Active",
     "leadDate": "2026-06-02",
-    "followup": "2026-06-03",
-    "lastContact": "",
+    "followup": "2026-06-17",
+    "lastContact": "2026-06-10",
     "reason": "",
-    "notes": "Sent him calculation.",
+    "notes": "Sent him calculation.\n1. Machine postpone for next week. Check on 17/6",
     "id": "mpwguwsh70erlkv46h4",
-    "updatedAt": "2026-06-02T10:00:21.662Z"
+    "updatedAt": "2026-06-10T06:25:04.138Z"
   },
   {
     "company": "Details yet to receive from Madhu babu",
