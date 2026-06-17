@@ -561,7 +561,7 @@
     "amount": "27100000",
     "subvention": "Leasing",
     "priority": "High",
-    "stage": "Contacted",
+    "stage": "Sanctioned",
     "status": "Active",
     "leadDate": "2026-04-30",
     "followup": "",
@@ -569,7 +569,7 @@
     "reason": "Wants lower ROI. Lower than 9.",
     "notes": "He needs 10 machines. Interested in leasing. Tata capital and siemens all have approached.\n1. Customer asked to meet on 6th May.\n2. Custimer asked to meet on 9th may.\n3. Customer wants 9% ROI. He will update on 18th may\n4. He will consider after sanyals visit on 22nd",
     "id": "moo5vzr1bibfuqjb9js",
-    "updatedAt": "2026-05-29T09:52:58.263Z"
+    "updatedAt": "2026-06-17T10:54:05.048Z"
   },
   {
     "company": "Lakshmi Precision Tools",
