@@ -120,14 +120,14 @@
     "subvention": "None",
     "priority": "Medium",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-06-18",
-    "followup": "2026-06-18",
-    "lastContact": "2026-06-18",
-    "reason": "",
+    "followup": "",
+    "lastContact": "2026-06-23",
+    "reason": "10 month old company. Low vintage",
     "notes": "Meeting in HSR layout.",
     "id": "mqjd8o4pmf2xhvajmk9",
-    "updatedAt": "2026-06-18T11:57:57.906Z"
+    "updatedAt": "2026-06-23T05:40:04.988Z"
   },
   {
     "company": "Imprint Technopack",
