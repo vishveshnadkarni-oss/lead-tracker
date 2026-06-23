@@ -94,14 +94,14 @@
     "subvention": "None",
     "priority": "Medium",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-06-18",
-    "followup": "2026-06-18",
-    "lastContact": "2026-06-18",
-    "reason": "",
+    "followup": "",
+    "lastContact": "2026-06-23",
+    "reason": "The customer wants to go with Mediloan",
     "notes": "Pavagadi Health Pvt Ltd\nThey will confirm which machine they want to buy.",
     "id": "mqjgho1ncp9ufha065",
-    "updatedAt": "2026-06-18T12:10:12.595Z"
+    "updatedAt": "2026-06-23T05:27:54.186Z"
   },
   {
     "company": "",
