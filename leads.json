@@ -900,14 +900,14 @@
     "subvention": "None",
     "priority": "Medium",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-05-18",
     "followup": "2026-05-19",
     "lastContact": "2026-05-19",
-    "reason": "",
+    "reason": "No reply from Ashish's team.",
     "notes": "97276 86323 - Gaurav CA. Call him.\n1. Meeting arranged with Ashish Sharma and others on 22nd May",
     "id": "mpcbb0b44v2mdhwe89u",
-    "updatedAt": "2026-05-21T11:07:19.088Z"
+    "updatedAt": "2026-06-24T12:13:40.468Z"
   },
   {
     "company": "Details yet to recieve",
