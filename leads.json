@@ -12,18 +12,18 @@
     "oem": "WiproGE",
     "sourceType": "OEM Referral",
     "machine": "",
-    "amount": "",
-    "subvention": "",
+    "amount": "900000",
+    "subvention": "Subvention",
     "priority": "Medium",
-    "stage": "New",
+    "stage": "Contacted",
     "status": "Active",
     "leadDate": "2026-06-26",
     "followup": "",
     "lastContact": "",
     "reason": "",
-    "notes": "",
+    "notes": "Equipment value is 29L\nLoan req only 9L",
     "id": "mqunns0skj7ryxtoju",
-    "updatedAt": "2026-06-26T08:14:36.700Z"
+    "updatedAt": "2026-06-26T08:36:35.406Z"
   },
   {
     "company": "Gorantla Geo-synthetics Ltd",
