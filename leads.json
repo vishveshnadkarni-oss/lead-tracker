@@ -1,17 +1,17 @@
 [
   {
-    "company": "",
+    "company": "Shree Guru Scanning centre",
     "customer": "Dr. Aravind Kantigond",
     "phone": "7795989315",
     "phone2": "",
-    "email": "",
+    "email": "geet95andani@gmail.com",
     "city": "Sindagi (KN)",
     "segment": "Medical",
-    "address": "",
+    "address": "Near bus stand, Gandhinagar, Sandagi, KN, 586128",
     "source": "Vijay Kurdagi",
     "oem": "WiproGE",
     "sourceType": "OEM Referral",
-    "machine": "",
+    "machine": "Voluson S8 BT22",
     "amount": "900000",
     "subvention": "Subvention",
     "priority": "Medium",
@@ -21,9 +21,9 @@
     "followup": "",
     "lastContact": "",
     "reason": "",
-    "notes": "Equipment value is 29L\nLoan req only 9L",
+    "notes": "Equipment value is 29L\nLoan req 9L",
     "id": "mqunns0skj7ryxtoju",
-    "updatedAt": "2026-06-26T08:36:35.406Z"
+    "updatedAt": "2026-06-26T08:41:12.514Z"
   },
   {
     "company": "Gorantla Geo-synthetics Ltd",
