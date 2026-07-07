@@ -1110,12 +1110,12 @@
     "stage": "Sanctioned",
     "status": "Lost",
     "leadDate": "2026-02-04",
-    "followup": "2026-05-04",
+    "followup": "",
     "lastContact": "2026-04-30",
     "reason": "3. Not responding",
     "notes": "-1. Customer wanted LTV of 85% which Siemens was giving. We approved LTV of 75%\n0. Offering him leasing.\n1. Sent him leasing vs loan.\n2. Customer postponed machine purchase because his raw material price increased cause of war.\n.",
     "id": "mnyovzw2wke59ehumzo",
-    "updatedAt": "2026-05-20T08:22:36.483Z"
+    "updatedAt": "2026-07-07T14:30:04.310Z"
   },
   {
     "company": "",
