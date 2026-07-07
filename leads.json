@@ -1781,17 +1781,17 @@
     "sourceType": "Dealer Referral",
     "machine": "",
     "amount": "2000000",
-    "subvention": "Yes",
+    "subvention": "",
     "priority": "Medium",
     "stage": "Closed Lost",
     "status": "Lost",
     "leadDate": "2026-04-13",
-    "followup": "2026-04-21",
+    "followup": "",
     "lastContact": "2026-04-18",
     "reason": "",
     "notes": "9% int and 0.5% PF shared\n1. Will call dealer on Tuesday to discuss on the case. \n2. Will call dealer on 24 April.\n3. Dealer not answering calls or WhatsApp, hence closing the lead",
     "id": "mo5b6f8dbxy9dqt8l68",
-    "updatedAt": "2026-04-27T10:00:42.753Z"
+    "updatedAt": "2026-07-07T14:30:27.217Z"
   },
   {
     "company": "Optisight eye hospital",
