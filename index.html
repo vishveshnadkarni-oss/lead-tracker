@@ -383,7 +383,7 @@ textarea { resize: vertical; min-height: 60px; }
 </div>
 
 <!-- IMPORT MODAL -->
-<input type="file" id="csvFileInput" accept=".csv" style="display:none" onchange="handleFileSelect(this)"/>
+<input type="file" id="csvFileInput" accept=".csv,.xlsx" style="display:none" onchange="handleFileSelect(this)"/>
 <div class="overlay" id="importOverlay" onclick="closeImportModal(event)">
   <div class="modal" style="max-width:700px">
     <div class="modal-handle"></div>
@@ -844,7 +844,7 @@ function renderSettings(container) {
     </p>
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
       <button class="btn btn-primary btn-sm" onclick="downloadTemplate()">⬇️ Download Template</button>
-      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('csvFileInput').click()">📂 Import CSV File</button>
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('csvFileInput').click()">📂 Import CSV / Excel File</button>
     </div>
     <div class="settings-note" style="margin-top:10px;">
       ✅ <strong>Valid values for dropdowns:</strong><br/>
@@ -1362,7 +1362,7 @@ function closeShareModal(e) { if (e.target === document.getElementById('shareOve
 // IMPORT
 // ─────────────────────────────────────────
 
-const CSV_HEADERS = ['Company','Customer Name','Phone','Alt Phone','Email','City','Segment','Address','Lead Received From','Source Type','OEM Name','Machine Requirement','Loan Amount','Subvention','Priority','Stage','Status','Lead Date','Next Follow-up','Last Contacted','Reason','Notes'];
+const CSV_HEADERS = ['Company','Customer Name','Phone','Alt Phone','Email','City','Segment','Address','Lead Received From','Source Type','OEM Name','Machine Requirement','Loan Amount','Scheme','Priority','Stage','Status','Lead Date','Next Follow-up','Last Contacted','Reason','Notes'];
 const CSV_KEYS    = ['company','customer','phone','phone2','email','city','segment','address','source','sourceType','oem','machine','amount','subvention','priority','stage','status','leadDate','followup','lastContact','reason','notes'];
 
 const TEMPLATE_SAMPLE = [
@@ -1443,22 +1443,37 @@ function handleFileSelect(input) {
   const file = input.files[0];
   if (!file) return;
   input.value = '';
-  const reader = new FileReader();
-  reader.onload = e => {
-    let text = e.target.result;
-    // Clean up common garbled characters from Windows encoding mismatch
-    text = text
-      .replace(/Ã¢ÂÂ/g, '–').replace(/Ã¢ÂÂ/g, '—')
-      .replace(/â€"/g, '–').replace(/â€"/g, '—')
-      .replace(/â€˜/g, "'").replace(/â€™/g, "'")
-      .replace(/â€œ/g, '"').replace(/â€/g, '"')
-      .replace(/Â·/g, '·').replace(/Ãƒ/g, 'A')
-      .replace(/[^\x00-\x7F\u00C0-\u024F\u0900-\u097F]/g, ' ') // strip other non-printable junk
-      .replace(/  +/g, ' '); // collapse double spaces
-    processImportFile(text, file.name);
-  };
-  // Try without forced encoding first — browser will auto-detect
-  reader.readAsText(file);
+  const isXLSX = file.name.toLowerCase().endsWith('.xlsx');
+
+  if (isXLSX) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      try {
+        const wb = XLSX.read(e.target.result, { type: 'array' });
+        // Use first sheet named 'Import Template' or just first sheet
+        const sheetName = wb.SheetNames.includes('Import Template') ? 'Import Template' : wb.SheetNames[0];
+        const ws = wb.Sheets[sheetName];
+        const rows = XLSX.utils.sheet_to_csv(ws);
+        processImportFile(rows, file.name);
+      } catch(err) {
+        toast('Could not read Excel file: ' + err.message, 'error');
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  } else {
+    const reader = new FileReader();
+    reader.onload = e => {
+      let text = e.target.result;
+      text = text
+        .replace(/â€"/g, '–').replace(/â€"/g, '—')
+        .replace(/â€˜/g, "'").replace(/â€™/g, "'")
+        .replace(/â€œ/g, '"').replace(/â€/g, '"')
+        .replace(/Â·/g, '·')
+        .replace(/  +/g, ' ');
+      processImportFile(text, file.name);
+    };
+    reader.readAsText(file);
+  }
 }
 
 let pendingImport = [];
