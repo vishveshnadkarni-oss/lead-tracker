@@ -407,6 +407,9 @@ let ghFileSHA = null;
 const STORAGE_KEY = 'lt_leads_local';
 const SETTINGS_KEY = 'lt_gh_settings';
 const LAST_BACKUP_KEY = 'lt_last_backup_date';
+const CSV_HEADERS = ['Company','Customer Name','Phone','Alt Phone','Email','City','Segment','Address','Lead Received From','Source Type','OEM Name','Machine Requirement','Loan Amount','Scheme','Priority','Stage','Status','Lead Date','Next Follow-up','Last Contacted','Reason','Notes'];
+const CSV_KEYS    = ['company','customer','phone','phone2','email','city','segment','address','source','sourceType','oem','machine','amount','subvention','priority','stage','status','leadDate','followup','lastContact','reason','notes'];
+const TEMPLATE_SAMPLE = ['ABC Industries','Rajesh Kumar','9876543210','9876500000','rajesh@abc.com','Bengaluru','Plot 12, Peenya Industrial Area, Bengaluru 560058','Industrial','Arun – XCMG Dealer','OEM Referral','XCMG','20T Excavator','5500000','Subvention','High','Contacted','Active','2026-04-01','2026-04-10','2026-04-05','Interested, checking finance','Referred by Suresh'];
 
 // ─────────────────────────────────────────
 // UTILS
@@ -1362,12 +1365,6 @@ function closeShareModal(e) { if (e.target === document.getElementById('shareOve
 // IMPORT
 // ─────────────────────────────────────────
 
-const CSV_HEADERS = ['Company','Customer Name','Phone','Alt Phone','Email','City','Segment','Address','Lead Received From','Source Type','OEM Name','Machine Requirement','Loan Amount','Scheme','Priority','Stage','Status','Lead Date','Next Follow-up','Last Contacted','Reason','Notes'];
-const CSV_KEYS    = ['company','customer','phone','phone2','email','city','segment','address','source','sourceType','oem','machine','amount','subvention','priority','stage','status','leadDate','followup','lastContact','reason','notes'];
-
-const TEMPLATE_SAMPLE = [
-  'ABC Industries','Rajesh Kumar','9876543210','9876500000','rajesh@abc.com','Bengaluru','Industrial','Plot 12, KIADB Peenya Industrial Area, Bengaluru 560058','Arun – XCMG Dealer','OEM Referral','XCMG','20T Excavator','5500000','Yes','High','Contacted','Active','2026-04-01','2026-04-10','2026-04-05','Interested, needs to check finance','Referred by Suresh'
-];
 
 function downloadTemplate() {
   const headers = [
