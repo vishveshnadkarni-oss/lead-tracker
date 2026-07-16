@@ -403,6 +403,7 @@ let leads = [];
 let editingId = null;
 let currentTab = 'all';
 let ghFileSHA = null;
+let pendingImport = [];
 
 const STORAGE_KEY = 'lt_leads_local';
 const SETTINGS_KEY = 'lt_gh_settings';
@@ -1473,13 +1474,20 @@ function handleFileSelect(input) {
   }
 }
 
-let pendingImport = [];
-
 function processImportFile(text, filename) {
   const { headers, rows } = parseCSV(text);
-  if (!headers.length) { toast('Could not read CSV file', 'error'); return; }
 
-  // Map CSV headers to field keys (case-insensitive, flexible)
+  if (!headers.length) {
+    toast('Could not read file — check it has data in the first row', 'error');
+    return;
+  }
+
+  const validRows = rows.filter(r => r.some(c => c.trim()));
+  if (!validRows.length) {
+    toast('No data rows found in file', 'error');
+    return;
+  }
+
   const normalize = s => s.toLowerCase().replace(/[^a-z0-9]/g, '');
   const normHeaders = CSV_HEADERS.map(normalize);
   const colMap = headers.map(h => {
@@ -1489,11 +1497,10 @@ function processImportFile(text, filename) {
 
   const existingPhones = new Set(leads.map(l => (l.phone||'').replace(/\D/g,'')).filter(Boolean));
 
-  const parsed = rows.map((row, i) => {
+  const parsed = validRows.map((row, i) => {
     const lead = {};
     colMap.forEach((key, ci) => { if (key) lead[key] = (row[ci] || '').trim(); });
 
-    // Normalise date fields: accept DD/MM/YYYY → YYYY-MM-DD
     ['leadDate','followup','lastContact'].forEach(k => {
       if (lead[k] && /^\d{2}\/\d{2}\/\d{4}$/.test(lead[k])) {
         const [d,m,y] = lead[k].split('/');
@@ -1503,13 +1510,20 @@ function processImportFile(text, filename) {
 
     const cleanPhone = (lead.phone||'').replace(/\D/g,'');
     const isDup = cleanPhone && existingPhones.has(cleanPhone);
-    const hasMin = lead.company || lead.customer || lead.phone;
-    return { lead, isDup, hasMin, row: i+2 }; // row+2 for 1-indexed + header
+    const hasMin = !!(lead.company || lead.customer || lead.phone);
+    return { lead, isDup, hasMin, row: i+2 };
   });
 
-  pendingImport = parsed;
-  renderImportPreview(filename, parsed);
+  const validParsed = parsed.filter(r => r.hasMin || r.lead.oem || r.lead.stage);
+  if (!validParsed.length) {
+    toast('No valid leads found — check column headers match template', 'error');
+    return;
+  }
+
+  pendingImport = validParsed;
+  renderImportPreview(filename, validParsed);
   document.getElementById('importOverlay').classList.add('open');
+  pushModalState();
 }
 
 function renderImportPreview(filename, parsed) {
