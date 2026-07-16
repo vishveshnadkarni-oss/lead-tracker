@@ -1179,7 +1179,7 @@
     "segment": "Medical",
     "address": "Near bus stand, Gandhinagar, Sandagi, KN, 586128",
     "source": "Vijay Kurdagi",
-    "oem": "WiproGE",
+    "oem": "Wipro GE",
     "sourceType": "OEM Referral",
     "machine": "Voluson S8 BT22",
     "amount": "1200000",
@@ -1193,7 +1193,7 @@
     "reason": "",
     "notes": "Equipment value is 29L\nLoan req 12L",
     "id": "mqunns0skj7ryxtoju",
-    "updatedAt": "2026-06-26T08:44:36.131Z"
+    "updatedAt": "2026-07-16T15:57:58.625Z"
   },
   {
     "company": "Chandana eye hospital",
