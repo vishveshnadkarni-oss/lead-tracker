@@ -3068,7 +3068,7 @@
     "updatedAt": "2026-04-14T14:36:47.950Z"
   },
   {
-    "company": "N/A",
+    "company": "Techno Four",
     "customer": "Mohan",
     "phone": "96867 35146",
     "phone2": "",
@@ -3078,10 +3078,10 @@
     "address": "",
     "source": "Narayan JY",
     "oem": "GPY Machine Tools",
-    "sourceType": "Dealer Referral",
+    "sourceType": "IMTEX 2026",
     "machine": "NA",
     "amount": "0",
-    "subvention": "No",
+    "subvention": "",
     "priority": "Medium",
     "stage": "Closed Lost",
     "status": "Lost",
@@ -3091,7 +3091,7 @@
     "reason": "Not interested in taking loan",
     "notes": "",
     "id": "mnyhv7qocx57a9yji6u",
-    "updatedAt": "2026-04-14T14:36:32.182Z"
+    "updatedAt": "2026-07-17T17:26:15.221Z"
   },
   {
     "company": "Tri Colour Hospital",
