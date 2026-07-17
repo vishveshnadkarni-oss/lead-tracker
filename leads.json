@@ -2636,7 +2636,7 @@
     "address": "S-303, 3rd floor, Brigade plaza, Sc Road, Anand Rao Circle, Bangalore, 560009",
     "source": "Sanyal",
     "oem": "Non-Standard",
-    "sourceType": "Existing Customer",
+    "sourceType": "BFL Employee",
     "machine": "",
     "amount": "50000000",
     "subvention": "",
@@ -2649,7 +2649,7 @@
     "reason": "Went in 2 tranches",
     "notes": "",
     "id": "mnyovzw2qiui8gc7mup",
-    "updatedAt": "2026-05-04T06:05:10.031Z"
+    "updatedAt": "2026-07-17T17:23:42.747Z"
   },
   {
     "company": "Yash Polymer",
