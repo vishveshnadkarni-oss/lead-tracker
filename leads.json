@@ -926,14 +926,14 @@
     "subvention": "Subvention",
     "priority": "Medium",
     "stage": "New",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-07-09",
     "followup": "",
     "lastContact": "",
-    "reason": "",
+    "reason": "Dealer not responding.",
     "notes": "BDK solutions",
     "id": "mrek99in8qszlblj8iu",
-    "updatedAt": "2026-07-10T06:36:27.682Z"
+    "updatedAt": "2026-07-17T17:29:09.195Z"
   },
   {
     "company": "Details yet to recieve",
