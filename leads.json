@@ -3130,10 +3130,10 @@
     "address": "Moka Rd. KHB colony, Tekur Compound, Gandhi Nagar, Ballari, Karnataka, 583103",
     "source": "Mr. Venkatraman Hegde",
     "oem": "B-MEC",
-    "sourceType": "Dealer Referral",
+    "sourceType": "OEM Referral",
     "machine": "Cathlab, CT scans and MRI machines",
     "amount": "70000000",
-    "subvention": "No",
+    "subvention": "",
     "priority": "Medium",
     "stage": "Closed Lost",
     "status": "Lost",
@@ -3143,7 +3143,7 @@
     "reason": "Its a Trust. Does not fit policy.",
     "notes": "",
     "id": "mnyovzw242ji05ooejd",
-    "updatedAt": "2026-04-14T14:26:51.855Z"
+    "updatedAt": "2026-07-17T17:25:06.766Z"
   },
   {
     "company": "Liberty Scans",
