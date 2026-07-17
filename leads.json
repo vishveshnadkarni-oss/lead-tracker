@@ -2688,7 +2688,7 @@
     "address": "No.45, 2nd floor, 2nd main, Sankey Road, Sadashivanagar, Bangalore - 560 080.",
     "source": "Sanyal",
     "oem": "Non-Standard",
-    "sourceType": "Existing Customer",
+    "sourceType": "BFL Employee",
     "machine": "",
     "amount": "70000000",
     "subvention": "",
@@ -2701,7 +2701,7 @@
     "reason": "Needs funding for HVAC also. Has loan sanctioned from Siemens",
     "notes": "",
     "id": "mnyovzw20ubkjdmyl6x",
-    "updatedAt": "2026-05-04T06:04:31.869Z"
+    "updatedAt": "2026-07-17T17:24:15.723Z"
   },
   {
     "company": "Akshaya Netralay",
