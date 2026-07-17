@@ -2372,7 +2372,7 @@
     "phone2": "",
     "email": "",
     "city": "Hyderabad",
-    "segment": "",
+    "segment": "Industrial",
     "address": "",
     "source": "Jayson",
     "oem": "Yamazen",
@@ -2384,12 +2384,12 @@
     "stage": "New",
     "status": "On Hold",
     "leadDate": "2026-04-14",
-    "followup": "2026-05-06",
-    "lastContact": "2026-05-05",
+    "followup": "",
+    "lastContact": "2026-07-14",
     "reason": "",
     "notes": "Shravan will take approval from customer and share his details. Customer wants 4% roi and leasing option.\n1. Sending subvention proposal to Yamazen\n\nCustomer not giving approval for bajaj to meet.",
     "id": "mnzt093yj5jmldkk52p",
-    "updatedAt": "2026-05-05T09:52:14.829Z"
+    "updatedAt": "2026-07-17T17:27:18.145Z"
   },
   {
     "company": "Prems's Eye Hospital",
