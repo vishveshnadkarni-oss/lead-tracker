@@ -272,15 +272,20 @@ textarea { resize: vertical; min-height: 60px; }
       </div>
       <div class="form-group">
         <label>Source Type</label>
-        <select id="f_sourceType">
+        <select id="f_sourceType" onchange="toggleOtherSource(this.value)">
           <option value="">Select</option>
           <option>OEM Referral</option>
           <option>Dealer Referral</option>
           <option>DSA</option>
           <option>Direct Walk-in</option>
           <option>Existing Customer</option>
+          <option>BFL Employee</option>
           <option>Other</option>
         </select>
+      </div>
+      <div class="form-group" id="otherSourceGroup" style="display:none">
+        <label>Specify Source</label>
+        <input id="f_sourceTypeCustom" type="text" placeholder="e.g. IMTEX 2026, Exhibition, Cold Call"/>
       </div>
 
       <!-- Section: Deal -->
@@ -632,7 +637,7 @@ async function initApp() {
 // ─────────────────────────────────────────
 // FILTERS
 // ─────────────────────────────────────────
-let filterOEM = '', filterStatus = '', filterStage = '', filterSegment = '', filterMonth = '', filterLocation = [], searchQ = '';
+let filterOEM = '', filterStatus = '', filterStage = '', filterSegment = '', filterMonth = '', filterLocation = [], filterSourceType = '', searchQ = '';
 
 function filteredLeads() {
   const t = today();
@@ -649,6 +654,7 @@ function filteredLeads() {
     if (filterOEM && l.oem !== filterOEM) return false;
     if (filterStatus && l.status !== filterStatus) return false;
     if (filterStage && l.stage !== filterStage) return false;
+    if (filterSourceType && l.sourceType !== filterSourceType) return false;
     if (filterSegment && l.segment !== filterSegment) return false;
     if (filterMonth && (l.leadDate||'').slice(0,7) !== filterMonth) return false;
     if (filterLocation.length && !filterLocation.includes(l.city)) return false;
@@ -701,7 +707,16 @@ function render() {
         <option value="Won" ${filterStatus==='Won'?'selected':''}>Won</option>
         <option value="Lost" ${filterStatus==='Lost'?'selected':''}>Lost</option>
       </select>
-      <div class="multi-select-wrap" id="locationDropWrap">
+      <select class="filter-select" onchange="filterSourceType=this.value;renderLeadsList()">
+        <option value="">All Sources</option>
+        <option value="OEM Referral" ${filterSourceType==='OEM Referral'?'selected':''}>OEM Referral</option>
+        <option value="Dealer Referral" ${filterSourceType==='Dealer Referral'?'selected':''}>Dealer Referral</option>
+        <option value="DSA" ${filterSourceType==='DSA'?'selected':''}>DSA</option>
+        <option value="Direct Walk-in" ${filterSourceType==='Direct Walk-in'?'selected':''}>Direct Walk-in</option>
+        <option value="Existing Customer" ${filterSourceType==='Existing Customer'?'selected':''}>Existing Customer</option>
+        <option value="BFL Employee" ${filterSourceType==='BFL Employee'?'selected':''}>BFL Employee</option>
+        <option value="Other" ${filterSourceType==='Other'?'selected':''}>Other</option>
+      </select>
         <button class="filter-select multi-select-btn" onclick="toggleLocationDrop(event)" id="locationDropBtn">
           <span id="locationDropLabel">All Locations</span> ▾
         </button>
@@ -741,7 +756,7 @@ function renderLeadsList() {
   const fl = filteredLeads();
 
   // Update stats to reflect current filtered view
-  const isFiltered = filterOEM || filterStatus || filterSegment || filterMonth || filterLocation.length || searchQ || currentTab !== 'all';
+  const isFiltered = filterOEM || filterStatus || filterSegment || filterMonth || filterLocation.length || filterSourceType || searchQ || currentTab !== 'all';
   const statsBase = isFiltered ? fl : leads;
   const el = id => document.getElementById(id);
   if (el('stat-total')) {
@@ -909,6 +924,11 @@ document.addEventListener('click', function(e) {
   if (list && wrap && !wrap.contains(e.target)) list.classList.remove('open');
 });
 
+function toggleOtherSource(val) {
+  const grp = document.getElementById('otherSourceGroup');
+  if (grp) grp.style.display = val === 'Other' ? '' : 'none';
+}
+
 function setTab(tab, el) {
   currentTab = tab;
   filterLocation = [];
@@ -1025,6 +1045,19 @@ function openEdit(id) {
     if (!el) return;
     el.value = l[f] || '';
   });
+  // If sourceType is a custom value (not in dropdown), show Other + custom box
+  const standardTypes = ['','OEM Referral','Dealer Referral','DSA','Direct Walk-in','Existing Customer','BFL Employee','Other'];
+  const stEl = document.getElementById('f_sourceType');
+  const customEl = document.getElementById('f_sourceTypeCustom');
+  const otherGrp = document.getElementById('otherSourceGroup');
+  if (stEl && !standardTypes.includes(l.sourceType||'')) {
+    stEl.value = 'Other';
+    if (customEl) customEl.value = l.sourceType || '';
+    if (otherGrp) otherGrp.style.display = '';
+  } else {
+    if (otherGrp) otherGrp.style.display = 'none';
+    if (customEl) customEl.value = '';
+  }
   document.getElementById('detailOverlay').classList.remove('open');
   document.getElementById('formOverlay').classList.add('open');
   pushModalState();
@@ -1043,6 +1076,11 @@ async function saveLead() {
     const el = document.getElementById('f_'+f);
     lead[f] = el ? el.value.trim() : '';
   });
+  // If sourceType is Other, use the custom text instead
+  if (lead.sourceType === 'Other') {
+    const custom = (document.getElementById('f_sourceTypeCustom').value || '').trim();
+    if (custom) lead.sourceType = custom;
+  }
   // Auto-set status to Lost when stage is Closed Lost
   if (lead.stage === 'Closed Lost') lead.status = 'Lost';
   lead.id = editingId || uid();
@@ -1232,6 +1270,7 @@ function copyFilteredWA() {
   if (filterOEM) parts.push(filterOEM);
   if (filterSegment) parts.push(filterSegment);
   if (filterStatus) parts.push(filterStatus);
+  if (filterSourceType) parts.push(filterSourceType);
   if (filterLocation.length) parts.push(filterLocation.join(', '));
   if (filterMonth) {
     const monthNames = {1:'Jan',2:'Feb',3:'Mar',4:'Apr',5:'May',6:'Jun',7:'Jul',8:'Aug',9:'Sep',10:'Oct',11:'Nov',12:'Dec'};
