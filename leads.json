@@ -3104,10 +3104,10 @@
     "address": "Amberpet Main Road, Bharat Nagar, Amberpet, Hyderabad, Telangana, 500013",
     "source": "Mr. Pani",
     "oem": "B-MEC",
-    "sourceType": "Dealer Referral",
+    "sourceType": "OEM Referral",
     "machine": "",
     "amount": "7000000",
-    "subvention": "No",
+    "subvention": "",
     "priority": "High",
     "stage": "Closed Lost",
     "status": "Lost",
@@ -3117,7 +3117,7 @@
     "reason": "Owner not interested",
     "notes": "Interested in Principal Morat Scheme. Urgently looking for loans",
     "id": "mnyovzw2lk8matffop",
-    "updatedAt": "2026-04-14T14:26:59.772Z"
+    "updatedAt": "2026-07-17T17:25:15.018Z"
   },
   {
     "company": "Voice Multispeciality Hospital & Research center",
