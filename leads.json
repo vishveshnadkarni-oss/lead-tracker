@@ -3156,10 +3156,10 @@
     "address": "No. 15/5, ShanmugarajaRd, Next to Axis Bank branch, Sekkalai, Karaikudi, TN, 630001",
     "source": "J. Daniel Vinoth Kumar",
     "oem": "B-MEC",
-    "sourceType": "Dealer Referral",
+    "sourceType": "OEM Referral",
     "machine": "",
     "amount": "38500000",
-    "subvention": "No",
+    "subvention": "",
     "priority": "Medium",
     "stage": "Closed Lost",
     "status": "Lost",
@@ -3169,7 +3169,7 @@
     "reason": "Startup",
     "notes": "",
     "id": "mnypinab06r8hsdr2ygh",
-    "updatedAt": "2026-04-14T14:26:43.686Z"
+    "updatedAt": "2026-07-17T17:24:56.557Z"
   },
   {
     "company": "Gustlane Precitec",
