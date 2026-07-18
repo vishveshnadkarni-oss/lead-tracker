@@ -1424,11 +1424,14 @@ function downloadTemplate() {
 
   const notes = [
     ['INSTRUCTIONS — Delete this sheet before importing'],
+    [''],
     ['Segment:', 'Medical / Industrial'],
     ['Priority:', 'High / Medium / Low'],
     ['Stage:', 'New / Contacted / Docs Collected / Credit Review / Sanctioned / Disbursed / Closed Lost'],
     ['Status:', 'Active / On Hold / Won / Lost'],
     ['Scheme:', 'None / Subvention / Leasing / Credit Days Subvention / Hybrid Flexi / EMI Holiday / Principal Morat'],
+    ['Source Type:', 'OEM Referral / Dealer Referral / DSA / Direct Walk-in / Existing Customer / BFL Employee / Other'],
+    ['', 'If Source Type is Other, write the actual source name directly e.g. IMTEX 2026, Exhibition, Cold Call'],
     ['Dates:', 'YYYY-MM-DD format e.g. 2026-04-06'],
     ['Loan Amount:', 'Numbers only e.g. 5500000 (no ₹ or commas)'],
   ];
@@ -1546,6 +1549,13 @@ function processImportFile(text, filename) {
         lead[k] = `${y}-${m}-${d}`;
       }
     });
+
+    // If sourceType is "Other", check if there's a custom value — keep as-is from CSV
+    // Custom source types (non-standard) are stored directly in sourceType field
+    const standardTypes = ['OEM Referral','Dealer Referral','DSA','Direct Walk-in','Existing Customer','BFL Employee','Other',''];
+    if (lead.sourceType && !standardTypes.includes(lead.sourceType)) {
+      // Already a custom value like "IMTEX 2026" — leave it as-is
+    }
 
     const cleanPhone = (lead.phone||'').replace(/\D/g,'');
     const isDup = cleanPhone && existingPhones.has(cleanPhone);
