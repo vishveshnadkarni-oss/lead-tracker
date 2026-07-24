@@ -99,7 +99,7 @@
     "followup": "",
     "lastContact": "",
     "reason": "",
-    "notes": "Didn’t answer call. Call again",
+    "notes": "Didnât answer call. Call again",
     "id": "mryldsg2jvuxd4qb1rb",
     "updatedAt": "2026-07-24T07:09:02.125Z"
   },
@@ -151,7 +151,7 @@
     "followup": "",
     "lastContact": "",
     "reason": "",
-    "notes": "Didn’t answer call. Call again",
+    "notes": "Didnât answer call. Call again",
     "id": "mryldsg23ba7q6qz6fu",
     "updatedAt": "2026-07-24T07:08:33.035Z"
   },
@@ -255,7 +255,7 @@
     "followup": "",
     "lastContact": "",
     "reason": "",
-    "notes": "Didn’t answer call. Call again",
+    "notes": "Didnât answer call. Call again",
     "id": "mryldsg2r54xe2ggcng",
     "updatedAt": "2026-07-24T07:07:42.534Z"
   },
@@ -281,7 +281,7 @@
     "followup": "",
     "lastContact": "",
     "reason": "",
-    "notes": "Didn’t answer call. Call again",
+    "notes": "Didnât answer call. Call again",
     "id": "mryldsg2qtdsllmpr9",
     "updatedAt": "2026-07-24T07:07:32.625Z"
   },
@@ -1295,7 +1295,7 @@
     "followup": "",
     "lastContact": "",
     "reason": "",
-    "notes": "Didn’t answer phone",
+    "notes": "Didnât answer phone",
     "id": "mrucmspwp41pjjbpkqp",
     "updatedAt": "2026-07-21T07:45:37.508Z"
   },
@@ -1618,7 +1618,7 @@
     "phone2": "",
     "email": "",
     "city": "Coimbatore",
-    "address": "NH 544 – Kochi – Salem Highway, Mukasi Pallagoundenpalayam, Pallagoundenpalayam Post, Uthukuli Taluk, Tiruppur District, Tamil Nadu, India",
+    "address": "NH 544 â Kochi â Salem Highway, Mukasi Pallagoundenpalayam, Pallagoundenpalayam Post, Uthukuli Taluk, Tiruppur District, Tamil Nadu, India",
     "segment": "IEF",
     "source": "Vishvesh",
     "sourceType": "INTEC Coimbatore 2026",
@@ -1762,7 +1762,7 @@
     "leadDate": "2026-06-05",
     "followup": "",
     "lastContact": "",
-    "reason": "Doesn’t Need Funding",
+    "reason": "Doesnât Need Funding",
     "notes": "",
     "id": "mrucmspwgxp79120kbq",
     "updatedAt": "2026-07-21T07:45:37.508Z"
@@ -2574,7 +2574,7 @@
     "updatedAt": "2026-07-17T06:36:12.530Z"
   },
   {
-    "company": "Not yet finalised",
+    "company": "Faros AP",
     "customer": "Sivanand's customer",
     "phone": "",
     "phone2": "",
@@ -2590,14 +2590,14 @@
     "subvention": "None",
     "priority": "Medium",
     "stage": "New",
-    "status": "Lost",
+    "status": "Active",
     "leadDate": "2026-07-15",
     "followup": "",
     "lastContact": "",
     "reason": "",
     "notes": "The OEM wants 9.5% ROI",
     "id": "mrnp3woxykfqtnyk93",
-    "updatedAt": "2026-07-16T16:00:27.969Z"
+    "updatedAt": "2026-07-24T08:15:47.668Z"
   },
   {
     "company": "Astratek Precision Manufacturer",
@@ -2750,7 +2750,7 @@
     "leadDate": "2026-07-08",
     "followup": "",
     "lastContact": "",
-    "reason": "They don’t go with Financing. Will connect when needed.",
+    "reason": "They donât go with Financing. Will connect when needed.",
     "notes": "",
     "id": "mrnnpznuceqgqixi7wv",
     "updatedAt": "2026-07-16T15:44:25.356Z"
@@ -2776,7 +2776,7 @@
     "leadDate": "2026-07-08",
     "followup": "",
     "lastContact": "",
-    "reason": "They don’t go with Financing",
+    "reason": "They donât go with Financing",
     "notes": "",
     "id": "mrnnpznucp1h0wtl3s4",
     "updatedAt": "2026-07-16T15:43:14.976Z"
