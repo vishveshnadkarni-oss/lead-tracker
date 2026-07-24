@@ -770,14 +770,14 @@
     "subvention": "None",
     "priority": "Medium",
     "stage": "New",
-    "status": "Active",
+    "status": "On Hold",
     "leadDate": "2026-07-22",
-    "followup": "",
+    "followup": "2026-08-20",
     "lastContact": "",
     "reason": "",
-    "notes": "Cold calling lead.\nNaveen will be calling and updating.",
+    "notes": "Cold calling lead.\nNaveen will be calling and updating.\nPlanning to buy in August. Call in august",
     "id": "mrx0twdb26ghb9beesw",
-    "updatedAt": "2026-07-23T04:38:31.968Z"
+    "updatedAt": "2026-07-24T10:33:58.506Z"
   },
   {
     "company": "V3 labs",
