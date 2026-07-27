@@ -2904,12 +2904,12 @@
     "stage": "Contacted",
     "status": "Active",
     "leadDate": "2026-07-09",
-    "followup": "2026-07-11",
-    "lastContact": "",
-    "reason": "",
-    "notes": "Asked to come on 10/7",
+    "followup": "",
+    "lastContact": "2026-07-27",
+    "reason": "No response. Will connect when purchasing machine.",
+    "notes": "Asked to come on 10/7.\nConnected with Khalid to update us when he will buy machine",
     "id": "mrnnpznu41a6og3eu57",
-    "updatedAt": "2026-07-16T15:45:14.231Z"
+    "updatedAt": "2026-07-27T10:46:20.165Z"
   },
   {
     "company": "Pheonix Fine Tooling",
