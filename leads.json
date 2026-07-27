@@ -1188,12 +1188,12 @@
     "stage": "Contacted",
     "status": "Active",
     "leadDate": "2026-07-08",
-    "followup": "2026-07-14",
-    "lastContact": "2026-07-14",
-    "reason": "",
+    "followup": "",
+    "lastContact": "2026-07-27",
+    "reason": "He will get back when he needs financing.",
     "notes": "Need to send leasing calculation for 35L.\nWants refurb of philips. Get details.",
     "id": "mrnnpznux2w1bjpzrx8",
-    "updatedAt": "2026-07-21T07:56:41.486Z"
+    "updatedAt": "2026-07-27T10:48:40.059Z"
   },
   {
     "company": "Advanced Precision Engineering",
