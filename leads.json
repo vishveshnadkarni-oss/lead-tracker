@@ -1,5 +1,31 @@
 [
   {
+    "company": "Essar Engineers",
+    "customer": "Jayaprakash Rai",
+    "phone": "98451 61775",
+    "phone2": "",
+    "email": "",
+    "city": "Bengaluru",
+    "segment": "Industrial",
+    "address": "1, Thigalarapalya Main Rd, Peenya 2nd Stage, Ragavendra Nagar, Peenya, Bengaluru, Karnataka 560058",
+    "source": "Vishvesh",
+    "oem": "Jyoti CNC",
+    "sourceType": "Direct Walk-in",
+    "machine": "",
+    "amount": "",
+    "subvention": "None",
+    "priority": "Medium",
+    "stage": "New",
+    "status": "Lost",
+    "leadDate": "2026-07-03",
+    "followup": "",
+    "lastContact": "2026-07-27",
+    "reason": "No response",
+    "notes": "",
+    "id": "mrnnpznunfzqt42u5jd",
+    "updatedAt": "2026-07-27T09:40:30.130Z"
+  },
+  {
     "company": "Climatic Technologies",
     "customer": "Manish Ramesh",
     "phone": "9538809889",
@@ -2860,32 +2886,6 @@
     "updatedAt": "2026-07-16T15:42:56.511Z"
   },
   {
-    "company": "Essar Engineers",
-    "customer": "Jayaprakash Rai",
-    "phone": "98451 61775",
-    "phone2": "",
-    "email": "",
-    "city": "Bengaluru",
-    "segment": "Industrial",
-    "address": "1, Thigalarapalya Main Rd, Peenya 2nd Stage, Ragavendra Nagar, Peenya, Bengaluru, Karnataka 560058",
-    "source": "Vishvesh",
-    "oem": "Jyoti CNC",
-    "sourceType": "Direct Walk-in",
-    "machine": "",
-    "amount": "",
-    "subvention": "None",
-    "priority": "Medium",
-    "stage": "New",
-    "status": "Lost",
-    "leadDate": "2026-07-03",
-    "followup": "",
-    "lastContact": "2026-07-27",
-    "reason": "No response",
-    "notes": "",
-    "id": "mrnnpznunfzqt42u5jd",
-    "updatedAt": "2026-07-27T09:40:30.130Z"
-  },
-  {
     "company": "SPM Laser Cutting",
     "customer": "Shrikantha MS",
     "phone": "99455 86958",
@@ -2909,7 +2909,7 @@
     "reason": "Not looking for loan now.",
     "notes": "",
     "id": "mrnnpznuzvboys14y6k",
-    "updatedAt": "2026-07-16T15:42:36.468Z"
+    "updatedAt": "2026-07-27T09:44:13.284Z"
   },
   {
     "company": "My Tech",
