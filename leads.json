@@ -2876,14 +2876,14 @@
     "subvention": "None",
     "priority": "Medium",
     "stage": "New",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-07-03",
     "followup": "",
-    "lastContact": "",
-    "reason": "",
+    "lastContact": "2026-07-27",
+    "reason": "No response",
     "notes": "",
     "id": "mrnnpznunfzqt42u5jd",
-    "updatedAt": "2026-07-16T15:42:46.888Z"
+    "updatedAt": "2026-07-27T09:40:30.130Z"
   },
   {
     "company": "SPM Laser Cutting",
