@@ -709,13 +709,7 @@ function render() {
       </select>
       <select class="filter-select" onchange="filterSourceType=this.value;renderLeadsList()">
         <option value="">All Sources</option>
-        <option value="OEM Referral" ${filterSourceType==='OEM Referral'?'selected':''}>OEM Referral</option>
-        <option value="Dealer Referral" ${filterSourceType==='Dealer Referral'?'selected':''}>Dealer Referral</option>
-        <option value="DSA" ${filterSourceType==='DSA'?'selected':''}>DSA</option>
-        <option value="Direct Walk-in" ${filterSourceType==='Direct Walk-in'?'selected':''}>Direct Walk-in</option>
-        <option value="Existing Customer" ${filterSourceType==='Existing Customer'?'selected':''}>Existing Customer</option>
-        <option value="BFL Employee" ${filterSourceType==='BFL Employee'?'selected':''}>BFL Employee</option>
-        <option value="Other" ${filterSourceType==='Other'?'selected':''}>Other</option>
+        ${[...new Set(leads.map(l=>l.sourceType).filter(Boolean))].sort().map(s=>`<option value="${s}" ${filterSourceType===s?'selected':''}>${s}</option>`).join('')}
       </select>
         <button class="filter-select multi-select-btn" onclick="toggleLocationDrop(event)" id="locationDropBtn">
           <span id="locationDropLabel">All Locations</span> ▾
