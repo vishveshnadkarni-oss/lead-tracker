@@ -2902,14 +2902,14 @@
     "subvention": "None",
     "priority": "High",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-07-09",
     "followup": "",
     "lastContact": "2026-07-27",
     "reason": "No response. Will connect when purchasing machine.",
     "notes": "Asked to come on 10/7.\nConnected with Khalid to update us when he will buy machine",
     "id": "mrnnpznu41a6og3eu57",
-    "updatedAt": "2026-07-27T10:46:20.165Z"
+    "updatedAt": "2026-07-27T10:49:09.153Z"
   },
   {
     "company": "Pheonix Fine Tooling",
