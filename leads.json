@@ -146,14 +146,14 @@
     "subvention": "None",
     "priority": "Medium",
     "stage": "New",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-07-15",
     "followup": "",
     "lastContact": "",
-    "reason": "",
+    "reason": "No response from OEM",
     "notes": "The OEM wants 9.5% ROI. Subvention calculation sent for 10%",
     "id": "mrnp3woxykfqtnyk93",
-    "updatedAt": "2026-07-28T09:59:01.299Z"
+    "updatedAt": "2026-07-28T13:44:29.534Z"
   },
   {
     "company": "Medline diagnostics",
