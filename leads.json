@@ -703,7 +703,7 @@
   },
   {
     "company": "Faros AP",
-    "customer": "Sivanand's customer",
+    "customer": "Sivanand/ Alex's customer",
     "phone": "",
     "phone2": "",
     "email": "",
@@ -714,7 +714,7 @@
     "oem": "Toshbro",
     "sourceType": "OEM Referral",
     "machine": "",
-    "amount": "",
+    "amount": "3700000",
     "subvention": "None",
     "priority": "Medium",
     "stage": "New",
@@ -723,9 +723,9 @@
     "followup": "",
     "lastContact": "",
     "reason": "",
-    "notes": "The OEM wants 9.5% ROI",
+    "notes": "The OEM wants 9.5% ROI. Subvention calculation sent for 10%",
     "id": "mrnp3woxykfqtnyk93",
-    "updatedAt": "2026-07-24T08:15:47.668Z"
+    "updatedAt": "2026-07-28T09:59:01.299Z"
   },
   {
     "company": "Gokul Industries",
