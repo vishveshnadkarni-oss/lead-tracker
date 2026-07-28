@@ -666,14 +666,14 @@
     "subvention": "",
     "priority": "Medium",
     "stage": "New",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-07-22",
     "followup": "",
     "lastContact": "",
-    "reason": "",
-    "notes": "Cold calling lead.\nNaveen will be calling and updating.\nAsset taken already. Send whatsapp",
+    "reason": "Asset taken already. Sent whatsapp",
+    "notes": "Cold calling lead.\nNaveen will be calling and updating.",
     "id": "mrx0r6ijqu8fob0thjs",
-    "updatedAt": "2026-07-24T10:33:20.788Z"
+    "updatedAt": "2026-07-28T09:54:05.688Z"
   },
   {
     "company": "Medline diagnostics",
