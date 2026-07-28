@@ -807,7 +807,7 @@
   },
   {
     "company": "Sustech engineers Die Moulds",
-    "customer": "Kandasami",
+    "customer": "Kanthasami",
     "phone": "9600185629",
     "phone2": "",
     "email": "",
@@ -826,10 +826,10 @@
     "leadDate": "2026-07-15",
     "followup": "",
     "lastContact": "",
-    "reason": "",
-    "notes": "Didnt answer call. Call again",
+    "reason": "Didnt answer call. Whatsapp sent.",
+    "notes": "",
     "id": "mryldsg2jvuxd4qb1rb",
-    "updatedAt": "2026-07-28T09:59:29.072Z"
+    "updatedAt": "2026-07-28T10:03:48.636Z"
   },
   {
     "company": "TD Connects",
