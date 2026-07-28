@@ -692,14 +692,14 @@
     "subvention": "None",
     "priority": "Medium",
     "stage": "New",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-07-22",
     "followup": "",
     "lastContact": "",
-    "reason": "",
-    "notes": "Cold calling lead.\nNaveen will be calling and updating.\nCustomer not responded. Call them",
+    "reason": "Customer not responding. Whatsapp sent.",
+    "notes": "Cold calling lead.\nNaveen will be calling and updating.",
     "id": "mrx0l6t7hmc3lfgkr7m",
-    "updatedAt": "2026-07-24T10:32:17.995Z"
+    "updatedAt": "2026-07-28T09:56:14.666Z"
   },
   {
     "company": "Faros AP",
