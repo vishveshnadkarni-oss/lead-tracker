@@ -1,5 +1,31 @@
 [
   {
+    "company": "Basava Children's Hospital",
+    "customer": "Dr. Basavaraj",
+    "phone": "99450 65049",
+    "phone2": "",
+    "email": "",
+    "city": "Sindhanur",
+    "segment": "Medical",
+    "address": "Kustagi - Sindhanur Road, near, Basava circle, Sindhanur, Karnataka 584128",
+    "source": "Vijay",
+    "oem": "Wipro GE",
+    "sourceType": "OEM Referral",
+    "machine": "Logiq totus.",
+    "amount": "4500000",
+    "subvention": "None",
+    "priority": "Medium",
+    "stage": "Closed Lost",
+    "status": "Lost",
+    "leadDate": "2026-03-18",
+    "followup": "",
+    "lastContact": "",
+    "reason": "Startup. Planning to start. Took Bajaj professional loan.",
+    "notes": "-He has partner with 5 years of experience.\n-PNDT will come on 2nd week on June.\n-Got sanction of 20L from HDFC. Need another 20L",
+    "id": "mnyovzw3uclo6bb8zih",
+    "updatedAt": "2026-07-28T13:58:01.079Z"
+  },
+  {
     "company": "Accuracy Engineering Technology",
     "customer": "Srinivasan",
     "phone": "9380033500",
@@ -777,7 +803,7 @@
     "reason": "",
     "notes": "1. Asked for documents. Has a friend who also wants a loan. He also wants working capital loan\n2. He is still in doubt about machine. Have informed Likhit to update us when he finalises machine",
     "id": "mrokh5esl7zzaet19be",
-    "updatedAt": "2026-07-27T07:53:09.884Z"
+    "updatedAt": "2026-07-31T08:01:15.470Z"
   },
   {
     "company": "Sri Ganesh Engineering",
@@ -3768,32 +3794,6 @@
     "notes": "",
     "id": "mqjg2ai67ddu8riczdi",
     "updatedAt": "2026-06-18T11:56:28.974Z"
-  },
-  {
-    "company": "Basava Children's Hospital",
-    "customer": "Dr. Basavaraj",
-    "phone": "99450 65049",
-    "phone2": "",
-    "email": "",
-    "city": "Sindhanur",
-    "segment": "Medical",
-    "address": "Kustagi - Sindhanur Road, near, Basava circle, Sindhanur, Karnataka 584128",
-    "source": "Vijay",
-    "oem": "Wipro GE",
-    "sourceType": "OEM Referral",
-    "machine": "Logiq totus.",
-    "amount": "4500000",
-    "subvention": "None",
-    "priority": "Medium",
-    "stage": "Closed Lost",
-    "status": "Lost",
-    "leadDate": "2026-03-18",
-    "followup": "",
-    "lastContact": "",
-    "reason": "Startup. Planning to start. Took Bajaj professional loan.",
-    "notes": "-He has partner with 5 years of experience.\n-PNDT will come on 2nd week on June.\n-Got sanction of 20L from HDFC. Need another 20L",
-    "id": "mnyovzw3uclo6bb8zih",
-    "updatedAt": "2026-07-28T13:58:01.079Z"
   },
   {
     "company": "Sakhtivel",
