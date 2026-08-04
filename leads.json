@@ -18,12 +18,12 @@
     "stage": "New",
     "status": "On Hold",
     "leadDate": "2026-07-22",
-    "followup": "",
-    "lastContact": "",
+    "followup": "2026-10-01",
+    "lastContact": "2026-08-04",
     "reason": "",
-    "notes": "Cold calling lead.\nNaveen will be calling and updating.\n1. Planning machine in 1 oct.",
+    "notes": "Cold calling lead.\nNaveen will be calling and updating.\n1. Planning machine in 1 oct",
     "id": "mrx0niow2vcmjs8dw2s",
-    "updatedAt": "2026-08-04T10:16:55.880Z"
+    "updatedAt": "2026-08-04T10:24:12.326Z"
   },
   {
     "company": "Medline diagnostics",
