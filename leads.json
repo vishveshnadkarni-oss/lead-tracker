@@ -40,16 +40,16 @@
     "machine": "USG",
     "amount": "",
     "subvention": "None",
-    "priority": "Medium",
+    "priority": "Low",
     "stage": "New",
-    "status": "Lost",
+    "status": "On Hold",
     "leadDate": "2026-07-22",
     "followup": "2026-10-04",
     "lastContact": "2026-08-04",
     "reason": "",
     "notes": "Cold calling lead.\n1. HDFC was giving 8.5%. but I broke that with flexi and moratorium options.\n2. Contact again on 4/8",
     "id": "mrx10s9a3njj8f2rtd5",
-    "updatedAt": "2026-08-04T12:46:27.750Z"
+    "updatedAt": "2026-08-04T12:46:39.250Z"
   },
   {
     "company": "",
