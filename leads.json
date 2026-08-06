@@ -8,9 +8,9 @@
     "city": "Bengaluru",
     "segment": "Industrial",
     "address": "No 22 srirangaiah, 2nd A Cross Rd, near GNANODAYA INTERNATIONAL SCHOOL, Bhyraveshwara Nagar, Hegganahalli, Bengaluru, Karnataka 560058",
-    "source": "Vishvesh",
+    "source": "Sanyal",
     "oem": "LMW",
-    "sourceType": "Direct Walk-in",
+    "sourceType": "BFL Employee",
     "machine": "",
     "amount": "",
     "subvention": "None",
@@ -20,10 +20,10 @@
     "leadDate": "2026-08-06",
     "followup": "",
     "lastContact": "",
-    "reason": "",
-    "notes": "Low vintage",
+    "reason": "Low vintage of 1.5 years",
+    "notes": "",
     "id": "mshmaahoc33vpk2gpcg",
-    "updatedAt": "2026-08-06T14:34:32.220Z"
+    "updatedAt": "2026-08-06T14:36:30.336Z"
   },
   {
     "company": "Dr. Fatima Eye Hospital",
