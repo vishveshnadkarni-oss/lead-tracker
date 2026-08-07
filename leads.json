@@ -1446,14 +1446,14 @@
     "subvention": "None",
     "priority": "Medium",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-07-15",
     "followup": "",
     "lastContact": "",
-    "reason": "",
+    "reason": "Went with SIDBI",
     "notes": "Existing SIDBI customer.",
     "id": "mryldsg29sc3ecnc0dn",
-    "updatedAt": "2026-07-24T07:04:58.828Z"
+    "updatedAt": "2026-08-07T14:59:35.674Z"
   },
   {
     "company": "Shine Machine Works",
