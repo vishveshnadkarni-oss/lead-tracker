@@ -1342,14 +1342,14 @@
     "subvention": "None",
     "priority": "Medium",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-07-15",
     "followup": "",
     "lastContact": "",
-    "reason": "",
-    "notes": "Reach out and check",
+    "reason": "No plans to buy machine",
+    "notes": "",
     "id": "mryldsg2ey9r1lk4tre",
-    "updatedAt": "2026-07-24T07:06:05.499Z"
+    "updatedAt": "2026-08-07T14:55:43.614Z"
   },
   {
     "company": "Zetford",
