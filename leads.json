@@ -770,14 +770,14 @@
     "subvention": "Subvention",
     "priority": "Medium",
     "stage": "New",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-07-24",
     "followup": "",
     "lastContact": "2026-07-28",
-    "reason": "",
+    "reason": "24 lakhs of overdue",
     "notes": "Qualification documents pending from customer. They have 14 directors.",
     "id": "mryu1k7dhomcg62rob9",
-    "updatedAt": "2026-07-28T09:48:30.056Z"
+    "updatedAt": "2026-08-10T19:57:59.342Z"
   },
   {
     "company": "Advanced Precision Engineering",
