@@ -354,14 +354,14 @@
     "subvention": "Hybrid Flexi",
     "priority": "High",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-08-06",
-    "followup": "2026-08-10",
+    "followup": "",
     "lastContact": "",
-    "reason": "",
+    "reason": "Customer went with bank for lower ROI",
     "notes": "1. He prefers banks. Wants to go with hybrid Flexi option.\n2. Wants lower roi and wants to close early.",
     "id": "mshm1flkctpam607fk7",
-    "updatedAt": "2026-08-06T14:27:38.937Z"
+    "updatedAt": "2026-08-10T19:56:17.680Z"
   },
   {
     "company": "Waveultra engineers Automation Pvt Ltd",
