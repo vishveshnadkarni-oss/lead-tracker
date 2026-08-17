@@ -1602,14 +1602,14 @@
     "subvention": "None",
     "priority": "Medium",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-07-15",
     "followup": "",
     "lastContact": "",
-    "reason": "",
-    "notes": "Didn't answer call. Call again",
+    "reason": "Not interested.",
+    "notes": "",
     "id": "mryldsg2r54xe2ggcng",
-    "updatedAt": "2026-08-17T09:08:25.290Z"
+    "updatedAt": "2026-08-17T09:17:11.448Z"
   },
   {
     "company": "JK Auto Components",
