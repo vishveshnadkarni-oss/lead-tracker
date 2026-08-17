@@ -2086,11 +2086,11 @@
     "phone2": "",
     "email": "",
     "city": "Coimbatore",
+    "segment": "",
     "address": "17 Nehru nagar, Nallampalayam road, Maniyakarampalayam, 2nd street, Ganapathy, Coimbatore, 641106",
-    "segment": "IEF",
     "source": "Vishvesh",
-    "sourceType": "INTEC Coimbatore 2026",
     "oem": "Cosmos",
+    "sourceType": "INTEC Coimbatore 2026",
     "machine": "",
     "amount": "",
     "subvention": "None",
@@ -2099,11 +2099,11 @@
     "status": "Active",
     "leadDate": "2026-06-05",
     "followup": "",
-    "lastContact": "",
+    "lastContact": "2026-08-17",
     "reason": "",
-    "notes": "No Response",
+    "notes": "Asked to send details on email",
     "id": "mrucmspwkkdvxpz3fgr",
-    "updatedAt": "2026-07-21T07:45:37.508Z"
+    "updatedAt": "2026-08-17T08:05:35.284Z"
   },
   {
     "company": "Mettaro",
