@@ -718,14 +718,14 @@
     "subvention": "None",
     "priority": "Medium",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-07-15",
     "followup": "",
     "lastContact": "",
-    "reason": "",
-    "notes": "Call on 26/7",
+    "reason": "No response. Whatsapp sent.",
+    "notes": "",
     "id": "mryldsg22x31l0kp449",
-    "updatedAt": "2026-08-07T14:54:38.085Z"
+    "updatedAt": "2026-08-17T09:19:44.520Z"
   },
   {
     "company": "Sri Eswari Auto Components (SEAL)",
