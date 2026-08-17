@@ -2086,11 +2086,11 @@
     "phone2": "",
     "email": "",
     "city": "Coimbatore",
+    "segment": "",
     "address": "4/118/1, Annamar Kovil Street, Nadu Arasur, Coimbatore, Tamil Nadu 641407",
-    "segment": "IEF",
     "source": "Vishvesh",
-    "sourceType": "INTEC Coimbatore 2026",
     "oem": "Not Finalised",
+    "sourceType": "INTEC Coimbatore 2026",
     "machine": "",
     "amount": "",
     "subvention": "None",
@@ -2101,9 +2101,9 @@
     "followup": "",
     "lastContact": "",
     "reason": "",
-    "notes": "DidnÃÂ¢ÃÂÃÂt answer phone",
+    "notes": "Didn't answer phone. Whatsapp reminder sent.",
     "id": "mrucmspwp41pjjbpkqp",
-    "updatedAt": "2026-07-21T07:45:37.508Z"
+    "updatedAt": "2026-08-17T08:49:34.939Z"
   },
   {
     "company": "JVJ Automation",
