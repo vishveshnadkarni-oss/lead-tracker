@@ -2694,14 +2694,14 @@
     "subvention": "Leasing",
     "priority": "Medium",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-07-15",
     "followup": "",
     "lastContact": "",
-    "reason": "",
-    "notes": "Send leasing calculation",
+    "reason": "Not planning for machine financing now. Maybe in 2027",
+    "notes": "Sent leasing calculation",
     "id": "mrstb7u7kqtugeuf5lf",
-    "updatedAt": "2026-07-20T05:56:58.351Z"
+    "updatedAt": "2026-08-17T08:00:35.943Z"
   },
   {
     "company": "Pragati Automation",
