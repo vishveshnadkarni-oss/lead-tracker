@@ -1628,14 +1628,14 @@
     "subvention": "None",
     "priority": "Medium",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-07-15",
     "followup": "",
     "lastContact": "",
-    "reason": "",
-    "notes": "DidnÃÂ¢ÃÂÃÂt answer call. Call again",
+    "reason": "Didnt answer call. Whatsapp sent.",
+    "notes": "",
     "id": "mryldsg2qtdsllmpr9",
-    "updatedAt": "2026-07-24T07:07:32.625Z"
+    "updatedAt": "2026-08-17T09:16:16.232Z"
   },
   {
     "company": "Arrow Moulds & Tools",
