@@ -9,7 +9,7 @@
     "segment": "Industrial",
     "address": "",
     "source": "Vishvesh",
-    "oem": "Not Finalised",
+    "oem": "Cosmos",
     "sourceType": "HIMTEX 2026",
     "machine": "",
     "amount": "",
@@ -21,9 +21,9 @@
     "followup": "",
     "lastContact": "",
     "reason": "",
-    "notes": "Cold lead.",
+    "notes": "Cold lead.\nPlanning in 2 months",
     "id": "mt7fegiht1a3tsctbmf",
-    "updatedAt": "2026-08-24T16:03:49.913Z"
+    "updatedAt": "2026-08-24T16:04:30.125Z"
   },
   {
     "company": "Tirupathi Enterprises",
