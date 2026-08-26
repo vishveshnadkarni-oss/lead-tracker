@@ -1316,14 +1316,14 @@
     "subvention": "None",
     "priority": "Low",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-06-05",
     "followup": "",
     "lastContact": "",
-    "reason": "",
+    "reason": "Customer not answering. WA sent.",
     "notes": "Waiting for Quote\nCan't speak English. Asked Karthick to speak with him.",
     "id": "mrucmspw8f6gmwpdl9o",
-    "updatedAt": "2026-08-17T08:06:52.235Z"
+    "updatedAt": "2026-08-26T06:34:38.829Z"
   },
   {
     "company": "Fillet Engineering Services",
