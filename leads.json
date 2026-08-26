@@ -926,14 +926,14 @@
     "subvention": "None",
     "priority": "Medium",
     "stage": "New",
-    "status": "Active",
+    "status": "On Hold",
     "leadDate": "2026-07-15",
-    "followup": "",
+    "followup": "2026-11-26",
     "lastContact": "2026-08-07",
-    "reason": "No response. Whatsapp sent.",
-    "notes": "Machine not finalised",
+    "reason": "",
+    "notes": "Machine not finalised.\nCall after 3 months.",
     "id": "mryldsg2gq76slt5x6r",
-    "updatedAt": "2026-08-17T09:30:09.885Z"
+    "updatedAt": "2026-08-26T05:56:10.633Z"
   },
   {
     "company": "MKV Engineering",
