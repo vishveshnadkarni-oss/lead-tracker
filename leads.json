@@ -848,14 +848,14 @@
     "subvention": "None",
     "priority": "Medium",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-08-23",
     "followup": "",
     "lastContact": "",
-    "reason": "",
+    "reason": "Not interested.",
     "notes": "Cold lead.\nPrefers SBI bank.",
     "id": "mt675c9wjmtzun29k48",
-    "updatedAt": "2026-08-23T19:25:29.021Z"
+    "updatedAt": "2026-08-28T12:15:17.738Z"
   },
   {
     "company": "Bharati Innovative Technocraft",
