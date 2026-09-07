@@ -171,7 +171,7 @@
     "amount": "30000000",
     "subvention": "Leasing",
     "priority": "Medium",
-    "stage": "Contacted",
+    "stage": "Credit Review",
     "status": "Active",
     "leadDate": "2026-09-02",
     "followup": "",
@@ -179,7 +179,7 @@
     "reason": "",
     "notes": "Sanyal will meet customer in Peenya on 3/9.",
     "id": "mtjz1p0i8fb2rojcxd",
-    "updatedAt": "2026-09-02T10:47:00.834Z"
+    "updatedAt": "2026-09-07T09:16:55.952Z"
   },
   {
     "company": "Swastik Hospital",
