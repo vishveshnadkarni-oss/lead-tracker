@@ -172,14 +172,14 @@
     "subvention": "None",
     "priority": "Medium",
     "stage": "New",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-09-03",
     "followup": "",
     "lastContact": "",
-    "reason": "",
+    "reason": "12 cheque bounces.",
     "notes": "Existing Bajaj customer. Turnover of 12cr.\nMeeting with Kumar on 9/9.",
     "id": "mtleghk6zfgvm4jp1ef",
-    "updatedAt": "2026-09-07T10:10:01.823Z"
+    "updatedAt": "2026-09-11T07:17:19.295Z"
   },
   {
     "company": "Hi Mech",
