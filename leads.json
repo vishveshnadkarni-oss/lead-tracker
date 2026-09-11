@@ -1134,14 +1134,14 @@
     "subvention": "Leasing",
     "priority": "High",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-08-11",
     "followup": "2026-08-27",
     "lastContact": "2026-08-12",
-    "reason": "",
+    "reason": "Customer not responding.",
     "notes": "They want to understand leasing. \nWant to go with BFW machines.",
     "id": "mspnc8jr1n1iqssrsmj",
-    "updatedAt": "2026-08-26T05:46:00.655Z"
+    "updatedAt": "2026-09-11T07:03:11.873Z"
   },
   {
     "company": "Chandana eye hospital",
