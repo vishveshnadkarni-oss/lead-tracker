@@ -1290,14 +1290,14 @@
     "subvention": "Subvention",
     "priority": "Medium",
     "stage": "New",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-08-21",
     "followup": "",
     "lastContact": "2026-08-26",
-    "reason": "",
+    "reason": "Customer has not finalised.",
     "notes": "Subvention calculation sent.\nNitin waiting for doctors confirmation, then he will send it to Phaniraj.",
     "id": "mt2rjzqv8aht6sqn9j6",
-    "updatedAt": "2026-08-26T06:12:09.972Z"
+    "updatedAt": "2026-09-21T07:57:42.467Z"
   },
   {
     "company": "YDS Engineering",
