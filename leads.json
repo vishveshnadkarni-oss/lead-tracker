@@ -224,14 +224,14 @@
     "subvention": "Leasing",
     "priority": "High",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-08-24",
     "followup": "",
     "lastContact": "",
-    "reason": "Customer is out of station. Will get back when he comes back to Hyderabad.",
+    "reason": "Customer is out of station. Will get back when he comes back to Hyderabad. Not reaponding",
     "notes": "Meeting on 25th aug, 12 pm.\nWants to do leasing with LMW.",
     "id": "mt7frqilg8hlzk11xgu",
-    "updatedAt": "2026-09-11T15:52:16.213Z"
+    "updatedAt": "2026-09-21T07:58:10.508Z"
   },
   {
     "company": "Srinivas Enterprises",
