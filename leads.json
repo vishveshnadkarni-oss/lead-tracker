@@ -692,14 +692,14 @@
     "subvention": "Subvention",
     "priority": "Medium",
     "stage": "New",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-09-01",
     "followup": "",
     "lastContact": "",
-    "reason": "",
+    "reason": "Customer not sharing documents",
     "notes": "Proprietor - Reetu singh Patel (Non medico)\nHusband - MBBS",
     "id": "mtjohtoxr9jsj2kdxv",
-    "updatedAt": "2026-09-02T05:51:37.617Z"
+    "updatedAt": "2026-09-24T04:53:34.117Z"
   },
   {
     "company": "Green Tech Engineering Systems Pvt Ltd",
