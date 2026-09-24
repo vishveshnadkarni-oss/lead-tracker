@@ -146,14 +146,14 @@
     "subvention": "None",
     "priority": "Low",
     "stage": "Contacted",
-    "status": "Active",
+    "status": "Lost",
     "leadDate": "2026-06-04",
     "followup": "2026-09-02",
     "lastContact": "2026-08-26",
-    "reason": "",
+    "reason": "No response",
     "notes": "Didn't answer phone. Whatsapp reminder sent.\nAsked to connect in September 1st week.",
     "id": "mrucmspwp41pjjbpkqp",
-    "updatedAt": "2026-09-22T06:11:05.996Z"
+    "updatedAt": "2026-09-24T04:53:15.651Z"
   },
   {
     "company": "Nandadeep Eye Hospital",
