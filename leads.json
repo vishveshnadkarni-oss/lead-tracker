@@ -425,7 +425,7 @@
     "segment": "Medical",
     "address": "Sadguru Wamanrao Pai Marg, Circuit House Rd, Ambai Nagar, Vyankatesh Nagar, Maharashtra 416416",
     "source": "Phaniraj",
-    "oem": "BioMedix",
+    "oem": "Biomedix",
     "sourceType": "OEM Referral",
     "machine": "",
     "amount": "22500000",
@@ -439,7 +439,7 @@
     "reason": "",
     "notes": "Project delayed to December 2026",
     "id": "mu6mijz4bbnyw4harz",
-    "updatedAt": "2026-09-22T06:09:55.828Z"
+    "updatedAt": "2026-09-30T07:14:16.049Z"
   },
   {
     "company": "DVB Design Engineering",
